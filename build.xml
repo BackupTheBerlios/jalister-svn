@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Directory Lister" basedir="." default="help">
+
+    <property name="javac.debug" value="true"/>
+    <property name="javac.deprecation" value="true"/>
+    <property name="javac.optimize" value="false"/>
+
+    <property file="${basedir}/build.properties"/>
+
+    <target name="init">
+
+        <property name="lib.dir" value="${basedir}/lib"/>
+        <property name="main.dir" value="${basedir}/gui"/>
+
+        <property name="src.dir" value="${main.dir}/src"/>
+        <property name="test.dir" value="${main.dir}/test"/>
+        <property name="javadoc.dir" value="${basedir}/javadoc"/>
+
+        <property name="build.dir" value="${basedir}/classes"/>
+
+        <property name="dist.dir" value="${basedir}/dist"/>
+        <property name="dist.file" value="${dist.dir}/directoryLister.jar"/>
+
+        <property name="source-distribution" value="directoryLister-src"/>
+
+        <property name="tools.dir" value="${basedir}/tools"/>
+        <property name="cobertura.dir" value="${tools.dir}/cobertura"/>
+        <property name="instrumented.dir" value="${basedir}/instrumented"/>
+
+        <property name="reports.dir" value="${basedir}/reports"/>
+        <property name="reports.xml.dir" value="${reports.dir}/junit-xml"/>
+        <property name="reports.html.dir" value="${reports.dir}/junit-html"/>
+        <property name="coverage.xml.dir" value="${reports.dir}/cobertura-xml"/>
+        <property name="coverage.html.dir" value="${reports.dir}/cobertura-html"/>
+
+
+        <path id="classpath">
+            <fileset dir="${lib.dir}">
+                <include name="*.jar"/>
+            </fileset>
+            <pathelement location="${tools.dir}/ant/ant-junit.jar"/>
+        </path>
+
+        <path id="cobertura.classpath">
+            <fileset dir="${cobertura.dir}">
+                <include name="cobertura.jar"/>
+                <include name="lib/**/*.jar"/>
+            </fileset>
+        </path>
+
+        <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+
+    </target>
+
+
+    <target name="prepare" depends="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${instrumented.dir}"/>
+        <mkdir dir="${reports.xml.dir}"/>
+        <mkdir dir="${reports.html.dir}"/>
+        <mkdir dir="${coverage.xml.dir}"/>
+        <mkdir dir="${coverage.html.dir}"/>
+
+    </target>
+
+    <target name="compile" depends="prepare">
+        <javac srcdir="${src.dir}"
+               destdir="${build.dir}"
+               debug="${javac.debug}"
+               deprecation="${javac.deprecation}"
+               optimize="${javac.optimize}"
+               includes="**/*.java"
+               source="1.5"
+               target="1.5">
+
+            <classpath refid="classpath"/>
+        </javac>
+
+        <javac srcdir="${test.dir}"
+               destdir="${build.dir}"
+               debug="${javac.debug}"
+               deprecation="${javac.deprecation}"
+               optimize="${javac.optimize}"
+               includes="**/*.java"
+               source="1.5"
+               target="1.5">
+
+            <classpath refid="classpath"/>
+        </javac>
+
+    </target>
+
+    <target name="native2ascii" depends="prepare">
+        <native2ascii encoding="UTF-8"
+                      src="${src.dir}"
+                      dest="${build.dir}"
+                      includes="**/*.properties"/>
+    </target>
+
+    <target name="prepare-run" depends="init, native2ascii">
+        <!--<copy todir="${build.dir}">-->
+        <!--<fileset dir="${src.dir}">-->
+        <!--<include name="**/*.properties"/>-->
+        <!--</fileset>-->
+        <!--</copy>-->
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar basedir="${build.dir}" destfile="${dist.file}">
+            <manifest>
+                <attribute name="Main-Class" value="directorylister.gui.MainWindow"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}" verbose="false" failonerror="false"/>
+
+        <delete dir="${instrumented.dir}"/>
+        <delete dir="${reports.dir}"/>
+        <delete file="cobertura.log"/>
+        <delete file="cobertura.ser"/>
+    </target>
+
+    <target name="help">
+
+    </target>
+
+    <!-- SVN Tasks -->
+    <target name="init-svnant">
+        <property file="build.properties"/>
+
+        <property name="svnant.lib.dir" value="${tools.dir}/svnant/lib"/>
+        <property name="revision" value="UNKNOWN"/>
+        <!-- path to the svnant libraries. Usually they will be located in ANT_HOME/lib -->
+        <path id="svnant.classpath">
+            <pathelement location="${svnant.lib.dir}/svnjavahl.jar"/>
+            <pathelement location="${svnant.lib.dir}/svnant.jar"/>
+            <pathelement location="${svnant.lib.dir}/svnClientAdapter.jar"/>
+        </path>
+
+        <!-- load the svn task -->
+        <taskdef resource="svntask.properties" classpathref="svnant.classpath"/>
+
+    </target>
+
+    <target name="update-svn" depends="init-svnant">
+        <svn username="${svnant.repository.user}"
+             password="${svnant.repository.passwd}">
+            <update dir="${basedir}"/>
+        </svn>
+    </target>
+
+    <target name="status-svn" depends="init-svnant">
+        <svn username="${svnant.repository.user}"
+             password="${svnant.repository.passwd}">
+            <status path="${basedir}" revisionProperty="revision"/>
+        </svn>
+    </target>
+
+    <target name="dist-src" depends="prepare, update-svn, status-svn">
+        <delete file="${dist.dir}/${source-distribution}.zip"/>
+        <zip basedir="${basedir}" zipfile="${dist.dir}/${source-distribution}-r${revision}.zip"
+             compress="yes" excludes="classes/**, dist/**">
+        </zip>
+    </target>
+
+    <target name="instrument" depends="init,compile">
+        <!--
+            Remove the coverage data file and any old instrumentation.
+        -->
+        <delete file="cobertura.ser"/>
+        <delete dir="${instrumented.dir}"/>
+
+        <!--
+            Instrument the application classes, writing the
+            instrumented classes into ${build.instrumented.dir}.
+        -->
+        <cobertura-instrument todir="${instrumented.dir}">
+            <!--
+                The following line causes instrument to ignore any
+                source line containing a reference to log4j, for the
+                purposes of coverage reporting.
+            -->
+            <ignore regex="org.apache.log4j.*"/>
+
+            <fileset dir="${build.dir}">
+                <!--
+                    Instrument all the application classes, but
+                    don't instrument the test classes.
+                -->
+                <include name="**/*.class"/>
+                <exclude name="**/*Test.class"/>
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <target name="javadoc" depends="prepare">
+        <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"
+                 author="true"
+                 use="true"
+                 splitindex="true"
+                 serialwarn="true"
+                 version="true"
+                 source="1.5">
+            <classpath refid="classpath"/>
+        </javadoc>
+    </target>
+
+    <target name="test" depends="prepare,compile,native2ascii">
+        <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+            <!--
+                Note the classpath order: instrumented classes are before the
+                original (uninstrumented) classes.  This is important.
+            -->
+            <classpath location="${instrumented.dir}"/>
+            <classpath location="${build.dir}"/>
+
+            <!--
+                The instrumented classes reference classes used by the
+                Cobertura runtime, so Cobertura and its dependencies
+                must be on your classpath.
+            -->
+            <classpath refid="cobertura.classpath"/>
+            <classpath refid="classpath"/>
+
+            <formatter type="xml"/>
+            <test name="${testcase}" todir="${reports.xml.dir}" if="testcase"/>
+            <batchtest todir="${reports.xml.dir}" unless="testcase">
+                <fileset dir="${test.dir}">
+                    <include name="**/*UnitTest.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${reports.xml.dir}">
+            <fileset dir="${reports.xml.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${reports.html.dir}"/>
+        </junitreport>
+    </target>
+
+    <target name="coverage-check">
+        <cobertura-check branchrate="34" totallinerate="100"/>
+    </target>
+
+
+    <target name="coverage-report">
+        <!--
+            Generate an XML file containing the coverage data using
+            the "srcdir" attribute.
+        -->
+        <cobertura-report srcdir="${src.dir}" destdir="${coverage.xml.dir}" format="xml"/>
+    </target>
+
+
+    <target name="alternate-coverage-report">
+        <!--
+            Generate a series of HTML files containing the coverage
+            data in a user-readable form using nested source filesets.
+        -->
+        <cobertura-report destdir="${coverage.html.dir}">
+            <fileset dir="${src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
+    </target>
+
+    <target name="coverage"
+            depends="compile,instrument,test,coverage-report,alternate-coverage-report"
+            description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports.">
+
+    </target>
+
+
+</project>
