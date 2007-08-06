@@ -12,8 +12,16 @@ import java.awt.event.MouseEvent;
  * @since 29.07.2007 16:25:33
  */
 public class SelectedFilesListMouseAction extends MouseAdapter {
+    /**
+     * Field files
+     */
     private final JList files;
 
+    /**
+     * Constructor SelectedFilesListMouseAction creates a new SelectedFilesListMouseAction instance.
+     *
+     * @param files of type JList
+     */
     public SelectedFilesListMouseAction(final JList files) {
         this.files = files;
     }

@@ -13,46 +13,87 @@ import org.junit.Test;
  * @since <pre>07/28/2007</pre>
  */
 public class StartupProgressNotifierUnitTest {
-    private StartupProgressNotifier notifier;
+    /**
+     * Field notifier
+     */
+    private ProgressNotifier notifier;
 
+    /**
+     * Constructs a new StartupProgressNotifierUnitTest.
+     */
     public StartupProgressNotifierUnitTest() {
     }
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
-        notifier = new StartupProgressNotifier();
+    public void setUp() {
+        notifier = new ProgressNotifier();
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
     }
 
+    /**
+     * Method testAddListener ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testAddListener() throws Exception {
         Assert.assertTrue(notifier.addListener(new TestStartupListener()));
     }
 
+    /**
+     * Method testAddListenerTwice ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testAddListenerTwice() throws Exception {
-        StartupListener listener = new TestStartupListener();
+        ProgressListener listener = new TestStartupListener();
         notifier.addListener(listener);
         Assert.assertFalse(notifier.addListener(listener));
     }
 
+    /**
+     * Method testNotifySendsMessages ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testNotifySendsMessages() throws Exception {
         TestStartupListener listener = new TestStartupListener();
         notifier.addListener(listener);
 
-        notifier.notifyListeners("message");
+        notifier.notifyListeners("message", false);
 
         Assert.assertTrue(listener.notifyReceived);
     }
 
-    private static class TestStartupListener implements StartupListener {
+    /**
+     * Class TestStartupListener ...
+     *
+     * @author schakal
+     *         Created on 05.08.2007
+     */
+    private static class TestStartupListener implements ProgressListener {
+        /**
+         * Field notifyReceived
+         */
         private boolean notifyReceived;
 
+        /**
+         * {@inheritDoc}
+         *
+         * @see ProgressListener#notify(String)
+         */
         public void notify(String message) {
             notifyReceived = true;
         }

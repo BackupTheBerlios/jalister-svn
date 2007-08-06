@@ -14,6 +14,9 @@ import java.util.List;
  */
 public class SortedFileEntryListTransformer implements Transformer<List<FileEntry>, List<FileEntry>> {
 
+    /**
+     * Field TRANSFORMER
+     */
     public static final SortedFileEntryListTransformer TRANSFORMER = new SortedFileEntryListTransformer();
 
 

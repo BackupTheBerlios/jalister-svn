@@ -17,18 +17,30 @@ import java.util.Locale;
  */
 public class LocalizerUnitTest {
 
+    /**
+     * Field localizer
+     */
     private Localizer localizer;
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
+    public void setUp() {
         localizer = new Localizer();
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
         ResourceHandler.getInstance().setLocale(Locale.ENGLISH);
     }
 
+    /**
+     * Method testLocalizationWorkForButton ...
+     */
     @Test()
     public void testLocalizationWorkForButton() {
         JButton button = new JButton();
@@ -39,6 +51,9 @@ public class LocalizerUnitTest {
         assertEquals("Directory Lister", button.getText());
     }
 
+    /**
+     * Method testLocalizationWorkForJMenu ...
+     */
     @Test()
     public void testLocalizationWorkForJMenu() {
         JMenu menu = new JMenu();
@@ -47,6 +62,9 @@ public class LocalizerUnitTest {
         assertEquals("Directory Lister", menu.getText());
     }
 
+    /**
+     * Method testLocalizationWorkForJFrame ...
+     */
     @Test()
     public void testLocalizationWorkForJFrame() {
         JFrame frame = new JFrame();
@@ -55,6 +73,9 @@ public class LocalizerUnitTest {
         assertEquals("Directory Lister", frame.getTitle());
     }
 
+    /**
+     * Method testLocalizationWorkForJMenuItem ...
+     */
     @Test()
     public void testLocalizationWorkForJMenuItem() {
         JMenuItem menuItem = new JMenuItem();
@@ -63,6 +84,9 @@ public class LocalizerUnitTest {
         assertEquals("Directory Lister", menuItem.getText());
     }
 
+    /**
+     * Method testLocalizationWorkForJLabel ...
+     */
     @Test()
     public void testLocalizationWorkForJLabel() {
         JLabel label = new JLabel();
@@ -71,6 +95,9 @@ public class LocalizerUnitTest {
         assertEquals("Directory Lister", label.getText());
     }
 
+    /**
+     * Method testLocalizationWorkForJDialog ...
+     */
     @Test()
     public void testLocalizationWorkForJDialog() {
         JDialog dialog = new JDialog();
@@ -79,6 +106,9 @@ public class LocalizerUnitTest {
         assertEquals("Directory Lister", dialog.getTitle());
     }
 
+    /**
+     * Method testLocalizationForNonExistentNameButton ...
+     */
     @Test()
     public void testLocalizationForNonExistentNameButton() {
         JButton button = new JButton();
@@ -89,6 +119,9 @@ public class LocalizerUnitTest {
         assertEquals("Non Existent", button.getText());
     }
 
+    /**
+     * Method testLocalizationForNullNameButton ...
+     */
     @Test()
     public void testLocalizationForNullNameButton() {
         JButton button = new JButton();
@@ -98,6 +131,9 @@ public class LocalizerUnitTest {
         assertEquals("", button.getText());
     }
 
+    /**
+     * Method testLocalizationWork2 ...
+     */
     @Test()
     public void testLocalizationWork2() {
         ResourceHandler.getInstance().setLocale(new Locale("RU"));
@@ -109,6 +145,11 @@ public class LocalizerUnitTest {
         assertEquals("Directory Lister RUSSIAN", button.getText());
     }
 
+    /**
+     * Method suite ...
+     *
+     * @return Test
+     */
     public static junit.framework.Test suite() {
         return new JUnit4TestAdapter(LocalizerUnitTest.class);
     }

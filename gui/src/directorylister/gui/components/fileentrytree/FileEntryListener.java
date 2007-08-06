@@ -15,9 +15,17 @@ import java.util.List;
  * @author schakal Oleg Atamanenko
  * @since 29.07.2007 16:17:20
  */
-class FileEntryListener extends FileEntryListenerAdapter {
-    private JTree tree;
+final class FileEntryListener extends FileEntryListenerAdapter {
+    /**
+     * Field tree
+     */
+    private final JTree tree;
 
+    /**
+     * Constructor FileEntryListener creates a new FileEntryListener instance.
+     *
+     * @param tree of type JTree
+     */
     public FileEntryListener(final JTree tree) {
         this.tree = tree;
     }
@@ -25,17 +33,26 @@ class FileEntryListener extends FileEntryListenerAdapter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void notifyCurrentFileEntryChanged(FileEntry currentEntry, FileEntry newEntry) {
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-        root.setUserObject(newEntry);
+        if (newEntry != null) {
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+            root.setUserObject(newEntry);
 
-        buildTree(root, newEntry.getChilds(SortedFileEntryListTransformer.TRANSFORMER));
+            buildTree(root, newEntry.getChilds(SortedFileEntryListTransformer.TRANSFORMER));
 
-        final DefaultTreeModel treeModel = new DefaultTreeModel(root);
-        tree.setModel(treeModel);
-        tree.setEnabled(true);
+            final DefaultTreeModel treeModel = new DefaultTreeModel(root);
+            tree.setModel(treeModel);
+            tree.setEnabled(true);
+        }
     }
 
+    /**
+     * Method buildTree ...
+     *
+     * @param root    of type DefaultMutableTreeNode
+     * @param entries of type List<FileEntry>
+     */
     private void buildTree(DefaultMutableTreeNode root, List<FileEntry> entries) {
 
         for (FileEntry entry : entries) {

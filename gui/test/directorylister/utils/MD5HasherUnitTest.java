@@ -1,10 +1,9 @@
 package directorylister.utils;
 
-import static directorylister.utils.MD5Hasher.getMD5;
+import static directorylister.utils.MD5Hasher.*;
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,19 +20,34 @@ import java.io.IOException;
  * @since <pre>07/28/2007</pre>
  */
 public class MD5HasherUnitTest {
+    /**
+     * Field test
+     */
     private File test;
+    /**
+     * Field directory
+     */
     private File directory;
 
+    /**
+     * Constructs a new MD5HasherUnitTest.
+     */
     public MD5HasherUnitTest() {
     }
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
+    public void setUp() {
 
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
         if (test != null) {
             test.delete();
         }
@@ -42,11 +56,21 @@ public class MD5HasherUnitTest {
         }
     }
 
+    /**
+     * Method testGetMD5 ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testGetMD5() throws Exception {
         assertNotNull(getMD5("Test".getBytes()));
     }
 
+    /**
+     * Method testGetMD51 ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testGetMD51() throws Exception {
         test = File.createTempFile("test", "tmp");
@@ -56,6 +80,11 @@ public class MD5HasherUnitTest {
         assertNotNull(getMD5(test));
     }
 
+    /**
+     * Method testGetMd5ForDirectoryReturnsEmptyString ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testGetMd5ForDirectoryReturnsEmptyString() throws Exception {
         directory = new File("testDirectory");
@@ -63,6 +92,12 @@ public class MD5HasherUnitTest {
         assertEquals(StringUtils.EMPTY, getMD5(directory));
     }
 
+    /**
+     * Method writeContent ...
+     *
+     * @param test of type File
+     * @throws IOException when
+     */
     private void writeContent(File test) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(test);
         fileOutputStream.write("Test string".getBytes());

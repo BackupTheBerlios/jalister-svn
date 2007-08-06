@@ -20,15 +20,30 @@ import java.util.Locale;
  */
 public class MainMenuUnitTest {
 
+    /**
+     * Field mainMenu
+     */
     private MainMenu mainMenu;
+    /**
+     * Field menuBar
+     */
     private MenuBar menuBar;
+    /**
+     * Field resourceHandler
+     */
     private ResourceHandler resourceHandler;
 
+    /**
+     * Constructs a new MainMenuUnitTest.
+     */
     public MainMenuUnitTest() {
     }
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
+    public void setUp() {
         mainMenu = new MainMenu(null);
 
         resourceHandler = ResourceHandler.getInstance();
@@ -38,16 +53,29 @@ public class MainMenuUnitTest {
         menuBar = new MenuBar(mainMenu);
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
     }
 
+    /**
+     * Method testMenuIsEnabled ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testMenuIsEnabled() throws Exception {
         Assert.assertTrue(menuBar.isEnabled().isTrue());
     }
 
+    /**
+     * Method testFileItemsAreAdded ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testFileItemsAreAdded() throws Exception {
         MenuItem file = menuBar.getMenu(resourceHandler.getMessage("MainMenu.File"));

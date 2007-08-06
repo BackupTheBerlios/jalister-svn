@@ -10,7 +10,14 @@ import java.util.Comparator;
  */
 public class FileEntryComparator implements Comparator<FileEntry>, Serializable {
 
+    /**
+     * Field COMPARATOR
+     */
     public static final FileEntryComparator COMPARATOR = new FileEntryComparator();
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = -7452687270053312042L;
 
 
     /**

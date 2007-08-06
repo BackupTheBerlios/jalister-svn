@@ -14,18 +14,30 @@ import java.util.List;
  * @since 25.07.2007 0:21:16
  */
 public class SortedFileEntryListTransformerUnitTest {
+    /**
+     * Field transformer
+     */
     private SortedFileEntryListTransformer transformer;
 
+    /**
+     * Method setUp ...
+     */
     @Before()
     public void setUp() {
         transformer = SortedFileEntryListTransformer.TRANSFORMER;
     }
 
+    /**
+     * Method testTransformerIsNotNull ...
+     */
     @Test()
     public void testTransformerIsNotNull() {
         Assert.assertNotNull(transformer);
     }
 
+    /**
+     * Method testTransformation ...
+     */
     @Test()
     public void testTransformation() {
         List<FileEntry> entries = new ArrayList<FileEntry>();
@@ -42,6 +54,9 @@ public class SortedFileEntryListTransformerUnitTest {
         Assert.assertTrue(sorted.get(1).equals(entry1));
     }
 
+    /**
+     * Method testInterfaceIsImplemented ...
+     */
     @Test()
     public void testInterfaceIsImplemented() {
         Class<?>[] interfaces = SortedFileEntryListTransformer.class.getInterfaces();

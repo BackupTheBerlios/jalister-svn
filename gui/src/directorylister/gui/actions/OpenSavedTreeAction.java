@@ -3,6 +3,7 @@ package directorylister.gui.actions;
 import directorylister.controllers.FileEntryController;
 import directorylister.gui.MainWindow;
 import directorylister.model.FileEntry;
+import org.apache.commons.lang.SerializationException;
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,17 +17,26 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
- * Created by IntelliJ IDEA.
  * User: bg
  * Date: 15.07.2007
  * Time: 19:10:21
- * To change this template use File | Settings | File Templates.
  */
-public class OpenSavedTreeAction implements ActionListener {
+public final class OpenSavedTreeAction implements ActionListener {
 
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(OpenSavedTreeAction.class);
-    private MainWindow mainWindow;
+    /**
+     * Field mainWindow
+     */
+    private final MainWindow mainWindow;
 
+    /**
+     * Constructor OpenSavedTreeAction creates a new OpenSavedTreeAction instance.
+     *
+     * @param mainWindow of type MainWindow
+     */
     public OpenSavedTreeAction(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
@@ -50,7 +60,9 @@ public class OpenSavedTreeAction implements ActionListener {
             } catch(FileNotFoundException e) {
                 logger.error(e.toString());
             }
-
+            catch(SerializationException e) {
+                logger.error(e.toString());
+            }
         }
     }
 }

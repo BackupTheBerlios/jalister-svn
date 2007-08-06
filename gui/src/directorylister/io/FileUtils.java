@@ -1,11 +1,25 @@
 package directorylister.io;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.*;
-import java.util.logging.Logger;
 
+/**
+ * Class FileUtils ...
+ *
+ * @author schakal
+ *         Created on 05.08.2007
+ */
 public class FileUtils {
-    private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
+    /**
+     * Field logger
+     */
+    private static final Log logger = LogFactory.getLog(FileUtils.class.getName());
 
+    /**
+     * Field BUFFER
+     */
     public static final int BUFFER = 4096;
 
     /**
@@ -14,6 +28,13 @@ public class FileUtils {
     private FileUtils() {
     }
 
+    /**
+     * Method getContents ...
+     *
+     * @param file of type File
+     * @return byte[]
+     * @throws IOException when
+     */
     public static byte[] getContents(File file) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -33,6 +54,13 @@ public class FileUtils {
         return out.toByteArray();
     }
 
+    /**
+     * Method putContents ...
+     *
+     * @param file  of type File
+     * @param bytes of type byte[]
+     * @throws IOException when
+     */
     public static void putContents(File file, byte[] bytes) throws IOException {
         OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
 
@@ -42,6 +70,11 @@ public class FileUtils {
         os.close();
     }
 
+    /**
+     * Method delete ...
+     *
+     * @param file of type File
+     */
     public static void delete(File file) {
         if (file.isDirectory()) {
             for (File child : file.listFiles()) {
@@ -50,5 +83,20 @@ public class FileUtils {
         }
 
         file.delete();
+    }
+
+    /**
+     * Checks if given file is Unix symbolic link.
+     *
+     * @param pathname file to check.
+     * @return <code>true</code> if pathname is link. <code>false</code> otherwise.
+     */
+    public static boolean isLink(File pathname) {
+        try {
+            return !pathname.getCanonicalPath().equals(pathname.getAbsolutePath());
+        } catch(IOException e) {
+            logger.error(e);
+            return false;
+        }
     }
 }

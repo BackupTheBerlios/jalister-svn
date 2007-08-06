@@ -1,31 +1,48 @@
 package directorylister.gui.actions;
 
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import directorylister.controllers.FileEntryController;
 import directorylister.gui.MainWindow;
 import directorylister.model.FileEntry;
-import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.swing.JFileChooser;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
  * User: bg
  * Date: 15.07.2007
  * Time: 18:11:24
- * To change this template use File | Settings | File Templates.
  */
 
-public class FileSaveXMLAction implements ActionListener {
+public final class FileSaveXMLAction implements ActionListener {
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(FileSaveXMLAction.class);
 
-    private MainWindow mainWindow;
+    /**
+     * Field mainWindow
+     */
+    private final MainWindow mainWindow;
 
 
+    /**
+     * Constructor FileSaveXMLAction creates a new FileSaveXMLAction instance.
+     *
+     * @param mainWindow of type MainWindow
+     */
     public FileSaveXMLAction(MainWindow mainWindow) {
 
         this.mainWindow = mainWindow;
@@ -39,26 +56,51 @@ public class FileSaveXMLAction implements ActionListener {
         fileChooser.showSaveDialog(null);
 
         File selectedFile = fileChooser.getSelectedFile();
+        if (null == selectedFile) {
+            return;
+        }
 
         FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
 
         if (null != fileEntry) {
-            OutputStream outputStream = null;
+            //OutputStream outputStream = null;
+            //outputStream = new FileOutputStream(selectedFile);
+            final DocumentBuilderFactory factory;
+            factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = null;
             try {
-                outputStream = new FileOutputStream(selectedFile);
-                SerializationUtils.serialize(fileEntry, outputStream);
-            } catch(FileNotFoundException e) {
-                logger.error(e.toString());
+                documentBuilder = factory.newDocumentBuilder();
+            } catch(ParserConfigurationException pce) {
+                logger.error(pce.toString());
             }
-            finally {
-                if (outputStream != null) {
-                    try {
-                        outputStream.close();
-                    } catch(IOException e) {
-                        logger.error(e.toString());
-                    }
+            Document document;
+            if (documentBuilder != null) {
+                document = documentBuilder.newDocument();
+                document.setXmlVersion("1.1");
+
+                Element xmlNode = fileEntry.serializeToXML(document);
+                document.appendChild(xmlNode);
+                /*logger.debug(document.getElementsByTagName("directory").item(0));*/
+                try {
+                    FileWriter fWriter = new FileWriter(selectedFile.getAbsolutePath(),
+                            false);
+                    XMLSerializer xmlSer = new XMLSerializer(fWriter, null);
+                    xmlSer.serialize(document);
+                } catch(IOException ioe) {
+                    logger.error(ioe.toString());
                 }
             }
+            //  SerializationUtils.serialize(fileEntry, outputStream);
+
         }
+        /*finally{
+           if(outputStream!=null){
+              try{
+                 outputStream.close();
+              } catch(IOException e){
+                 logger.error(e.toString());
+              }
+           }
+        }*/
     }
 }

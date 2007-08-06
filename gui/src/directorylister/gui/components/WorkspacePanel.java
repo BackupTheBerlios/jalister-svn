@@ -9,6 +9,12 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+/**
+ * Class WorkspacePanel ...
+ *
+ * @author schakal
+ *         Created on 05.08.2007
+ */
 public class WorkspacePanel extends JPanel {
     /**
      * Constructs a new WorkspacePanel.

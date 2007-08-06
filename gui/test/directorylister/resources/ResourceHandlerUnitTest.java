@@ -16,23 +16,42 @@ import java.util.Locale;
  */
 public class ResourceHandlerUnitTest {
 
+    /**
+     * Field resourceHandler
+     */
     private ResourceHandler resourceHandler;
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
+    public void setUp() {
         resourceHandler = ResourceHandler.getInstance();
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
         resourceHandler.setLocale(Locale.ENGLISH);
     }
 
+    /**
+     * Method testGetInstance ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testGetInstance() throws Exception {
         assertNotNull(resourceHandler);
     }
 
+    /**
+     * Method testSetLocale ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testSetLocale() throws Exception {
         resourceHandler.setLocale(new Locale("RU"));
@@ -40,6 +59,11 @@ public class ResourceHandlerUnitTest {
         assertEquals("Directory Lister RUSSIAN", resourceHandler.getMessage("MainWindow"));
     }
 
+    /**
+     * Method testGetMessage ...
+     *
+     * @throws Exception when
+     */
     @org.junit.Test()
     public void testGetMessage() throws Exception {
         final String s = resourceHandler.getMessage("MainWindow");
@@ -47,12 +71,20 @@ public class ResourceHandlerUnitTest {
         assertEquals("Directory Lister", s);
     }
 
+    /**
+     * Method testKeyIsReturnedForNonExistentValue ...
+     */
     @Test()
     public void testKeyIsReturnedForNonExistentValue() {
         assertEquals("The non existent value",
                 resourceHandler.getMessage("The non existent value"));
     }
 
+    /**
+     * Method suite ...
+     *
+     * @return Test
+     */
     public static junit.framework.Test suite() {
         return new JUnit4TestAdapter(ResourceHandlerUnitTest.class);
     }

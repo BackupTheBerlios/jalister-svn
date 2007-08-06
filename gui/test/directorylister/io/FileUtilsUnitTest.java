@@ -16,23 +16,40 @@ import java.io.File;
  */
 public class FileUtilsUnitTest {
 
+    /**
+     * Field file
+     */
     private File file;
 
+    /**
+     * Constructs a new FileUtilsUnitTest.
+     */
     public FileUtilsUnitTest() {
     }
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
+    public void setUp() {
 
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
         if (null != file) {
             file.delete();
         }
     }
 
+    /**
+     * Method testGetContents ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testGetContents() throws Exception {
 
@@ -45,6 +62,11 @@ public class FileUtilsUnitTest {
         assertArrayEquals(bytes, contents);
     }
 
+    /**
+     * Method testDeleteFile ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testDeleteFile() throws Exception {
         file = File.createTempFile("tempFile", "test");
@@ -54,6 +76,11 @@ public class FileUtilsUnitTest {
         assertFalse(file.exists());
     }
 
+    /**
+     * Method testDeleteEmptyDirectory ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testDeleteEmptyDirectory() throws Exception {
         file = new File("tempDirectory");
@@ -63,6 +90,11 @@ public class FileUtilsUnitTest {
         assertFalse(file.exists());
     }
 
+    /**
+     * Method testDeleteNonEmptyDirectory ...
+     *
+     * @throws Exception when
+     */
     @Test()
     public void testDeleteNonEmptyDirectory() throws Exception {
         file = new File("rootDirectory");

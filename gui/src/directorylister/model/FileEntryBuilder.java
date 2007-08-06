@@ -25,7 +25,7 @@ public class FileEntryBuilder {
      * @return new FileEntry for the passed file.
      * @throws IOException - if I/O error occures.
      */
-    public FileEntry buildFrom(final File file) throws IOException {
+    public FileEntry buildFrom(final File file) {
         final String md5 = null; //directorylister.utils.MD5Hasher.getMD5(file);
         return new FileEntry(file.getAbsolutePath(), file.isDirectory(),
                 file.lastModified(), md5, file.getName());

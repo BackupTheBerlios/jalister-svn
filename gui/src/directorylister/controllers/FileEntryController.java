@@ -15,10 +15,22 @@ import java.util.List;
  */
 public class FileEntryController {
 
+    /**
+     * Field LISTENERS
+     */
     private final List<FileEntryListener> LISTENERS = Collections.synchronizedList(new LinkedList<FileEntryListener>());
 
+    /**
+     * Field INSTANCE
+     */
     private static final FileEntryController INSTANCE = new FileEntryController();
+    /**
+     * Field currentEntry
+     */
     private FileEntry currentEntry;
+    /**
+     * Field selectedFileEntry
+     */
     private FileEntry selectedFileEntry;
 
     /**
@@ -38,6 +50,8 @@ public class FileEntryController {
      */
     public void addListener(final FileEntryListener listener) {
         LISTENERS.add(listener);
+
+        listener.notifyCurrentFileEntryChanged(currentEntry, currentEntry);
     }
 
     /**

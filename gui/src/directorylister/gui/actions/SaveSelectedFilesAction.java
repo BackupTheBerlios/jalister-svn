@@ -19,10 +19,21 @@ import java.util.Enumeration;
  * @since 29.07.2007 15:56:29
  */
 public class SaveSelectedFilesAction implements ActionListener {
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(SaveSelectedFilesAction.class.getName());
 
+    /**
+     * Field list
+     */
     private final JList list;
 
+    /**
+     * Constructor SaveSelectedFilesAction creates a new SaveSelectedFilesAction instance.
+     *
+     * @param model of type JList
+     */
     public SaveSelectedFilesAction(final JList model) {
         this.list = model;
     }
@@ -35,6 +46,9 @@ public class SaveSelectedFilesAction implements ActionListener {
         fileChooser.showSaveDialog(null);
 
         File selectedFile = fileChooser.getSelectedFile();
+        if (null == selectedFile) {
+            return;
+        }
 
         PrintWriter outputStream = null;
 

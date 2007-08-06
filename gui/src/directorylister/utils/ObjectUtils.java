@@ -14,6 +14,12 @@ public class ObjectUtils {
     private ObjectUtils() {
     }
 
+    /**
+     * Method buildToString ...
+     *
+     * @param o of type Object
+     * @return String
+     */
     public static String buildToString(final Object o) {
         return ToStringBuilder.reflectionToString(o, ToStringStyle.MULTI_LINE_STYLE);
     }

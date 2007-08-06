@@ -7,14 +7,32 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * Class ResourceHandler ...
+ *
+ * @author schakal
+ *         Created on 05.08.2007
+ */
 public class ResourceHandler {
 
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(ResourceHandler.class);
 
+    /**
+     * Field INSTANCE
+     */
     private static final ResourceHandler INSTANCE = new ResourceHandler();
 
+    /**
+     * Field locale
+     */
     private Locale locale;
 
+    /**
+     * Field resourceBundle
+     */
     private ResourceBundle resourceBundle;
 
     /**
@@ -26,6 +44,9 @@ public class ResourceHandler {
         reloadResources();
     }
 
+    /**
+     * Method reloadResources ...
+     */
     private void reloadResources() {
         resourceBundle = ResourceBundle.getBundle("directorylister.resources.messages", locale);
     }
@@ -50,6 +71,12 @@ public class ResourceHandler {
 
     }
 
+    /**
+     * Method getMessage ...
+     *
+     * @param key of type String
+     * @return String
+     */
     public String getMessage(final String key) {
         final String value;
         try {

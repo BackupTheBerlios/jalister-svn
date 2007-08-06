@@ -10,8 +10,18 @@ import java.io.Serializable;
  * @since 17.07.2007 1:34:41
  */
 public class FileEntryMetaData implements Serializable {
-    MetaDataKey key;
-    MetaDataValue value;
+    /**
+     * Field key
+     */
+    private MetaDataKey key;
+    /**
+     * Field value
+     */
+    private MetaDataValue value;
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = -7192341076454468080L;
 
 
     /**
@@ -67,10 +77,8 @@ public class FileEntryMetaData implements Serializable {
 
         FileEntryMetaData that = (FileEntryMetaData) o;
 
-        if (key != that.key) return false;
-        if (value != null ? !value.equals(that.value) : that.value != null) return false;
+        return key == that.key && !(value != null ? !value.equals(that.value) : that.value != null);
 
-        return true;
     }
 
     /**

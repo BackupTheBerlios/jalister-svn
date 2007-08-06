@@ -3,7 +3,9 @@ package directorylister.gui.components;
 import directorylister.gui.MainWindow;
 import directorylister.gui.actions.*;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import java.util.Locale;
 
 /**
@@ -11,11 +13,15 @@ import java.util.Locale;
  * User: bg
  * Date: 15.07.2007
  * Time: 16:54:23
- * To change this template use File | Settings | File Templates.
  */
 public class MainMenu extends JMenuBar {
 
 
+    /**
+     * Constructor MainMenu creates a new MainMenu instance.
+     *
+     * @param mainWindow of type MainWindow
+     */
     public MainMenu(MainWindow mainWindow) {
         setName("MainMenu");
 
@@ -33,7 +39,11 @@ public class MainMenu extends JMenuBar {
 
         JMenuItem fileSave = new JMenuItem();
         fileSave.setName("MainMenu.SaveTree");
-        fileSave.addActionListener(new FileSaveXMLAction(mainWindow));
+        fileSave.addActionListener(new FileSaveTreeAction(mainWindow));
+
+        JMenuItem saveXML = new JMenuItem();
+        saveXML.setName("MainMenu.SaveXML");
+        saveXML.addActionListener(new FileSaveXMLAction(mainWindow));
 
         JMenuItem fileCloseApp = new JMenuItem();
         fileCloseApp.setName("MainMenu.Close");
@@ -43,6 +53,8 @@ public class MainMenu extends JMenuBar {
         menuFile.addSeparator();
         menuFile.add(fileOpenTree);
         menuFile.add(fileSave);
+        menuFile.addSeparator();
+        menuFile.add(saveXML);
         menuFile.addSeparator();
         menuFile.add(fileCloseApp);
 
@@ -63,6 +75,16 @@ public class MainMenu extends JMenuBar {
         languageRussian.setName("MainMenu.Settings.Language.Russian");
         languageRussian.addActionListener(new SettingsSetLanguageAction(mainWindow, new Locale("RU", "ru")));
         settingsLanguage.add(languageRussian);
+
+        JMenu helpMenu = new JMenu();
+        helpMenu.setName("MainMenu.Help");
+
+        JMenuItem aboutBox = new JMenuItem();
+        aboutBox.setName("MainMenu.Help.About");
+        aboutBox.addActionListener(new ShowAboutBoxAction());
+
+        helpMenu.add(aboutBox);
+        add(helpMenu);
     }
 
 }

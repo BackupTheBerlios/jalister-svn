@@ -3,17 +3,32 @@ package directorylister.gui.components.selectedfilespanel;
 import directorylister.model.FileEntry;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JList;
 
 /**
  * @author schakal Oleg Atamanenko
  * @since 29.07.2007 16:22:57
  */
-class FileEntryListenerAdapter extends directorylister.controllers.FileEntryListenerAdapter {
-    private JList files;
+final class FileEntryListenerAdapter extends directorylister.controllers.FileEntryListenerAdapter {
+    /**
+     * Field files
+     */
+    private final JList files;
+    /**
+     * Field button
+     */
+    private final JButton button;
 
-    public FileEntryListenerAdapter(final JList files) {
+    /**
+     * Constructor FileEntryListenerAdapter creates a new FileEntryListenerAdapter instance.
+     *
+     * @param files  of type JList
+     * @param button of type JButton
+     */
+    public FileEntryListenerAdapter(final JList files, final JButton button) {
         this.files = files;
+        this.button = button;
     }
 
     /**
@@ -28,6 +43,5 @@ class FileEntryListenerAdapter extends directorylister.controllers.FileEntryList
         else {
             listModel.addElement(fileEntry);
         }
-
     }
 }

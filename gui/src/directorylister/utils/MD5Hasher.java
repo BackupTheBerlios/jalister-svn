@@ -13,10 +13,20 @@ import java.io.IOException;
  */
 public class MD5Hasher {
 
+    /**
+     * Do not instantiate MD5Hasher.
+     */
     private MD5Hasher() {
 
     }
 
+    /**
+     * Method getMD5 ...
+     *
+     * @param file of type File
+     * @return String
+     * @throws IOException when
+     */
     public static String getMD5(final File file) throws IOException {
         if (file.isDirectory()) {
             return StringUtils.EMPTY;
@@ -24,6 +34,12 @@ public class MD5Hasher {
         return getMD5(FileUtils.getContents(file));
     }
 
+    /**
+     * Method getMD5 ...
+     *
+     * @param contents of type byte[]
+     * @return String
+     */
     public static String getMD5(final byte[] contents) {
         return DigestUtils.md5Hex(contents);
     }

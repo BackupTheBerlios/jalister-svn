@@ -2,7 +2,8 @@ package directorylister.model;
 
 
 import directorylister.model.transformers.Transformer;
-import directorylister.utils.ObjectUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -17,12 +18,39 @@ import java.util.Set;
  * @since 01.04.2007 12:13:55
  */
 public class FileEntry implements Serializable, XMLSerializable {
+    /**
+     * Field logger
+     */
+    private static final Log logger = LogFactory.getLog(FileEntry.class);
+    /**
+     * Field fileName
+     */
     private String fileName;
+    /**
+     * Field shortName
+     */
     private String shortName;
+    /**
+     * Field directory
+     */
     private boolean directory;
+    /**
+     * Field lastModified
+     */
     private long lastModified;
+    /**
+     * Field parent
+     */
+    private FileEntry parent;
 
+    /**
+     * Field metadatas
+     */
     private Set<FileEntryMetaData> metadatas = new HashSet<FileEntryMetaData>();
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = -1988882703594070834L;
 
     /**
      * Setter for property 'fileName'.
@@ -69,7 +97,13 @@ public class FileEntry implements Serializable, XMLSerializable {
         this.md5 = md5;
     }
 
+    /**
+     * Field childs
+     */
     private final List<FileEntry> childs = new LinkedList<FileEntry>();
+    /**
+     * Field md5
+     */
     private String md5;
 
     /**
@@ -88,6 +122,11 @@ public class FileEntry implements Serializable, XMLSerializable {
     public FileEntry() {
     }
 
+    /**
+     * Method addMetaData ...
+     *
+     * @param metaData of type FileEntryMetaData
+     */
     public void addMetaData(FileEntryMetaData metaData) {
         metadatas.add(metaData);
     }
@@ -111,6 +150,15 @@ public class FileEntry implements Serializable, XMLSerializable {
         this.metadatas = metadatas;
     }
 
+    /**
+     * Constructor FileEntry creates a new FileEntry instance.
+     *
+     * @param absolutePath of type String
+     * @param directory    of type boolean
+     * @param lastModified of type long
+     * @param md5          of type String
+     * @param shortName    of type String
+     */
     public FileEntry(final String absolutePath, final boolean directory, final long lastModified, final String md5,
                      final String shortName) {
         this.md5 = md5;
@@ -120,6 +168,14 @@ public class FileEntry implements Serializable, XMLSerializable {
         this.shortName = shortName;
     }
 
+    /**
+     * Constructor FileEntry creates a new FileEntry instance.
+     *
+     * @param fileName     of type String
+     * @param lastModified of type long
+     * @param md5          of type String
+     * @param shortName    of type String
+     */
     public FileEntry(final String fileName, final long lastModified, final String md5, final String shortName) {
         this.md5 = md5;
         this.lastModified = lastModified;
@@ -185,7 +241,31 @@ public class FileEntry implements Serializable, XMLSerializable {
         return result;
     }
 
+    /**
+     * Getter for property 'parent'.
+     *
+     * @return Value for property 'parent'.
+     */
+    public FileEntry getParent() {
+        return parent;
+    }
+
+    /**
+     * Setter for property 'parent'.
+     *
+     * @param parent Value to set for property 'parent'.
+     */
+    private void setParent(FileEntry parent) {
+        this.parent = parent;
+    }
+
+    /**
+     * Method addChild ...
+     *
+     * @param entry of type FileEntry
+     */
     public void addChild(final FileEntry entry) {
+        entry.setParent(this);
         childs.add(entry);
     }
 
@@ -198,46 +278,95 @@ public class FileEntry implements Serializable, XMLSerializable {
         return childs;
     }
 
+    /**
+     * Method getChilds ...
+     *
+     * @param transformer of type Transformer<List<FileEntry>, T>
+     * @return T
+     */
     public <T> T getChilds(Transformer<List<FileEntry>, T> transformer) {
         return transformer.transform(childs);
     }
 
+
     /**
      * {@inheritDoc}
      */
-    @Override
+    @Override()
     public String toString() {
-        return ObjectUtils.buildToString(this);
+        return "FileEntry{" +
+                "fileName='" + fileName + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", directory=" + directory +
+                ", lastModified=" + lastModified +
+                ", metadatas=" + metadatas +
+                ", md5='" + md5 + '\'' +
+                '}';
     }
 
-
     /**
      * {@inheritDoc}
+     *
+     * @see XMLSerializable#serializeToXML(Document)
      */
-    public void serializeToXML(Document document) {
-        Element rootNode = document.createElement("fileEntry");
-
-        // CR: implement recursive обход FileEntry.
-//        if (null == rootNode) {
-//            if (directory) {
-//                rootNode = document.createElement("directory");
-//            } else {
-//                //TODO написать обработку хотя сюда мы не должны попасть
-//            }
-//        }
-
+    public Element serializeToXML(Document document) {
+        //    logger.debug((directory?"directory ":"file")+shortName);
         Element xmlNode = document.createElement(directory ? "directory" : "file");
-        xmlNode.setTextContent(shortName);
-        rootNode.appendChild(xmlNode);
+
+        xmlNode.setAttribute("Name", shortName);
         xmlNode.setAttribute("lastModified", "" + lastModified);
+
         for (FileEntryMetaData data : metadatas) {
-            xmlNode.setAttribute(data.key.toString(), data.value.toString());
+            xmlNode.setAttribute(data.getKey().toString(), data.getValue().toString());
         }
-        if (directory == true) {
+        //  logger.debug(xmlNode.toString());
+        if (directory) {
             List<FileEntry> childs = getChilds();
+            Element el;
             for (FileEntry child : childs) {
-                child.serializeToXML(document);
+                el = child.serializeToXML(document);
+                if (null != el) xmlNode.appendChild(el);
             }
         }
+        return xmlNode;
+    }
+
+    /**
+     * Method acceptVisitor ...
+     *
+     * @param fileEntryVisitor of type FileEntryVisitor
+     */
+    public void acceptVisitor(FileEntryVisitor fileEntryVisitor) {
+        accept(fileEntryVisitor, this);
+    }
+
+    /**
+     * Method accept ...
+     *
+     * @param fileEntryVisitor of type FileEntryVisitor
+     * @param entry            of type FileEntry
+     */
+    private void accept(FileEntryVisitor fileEntryVisitor, FileEntry entry) {
+        fileEntryVisitor.acceptEntry(entry);
+        List<FileEntry> fileEntries = entry.getChilds();
+
+        if (!fileEntries.isEmpty()) {
+            fileEntryVisitor.levelStarted(entry);
+            for (FileEntry fileEntry : fileEntries) {
+                accept(fileEntryVisitor, fileEntry);
+            }
+            fileEntryVisitor.levelEnded(entry);
+        }
+    }
+
+    /**
+     * Method cloneFirstLevel ...
+     *
+     * @return FileEntry
+     */
+    public FileEntry cloneFirstLevel() {
+        final FileEntry fileEntry = new FileEntry(fileName, directory, lastModified, md5, shortName);
+        fileEntry.setMetadatas(metadatas);
+        return fileEntry;
     }
 }

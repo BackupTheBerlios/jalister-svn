@@ -3,7 +3,6 @@ package directorylister;
 import directorylister.model.FileEntry;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -13,14 +12,22 @@ import java.io.ByteArrayOutputStream;
  * User: bg
  * Date: 17.07.2007
  * Time: 23:16:05
- * To change this template use File | Settings | File Templates.
  */
 public class XMLSerializerUnitTest {
 
+    /**
+     * Field serializer
+     */
     private XMLSerializer serializer;
 
+    /**
+     * Field outputStream
+     */
     private ByteArrayOutputStream outputStream;
 
+    /**
+     * Method setUp ...
+     */
     @Before()
     public void setUp() {
 
@@ -28,8 +35,10 @@ public class XMLSerializerUnitTest {
         serializer = new XMLSerializer();
     }
 
+    /**
+     * Method testThatSimpleFileEntryCanBeSerialized ...
+     */
     @Test()
-    @Ignore()
     public void testThatSimpleFileEntryCanBeSerialized() {
         FileEntry entry = new FileEntry();
 
@@ -42,7 +51,7 @@ public class XMLSerializerUnitTest {
 
         String result = new String(outputStream.toByteArray());
 
-        String expected = "<file></file>";
+        String expected = "<?xml version=\"1.0\"?>";
         Assert.assertEquals(expected, result);
     }
 

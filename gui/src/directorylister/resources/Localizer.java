@@ -1,11 +1,15 @@
 package directorylister.resources;
 
+import directorylister.utils.SwingUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.text.JTextComponent;
 import java.awt.Component;
-import java.awt.Container;
 
 /**
  * Performs localization of the GUI.
@@ -14,12 +18,20 @@ import java.awt.Container;
  * @since 22.07.2007 15:07:49
  */
 public class Localizer {
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(Localizer.class.getName());
+    /**
+     * Field processor
+     */
+    private ComponentProcessor processor;
 
     /**
      * Constructs a new Localizer.
      */
     public Localizer() {
+        processor = new ComponentProcessor();
     }
 
 
@@ -29,60 +41,56 @@ public class Localizer {
      * @param component - component to localize.
      */
     public void localize(final Component component) {
-        processComponent(component);
-
-        if (component instanceof Container) {
-            final Component[] components = ((Container) component).getComponents();
-            for (Component subComponent : components) {
-                processComponent(subComponent);
-            }
-        }
-        if (component instanceof JFrame) {
-            final JMenuBar menuBar = ((JFrame) component).getJMenuBar();
-            if (null != menuBar) {
-                final Component[] components = menuBar.getComponents();
-                for (Component subComponent : components) {
-                    localize(subComponent);
-                }
-            }
-        }
-        if (component instanceof JMenu) {
-            final Component[] components = ((JMenu) component).getMenuComponents();
-            for (Component subComponent : components) {
-                localize(subComponent);
-            }
-
-        }
+        SwingUtils.processWithSubComponents(component, processor);
     }
 
     /**
-     * Performs actual localizing.
+     * Class ComponentProcessor ...
      *
-     * @param component
+     * @author schakal
+     *         Created on 05.08.2007
      */
-    private static void processComponent(final Component component) {
-        final String componentName = component.getName();
-        if (componentName == null) {
-            return;
+    private static class ComponentProcessor implements directorylister.utils.ComponentProcessor {
+
+        /**
+         * Method getValueForComponent ...
+         *
+         * @param componentName of type String
+         * @return String
+         */
+        private static String getValueForComponent(final String componentName) {
+            return ResourceHandler.getInstance().getMessage(componentName);
         }
 
-        String value = getValueForComponent(componentName);
+        /**
+         * {@inheritDoc}
+         *
+         * @see directorylister.utils.ComponentProcessor#process(Component)
+         */
+        public void process(Component component) {
+            logger.debug("Processing:" + component.getClass() + " name: " + component.getName());
+            final String componentName = component.getName();
+            if (componentName == null) {
+                return;
+            }
 
-        if (component instanceof JLabel) {
-            ((JLabel) component).setText(value);
-        }
-        if (component instanceof JFrame) {
-            ((JFrame) component).setTitle(value);
-        }
-        if (component instanceof JDialog) {
-            ((JDialog) component).setTitle(value);
-        }
-        if (component instanceof AbstractButton) {
-            ((AbstractButton) component).setText(value);
-        }
-    }
+            String value = getValueForComponent(componentName);
 
-    private static String getValueForComponent(final String componentName) {
-        return ResourceHandler.getInstance().getMessage(componentName);
+            if (component instanceof JLabel) {
+                ((JLabel) component).setText(value);
+            }
+            if (component instanceof JFrame) {
+                ((JFrame) component).setTitle(value);
+            }
+            if (component instanceof JDialog) {
+                ((JDialog) component).setTitle(value);
+            }
+            if (component instanceof AbstractButton) {
+                ((AbstractButton) component).setText(value);
+            }
+            if (component instanceof JTextComponent) {
+                ((JTextComponent) component).setText(value);
+            }
+        }
     }
 }

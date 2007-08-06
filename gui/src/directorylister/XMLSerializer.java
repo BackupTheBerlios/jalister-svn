@@ -1,9 +1,9 @@
 package directorylister;
 
 import directorylister.model.XMLSerializable;
-import org.w3c.dom.Document;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,28 +15,37 @@ import java.io.OutputStream;
  * Date: 17.07.2007
  * Time: 23:15:50
  */
-public class XMLSerializer{
-   private static final Log logger = LogFactory.getLog(Main.class);
+public class XMLSerializer {
+    /**
+     * Field logger
+     */
+    private static final Log logger = LogFactory.getLog(Main.class);
 
-   public void serialize(OutputStream outputStream, XMLSerializable entry){
+    /**
+     * Method serialize ...
+     *
+     * @param outputStream of type OutputStream
+     * @param entry        of type XMLSerializable
+     */
+    public void serialize(OutputStream outputStream, XMLSerializable entry) {
 
-      // extract creation of document in the method.
-      final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-      DocumentBuilder documentBuilder = null;
-      try{
-         documentBuilder = factory.newDocumentBuilder();
-      } catch(ParserConfigurationException e){
-         e.printStackTrace();
-      }
-      if(documentBuilder==null){
-         logger.error("documentBuilder is null");
-         return;
-      }
-      Document document = documentBuilder.newDocument();
-      document.setXmlVersion("1.0");
+        // extract creation of document in the method.
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        try {
+            documentBuilder = factory.newDocumentBuilder();
+        } catch(ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        if (documentBuilder == null) {
+            logger.error("documentBuilder is null");
+            return;
+        }
+        Document document = documentBuilder.newDocument();
+        document.setXmlVersion("1.0");
 
-      entry.serializeToXML(document);
+        entry.serializeToXML(document);
 
-      // dump document to outputStream.
-   }
+        // dump document to outputStream.
+    }
 }

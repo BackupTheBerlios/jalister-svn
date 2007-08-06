@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
+import javax.swing.JButton;
 import java.util.Locale;
 
 /**
@@ -18,22 +18,37 @@ import java.util.Locale;
  */
 public class SettingsSetLanguageActionUnitTest {
 
+    /**
+     * Field action
+     */
     private SettingsSetLanguageAction action;
 
+    /**
+     * Constructs a new SettingsSetLanguageActionUnitTest.
+     */
     public SettingsSetLanguageActionUnitTest() {
 
     }
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
+    public void setUp() {
 
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
         ResourceHandler.getInstance().setLocale(Locale.ENGLISH);
     }
 
+    /**
+     * Method testAction ...
+     */
     @Test()
     public void testAction() {
         JButton button = new JButton();

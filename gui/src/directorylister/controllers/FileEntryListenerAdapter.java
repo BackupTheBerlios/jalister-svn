@@ -12,12 +12,16 @@ import directorylister.model.FileEntry;
 public class FileEntryListenerAdapter implements FileEntryListener {
     /**
      * {@inheritDoc}
+     *
+     * @see FileEntryListener#notifyCurrentFileEntryChanged(FileEntry,FileEntry)
      */
     public void notifyCurrentFileEntryChanged(FileEntry currentEntry, FileEntry newEntry) {
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @see FileEntryListener#notifyFileEntryToSelect(FileEntry)
      */
     public void notifyFileEntryToSelect(final FileEntry fileEntry) {
     }

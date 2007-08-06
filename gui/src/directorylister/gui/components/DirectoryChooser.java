@@ -69,6 +69,9 @@ public class DirectoryChooser extends JFileChooser {
         init();
     }
 
+    /**
+     * Method init ...
+     */
     private void init() {
         this.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     }

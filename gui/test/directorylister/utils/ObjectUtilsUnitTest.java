@@ -12,19 +12,33 @@ import org.junit.Before;
  * @since <pre>07/28/2007</pre>
  */
 public class ObjectUtilsUnitTest {
+    /**
+     * Constructs a new ObjectUtilsUnitTest.
+     */
     public ObjectUtilsUnitTest() {
     }
 
+    /**
+     * Method setUp ...
+     */
     @Before()
-    public void setUp() throws Exception {
+    public void setUp() {
 
     }
 
+    /**
+     * Method tearDown ...
+     */
     @After()
-    public void tearDown() throws Exception {
+    public void tearDown() {
 
     }
 
+    /**
+     * Method testToString ...
+     *
+     * @throws Exception when
+     */
     @org.junit.Test()
     public void testToString() throws Exception {
         Assert.assertNotNull(ObjectUtils.buildToString(this));

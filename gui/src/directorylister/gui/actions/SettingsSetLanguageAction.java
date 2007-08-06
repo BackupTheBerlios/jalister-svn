@@ -13,9 +13,21 @@ import java.util.Locale;
  * @since 22.07.2007 21:54:39
  */
 public class SettingsSetLanguageAction implements ActionListener {
+    /**
+     * Field mainWindow
+     */
     private final Component mainWindow;
+    /**
+     * Field newLocale
+     */
     private final Locale newLocale;
 
+    /**
+     * Constructor SettingsSetLanguageAction creates a new SettingsSetLanguageAction instance.
+     *
+     * @param mainWindow of type Component
+     * @param newLocale  of type Locale
+     */
     public SettingsSetLanguageAction(final Component mainWindow, final Locale newLocale) {
         this.mainWindow = mainWindow;
         this.newLocale = newLocale;

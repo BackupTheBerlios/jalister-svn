@@ -15,9 +15,17 @@ import java.awt.event.MouseEvent;
  * @author schakal Oleg Atamanenko
  * @since 29.07.2007 16:18:42
  */
-class TreeMouseListener extends MouseAdapter {
-    private JTree tree;
+final class TreeMouseListener extends MouseAdapter {
+    /**
+     * Field tree
+     */
+    private final JTree tree;
 
+    /**
+     * Constructor TreeMouseListener creates a new TreeMouseListener instance.
+     *
+     * @param tree of type JTree
+     */
     public TreeMouseListener(final JTree tree) {
         this.tree = tree;
     }
