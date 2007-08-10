@@ -1,6 +1,7 @@
 package directorylister;
 
 import directorylister.model.FileEntry;
+import directorylister.model.FileType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class XMLSerializerUnitTest {
     public void testThatSimpleFileEntryCanBeSerialized() {
         FileEntry entry = new FileEntry();
 
-        entry.setDirectory(true);
+        entry.setFileType(FileType.DIRECTORY);
         entry.setFileName("fileName");
         entry.setLastModified(System.currentTimeMillis() / 1000);
 

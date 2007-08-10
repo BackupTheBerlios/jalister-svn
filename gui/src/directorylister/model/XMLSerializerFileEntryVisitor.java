@@ -43,7 +43,7 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
     @Override
     public void acceptEntry(FileEntry fileEntry) {
         Element lastEntry = stack.lastElement();
-        Element node = document.createElement(fileEntry.isDirectory() ? "directory" : "file");
+        Element node = document.createElement(fileEntry.getFileType().name().toLowerCase());
         lastEntry.appendChild(node);
     }
 
@@ -54,7 +54,7 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
     public void levelStarted(FileEntry newRoot) {
         Element xmlNode =
                 document.createElement("fileEntry");
-        xmlNode.setAttribute("type", newRoot.isDirectory() ? "directory" : "file");
+        xmlNode.setAttribute("type", newRoot.getFileType().name().toLowerCase());
         xmlNode.setAttribute("shortName", newRoot.getShortName());
         xmlNode.setAttribute("lastModified", String.valueOf(newRoot.getLastModified()));
 

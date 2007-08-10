@@ -1,6 +1,7 @@
 package directorylister.model.transformers;
 
 import directorylister.model.FileEntry;
+import directorylister.model.FileType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,8 +42,8 @@ public class SortedFileEntryListTransformerUnitTest {
     @Test()
     public void testTransformation() {
         List<FileEntry> entries = new ArrayList<FileEntry>();
-        FileEntry entry1 = new FileEntry("def", false, 0, null, "def");
-        FileEntry entry2 = new FileEntry("abc", false, 0, null, "abc");
+        FileEntry entry1 = new FileEntry("def", FileType.FILE, 0, null, "def");
+        FileEntry entry2 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
         entries.add(entry1);
         entries.add(entry2);
         List<FileEntry> sorted = transformer.transform(entries);

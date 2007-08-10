@@ -31,9 +31,9 @@ public class FileEntry implements Serializable, XMLSerializable {
      */
     private String shortName;
     /**
-     * Field directory
+     * Field fileType
      */
-    private boolean directory;
+    private FileType fileType;
     /**
      * Field lastModified
      */
@@ -71,12 +71,12 @@ public class FileEntry implements Serializable, XMLSerializable {
     }
 
     /**
-     * Setter for property 'directory'.
+     * Setter for property 'fileType'.
      *
-     * @param directory Value to set for property 'directory'.
+     * @param fileType Value to set for property 'fileType'.
      */
-    public void setDirectory(boolean directory) {
-        this.directory = directory;
+    public void setFileType(FileType fileType) {
+        this.fileType = fileType;
     }
 
     /**
@@ -159,12 +159,12 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @param md5          of type String
      * @param shortName    of type String
      */
-    public FileEntry(final String absolutePath, final boolean directory, final long lastModified, final String md5,
+    public FileEntry(final String absolutePath, final FileType directory, final long lastModified, final String md5,
                      final String shortName) {
         this.md5 = md5;
         this.lastModified = lastModified;
         this.fileName = absolutePath;
-        this.directory = directory;
+        this.fileType = directory;
         this.shortName = shortName;
     }
 
@@ -181,7 +181,7 @@ public class FileEntry implements Serializable, XMLSerializable {
         this.lastModified = lastModified;
         this.fileName = fileName;
         this.shortName = shortName;
-        directory = false;
+        fileType = FileType.FILE;
     }
 
     /**
@@ -195,12 +195,12 @@ public class FileEntry implements Serializable, XMLSerializable {
 
 
     /**
-     * Getter for property 'directory'.
+     * Getter for property 'fileType'.
      *
-     * @return Value for property 'directory'.
+     * @return Value for property 'fileType'.
      */
-    public boolean isDirectory() {
-        return directory;
+    public FileType getFileType() {
+        return fileType;
     }
 
 
@@ -223,7 +223,7 @@ public class FileEntry implements Serializable, XMLSerializable {
 
         final FileEntry fileEntry = (FileEntry) o;
 
-        return directory == fileEntry.directory &&
+        return fileType == fileEntry.fileType &&
                 lastModified == fileEntry.lastModified &&
                 fileName.equals(fileEntry.fileName);
 
@@ -236,7 +236,7 @@ public class FileEntry implements Serializable, XMLSerializable {
     public int hashCode() {
         int result;
         result = fileName.hashCode();
-        result = 31 * result + (directory ? 1 : 0);
+        result = 31 * result + (fileType.ordinal());
         result = 31 * result + (int) (lastModified ^ (lastModified >>> 32));
         return result;
     }
@@ -297,7 +297,7 @@ public class FileEntry implements Serializable, XMLSerializable {
         return "FileEntry{" +
                 "fileName='" + fileName + '\'' +
                 ", shortName='" + shortName + '\'' +
-                ", directory=" + directory +
+                ", fileType=" + fileType +
                 ", lastModified=" + lastModified +
                 ", metadatas=" + metadatas +
                 ", md5='" + md5 + '\'' +
@@ -310,8 +310,8 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @see XMLSerializable#serializeToXML(Document)
      */
     public Element serializeToXML(Document document) {
-        //    logger.debug((directory?"directory ":"file")+shortName);
-        Element xmlNode = document.createElement(directory ? "directory" : "file");
+        //    logger.debug((fileType?"fileType ":"file")+shortName);
+        Element xmlNode = document.createElement(fileType.name().toLowerCase());
 
         xmlNode.setAttribute("Name", shortName);
         xmlNode.setAttribute("lastModified", "" + lastModified);
@@ -320,7 +320,7 @@ public class FileEntry implements Serializable, XMLSerializable {
             xmlNode.setAttribute(data.getKey().toString(), data.getValue().toString());
         }
         //  logger.debug(xmlNode.toString());
-        if (directory) {
+        if (fileType.equals(FileType.FILE)) {
             List<FileEntry> childs = getChilds();
             Element el;
             for (FileEntry child : childs) {
@@ -365,7 +365,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @return FileEntry
      */
     public FileEntry cloneFirstLevel() {
-        final FileEntry fileEntry = new FileEntry(fileName, directory, lastModified, md5, shortName);
+        final FileEntry fileEntry = new FileEntry(fileName, fileType, lastModified, md5, shortName);
         fileEntry.setMetadatas(metadatas);
         return fileEntry;
     }

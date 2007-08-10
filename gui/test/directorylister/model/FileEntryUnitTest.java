@@ -35,7 +35,7 @@ public class FileEntryUnitTest {
     @Before()
     public void setUp() {
         context = new Mockery();
-        fileEntry = new FileEntry("the name.txt", true, new Date().getTime(), "", null);
+        fileEntry = new FileEntry("the name.txt", FileType.DIRECTORY, new Date().getTime(), "", null);
     }
 
     /**
@@ -55,7 +55,7 @@ public class FileEntryUnitTest {
     @Test()
     public void testThatByDefaultCreatedFile() {
         fileEntry = new FileEntry("the name.txt", new Date().getTime(), "", null);
-        assertEquals(false, fileEntry.isDirectory());
+        assertEquals(false, fileEntry.getFileType());
     }
 
     /**
@@ -63,8 +63,8 @@ public class FileEntryUnitTest {
      */
     @Test()
     public void testThatDirectoryCanBeCreated() {
-        fileEntry = new FileEntry("the name.txt", true, new Date().getTime(), "", null);
-        assertEquals(true, fileEntry.isDirectory());
+        fileEntry = new FileEntry("the name.txt", FileType.DIRECTORY, new Date().getTime(), "", null);
+        assertEquals(true, fileEntry.getFileType());
     }
 
     /**

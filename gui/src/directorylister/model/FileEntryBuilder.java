@@ -27,7 +27,7 @@ public class FileEntryBuilder {
      */
     public FileEntry buildFrom(final File file) {
         final String md5 = null; //directorylister.utils.MD5Hasher.getMD5(file);
-        return new FileEntry(file.getAbsolutePath(), file.isDirectory(),
+        return new FileEntry(file.getAbsolutePath(), FileType.getType(file),
                 file.lastModified(), md5, file.getName());
     }
 }
