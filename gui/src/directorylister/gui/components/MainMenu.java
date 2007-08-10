@@ -1,7 +1,13 @@
 package directorylister.gui.components;
 
 import directorylister.gui.MainWindow;
-import directorylister.gui.actions.*;
+import directorylister.gui.actions.ChooseDirectoryAction;
+import directorylister.gui.actions.CloseApplicationAction;
+import directorylister.gui.actions.FileSaveTreeAction;
+import directorylister.gui.actions.FileSaveXMLAction;
+import directorylister.gui.actions.OpenSavedTreeAction;
+import directorylister.gui.actions.SettingsSetLanguageAction;
+import directorylister.gui.actions.ShowAboutBoxAction;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,7 +37,7 @@ public class MainMenu extends JMenuBar {
 
         JMenuItem fileChooseDirectory = new JMenuItem();
         fileChooseDirectory.setName("MainMenu.ChooseDirectory");
-        fileChooseDirectory.addActionListener(new ChooseDirectoryAction());
+        fileChooseDirectory.addActionListener(new ChooseDirectoryAction(mainWindow));
 
         JMenuItem fileOpenTree = new JMenuItem();
         fileOpenTree.setName("MainMenu.OpenSavedTree");

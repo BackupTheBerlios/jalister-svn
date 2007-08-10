@@ -1,4 +1,4 @@
-package directorylister.startup;
+package directorylister.notification;
 
 /**
  * Interface for progress listener.
@@ -11,7 +11,7 @@ public interface ProgressListener {
     /**
      * Called when new notification received.
      *
-     * @param message - notification message.
+     * @param notification - notification message.
      */
-    void notify(final String message);
+    void notify(final Notification notification);
 }

@@ -1,5 +1,6 @@
 package directorylister.gui.components;
 
+import directorylister.notification.Notification;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -90,7 +91,7 @@ public class SplashScreenUnitTest {
     public void testLabelChangesItsText() throws Exception {
         TextBox label = getLabel();
 
-        splashScreen.notify("New Message");
+        splashScreen.notify(new Notification("New Message"));
 
         Assert.assertEquals("New Message", label.getText());
     }

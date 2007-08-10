@@ -1,6 +1,6 @@
 package directorylister.gui.components;
 
-import directorylister.startup.ProgressNotifier;
+import directorylister.notification.ProgressNotifier;
 
 import java.awt.HeadlessException;
 
@@ -14,7 +14,7 @@ public class SplashScreen extends ProgressBarFrame {
     /**
      * Constructs a new SplashScreen.
      *
-     * @throws java.awt.HeadlessException
+     * @throws java.awt.HeadlessException in case of error.
      */
     public SplashScreen() throws HeadlessException {
 
@@ -35,7 +35,7 @@ public class SplashScreen extends ProgressBarFrame {
 
         try {
             Thread.sleep(2000);
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 

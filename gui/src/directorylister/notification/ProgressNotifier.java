@@ -1,4 +1,4 @@
-package directorylister.startup;
+package directorylister.notification;
 
 import directorylister.resources.ResourceHandler;
 
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Controller for managing startup process.
+ * Controller for managing notification process.
  */
 public class ProgressNotifier {
 
@@ -24,10 +24,10 @@ public class ProgressNotifier {
     }
 
     /**
-     * Notifies all listeners about new startup status.
+     * Notifies all listeners about new notification status.
      *
      * @param message   - notification message to broadcast.
-     * @param localized
+     * @param localized - if message should be localized.
      */
     public void notifyListeners(final String message, final boolean localized) {
 
@@ -35,14 +35,14 @@ public class ProgressNotifier {
         if (localized) {
             localizedMessage = ResourceHandler.getInstance().getMessage(message);
         }
-
+        Notification notification = new Notification(localizedMessage);
         for (final ProgressListener listener : listeners) {
-            listener.notify(localizedMessage);
+            listener.notify(notification);
         }
     }
 
     /**
-     * Add new startup listener.
+     * Add new notification listener.
      *
      * @param startupListener Startup Progress Listener to add.
      * @return <code>true</code>, if startupListener was added, <code>false</code> otherwise.

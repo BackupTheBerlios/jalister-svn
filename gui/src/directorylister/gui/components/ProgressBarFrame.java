@@ -1,6 +1,7 @@
 package directorylister.gui.components;
 
-import directorylister.startup.ProgressListener;
+import directorylister.notification.Notification;
+import directorylister.notification.ProgressListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -27,7 +28,7 @@ public class ProgressBarFrame extends JFrame implements ProgressListener {
     /**
      * Constructs a new ProgressBarFrame.
      *
-     * @throws java.awt.HeadlessException
+     * @throws java.awt.HeadlessException in case of error.
      */
     public ProgressBarFrame() throws HeadlessException {
         setSize(600, 80);
@@ -69,9 +70,9 @@ public class ProgressBarFrame extends JFrame implements ProgressListener {
     /**
      * {@inheritDoc}
      *
-     * @see directorylister.startup.ProgressListener#notify(String)
+     * @see directorylister.notification.ProgressListener#notify(Notification)
      */
-    public void notify(final String message) {
-        label.setText(message);
+    public void notify(final Notification notification) {
+        label.setText(notification.getMessage());
     }
 }

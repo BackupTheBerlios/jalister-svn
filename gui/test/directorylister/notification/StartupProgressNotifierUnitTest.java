@@ -1,4 +1,4 @@
-package directorylister.startup;
+package directorylister.notification;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -92,9 +92,9 @@ public class StartupProgressNotifierUnitTest {
         /**
          * {@inheritDoc}
          *
-         * @see ProgressListener#notify(String)
+         * @see ProgressListener#notify(Notification)
          */
-        public void notify(String message) {
+        public void notify(Notification message) {
             notifyReceived = true;
         }
     }

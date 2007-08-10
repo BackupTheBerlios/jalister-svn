@@ -1,16 +1,20 @@
 package directorylister.gui.actions;
 
 import directorylister.controllers.FileEntryController;
-import directorylister.gui.MainWindow;
 import directorylister.model.FileEntry;
+import directorylister.notification.Notification;
+import directorylister.notification.ProgressListener;
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JFileChooser;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
+import javax.swing.JFrame;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,59 +22,58 @@ import java.io.*;
  * Date: 30.07.2007
  * Time: 23:28:35
  */
-public final class FileSaveTreeAction implements ActionListener {
+public final class FileSaveTreeAction extends AbstractFileOpenSaveActionWithProgressBar {
     /**
      * Field logger
      */
     private static final Log logger = LogFactory.getLog(FileSaveXMLAction.class);
 
     /**
-     * Field mainWindow
-     */
-    private final MainWindow mainWindow;
-
-
-    /**
      * Constructor FileSaveTreeAction creates a new FileSaveTreeAction instance.
      *
-     * @param mainWindow of type MainWindow
+     * @param frame - main frame.
      */
-    public FileSaveTreeAction(MainWindow mainWindow) {
-
-        this.mainWindow = mainWindow;
+    public FileSaveTreeAction(final JFrame frame) {
+        super(frame);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void actionPerformed(ActionEvent actionEvent) {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showSaveDialog(null);
+    public FileOpenSavePlugin getFileOpenSavePligin() {
+        return new FileSaveTreePlugin();
+    }
 
-        File selectedFile = fileChooser.getSelectedFile();
-        if (null == selectedFile) {
-            return;
-        }
+    private static class FileSaveTreePlugin implements FileOpenSavePlugin {
 
-        FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
+        public void handleFile(File selectedFile, ProgressListener listener) {
+            FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
+            if (null != fileEntry) {
+                OutputStream outputStream = null;
+                try {
 
-        if (null != fileEntry) {
-            OutputStream outputStream = null;
-            try {
-                outputStream = new FileOutputStream(selectedFile);
-                SerializationUtils.serialize(fileEntry, outputStream);
-            } catch(FileNotFoundException e) {
-                logger.error(e.toString());
-            }
-            finally {
-                if (outputStream != null) {
-                    try {
-                        outputStream.close();
-                    } catch(IOException e) {
-                        logger.error(e.toString());
+                    listener.notify(new Notification("Saving..."));
+                    outputStream = new FileOutputStream(selectedFile);
+                    SerializationUtils.serialize(fileEntry, outputStream);
+                    listener.notify(new Notification("Done."));
+                } catch (FileNotFoundException e) {
+                    logger.error(e.toString());
+                }
+                finally {
+                    if (outputStream != null) {
+                        try {
+                            outputStream.close();
+                        } catch (IOException e) {
+                            logger.error(e.toString());
+                        }
                     }
                 }
             }
+        }
+
+        public JFileChooser getFileChooser() {
+            return new JFileChooser();
+        }
+
+        public boolean isOpenDialog() {
+            return false;
         }
     }
 }

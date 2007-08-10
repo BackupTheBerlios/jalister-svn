@@ -2,9 +2,9 @@ package directorylister;
 
 import directorylister.gui.MainWindow;
 import directorylister.gui.components.SplashScreen;
+import directorylister.notification.ProgressNotifier;
 import directorylister.resources.Localizer;
 import directorylister.resources.ResourceHandler;
-import directorylister.startup.ProgressNotifier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.BasicConfigurator;

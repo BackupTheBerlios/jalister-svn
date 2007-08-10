@@ -3,7 +3,7 @@ package directorylister.parser;
 import directorylister.io.FileUtils;
 import directorylister.model.FileEntry;
 import directorylister.model.FileEntryBuilder;
-import directorylister.startup.ProgressNotifier;
+import directorylister.notification.ProgressNotifier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
