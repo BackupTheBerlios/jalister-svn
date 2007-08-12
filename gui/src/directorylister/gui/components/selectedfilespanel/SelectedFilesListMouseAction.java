@@ -30,7 +30,7 @@ public class SelectedFilesListMouseAction extends MouseAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(final MouseEvent e) {
         if (1 == e.getClickCount() && e.getButton() == MouseEvent.BUTTON3) {
             final FileEntry fileEntry = (FileEntry) files.getSelectedValue();
             if (fileEntry != null) {

@@ -43,7 +43,7 @@ public final class FileSaveXMLAction implements ActionListener {
      *
      * @param mainWindow of type MainWindow
      */
-    public FileSaveXMLAction(MainWindow mainWindow) {
+    public FileSaveXMLAction(final MainWindow mainWindow) {
 
         this.mainWindow = mainWindow;
     }
@@ -51,16 +51,16 @@ public final class FileSaveXMLAction implements ActionListener {
     /**
      * {@inheritDoc}
      */
-    public void actionPerformed(ActionEvent actionEvent) {
-        JFileChooser fileChooser = new JFileChooser();
+    public void actionPerformed(final ActionEvent actionEvent) {
+        final JFileChooser fileChooser = new JFileChooser();
         fileChooser.showSaveDialog(null);
 
-        File selectedFile = fileChooser.getSelectedFile();
+        final File selectedFile = fileChooser.getSelectedFile();
         if (null == selectedFile) {
             return;
         }
 
-        FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
+        final FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
 
         if (null != fileEntry) {
             //OutputStream outputStream = null;
@@ -70,23 +70,23 @@ public final class FileSaveXMLAction implements ActionListener {
             DocumentBuilder documentBuilder = null;
             try {
                 documentBuilder = factory.newDocumentBuilder();
-            } catch(ParserConfigurationException pce) {
+            } catch (ParserConfigurationException pce) {
                 logger.error(pce.toString());
             }
-            Document document;
+            final Document document;
             if (documentBuilder != null) {
                 document = documentBuilder.newDocument();
                 document.setXmlVersion("1.1");
 
-                Element xmlNode = fileEntry.serializeToXML(document);
+                final Element xmlNode = fileEntry.serializeToXML(document);
                 document.appendChild(xmlNode);
                 /*logger.debug(document.getElementsByTagName("directory").item(0));*/
                 try {
-                    FileWriter fWriter = new FileWriter(selectedFile.getAbsolutePath(),
+                    final FileWriter fWriter = new FileWriter(selectedFile.getAbsolutePath(),
                             false);
-                    XMLSerializer xmlSer = new XMLSerializer(fWriter, null);
+                    final XMLSerializer xmlSer = new XMLSerializer(fWriter, null);
                     xmlSer.serialize(document);
-                } catch(IOException ioe) {
+                } catch (IOException ioe) {
                     logger.error(ioe.toString());
                 }
             }

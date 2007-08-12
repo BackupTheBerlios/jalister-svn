@@ -24,7 +24,7 @@ public final class FindComponentProcessor<T extends Component> implements Compon
      *
      * @param componentName of type String
      */
-    public FindComponentProcessor(String componentName) {
+    public FindComponentProcessor(final String componentName) {
         this.componentName = componentName;
     }
 
@@ -33,7 +33,7 @@ public final class FindComponentProcessor<T extends Component> implements Compon
      *
      * @see ComponentProcessor#process(Component)
      */
-    public void process(Component component) {
+    public void process(final Component component) {
         if (StringUtils.isEmpty(componentName)) {
             return;
         }

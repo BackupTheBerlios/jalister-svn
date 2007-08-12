@@ -6,7 +6,12 @@ import directorylister.resources.ResourceHandler;
 import directorylister.search.Searcher;
 import org.apache.commons.lang.StringUtils;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -72,13 +77,12 @@ public final class FileEntryTree extends JPanel {
             /**
              * {@inheritDoc}
              */
-            public void actionPerformed(ActionEvent e) {
-                Searcher searcher = new Searcher();
+            public void actionPerformed(final ActionEvent e) {
+                final Searcher searcher = new Searcher();
                 final String condition = searchBox.getText();
                 if (condition.equals(" ")) {
                     FileEntryController.getInstance().setCurrentFileEntry(oldFileEntry);
-                }
-                else {
+                } else {
                     if (null == oldFileEntry) {
                         oldFileEntry = FileEntryController.getInstance().getCurrentEntry();
                     }
@@ -88,8 +92,8 @@ public final class FileEntryTree extends JPanel {
 
             }
         });
-        JPanel searchBar = new JPanel();
-        BoxLayout layout = new BoxLayout(searchBar, BoxLayout.X_AXIS);
+        final JPanel searchBar = new JPanel();
+        final BoxLayout layout = new BoxLayout(searchBar, BoxLayout.X_AXIS);
         searchBar.setLayout(layout);
 
         searchBar.add(searchBox);
@@ -104,14 +108,14 @@ public final class FileEntryTree extends JPanel {
             /**
              * {@inheritDoc}
              */
-            public void insertUpdate(DocumentEvent e) {
+            public void insertUpdate(final DocumentEvent e) {
                 updateButtonState();
             }
 
             /**
              * {@inheritDoc}
              */
-            public void removeUpdate(DocumentEvent e) {
+            public void removeUpdate(final DocumentEvent e) {
                 updateButtonState();
             }
 
@@ -125,7 +129,7 @@ public final class FileEntryTree extends JPanel {
             /**
              * {@inheritDoc}
              */
-            public void changedUpdate(DocumentEvent e) {
+            public void changedUpdate(final DocumentEvent e) {
                 updateButtonState();
             }
         });
@@ -151,14 +155,14 @@ public final class FileEntryTree extends JPanel {
          *
          * @param enabledTextColor of type Color
          */
-        public SearchBoxFocusListener(Color enabledTextColor) {
+        public SearchBoxFocusListener(final Color enabledTextColor) {
             color = enabledTextColor;
         }
 
         /**
          * {@inheritDoc}
          */
-        public void focusGained(FocusEvent e) {
+        public void focusGained(final FocusEvent e) {
             searchBox.setForeground(color);
             if (searchBox.getText().equals(ResourceHandler.getInstance().getMessage(searchBox.getName()))) {
                 searchBox.setText("");
@@ -168,7 +172,7 @@ public final class FileEntryTree extends JPanel {
         /**
          * {@inheritDoc}
          */
-        public void focusLost(FocusEvent e) {
+        public void focusLost(final FocusEvent e) {
             if (StringUtils.isEmpty(searchBox.getText())) {
                 searchBox.setText(ResourceHandler.getInstance().getMessage(searchBox.getName()));
                 color = searchBox.getForeground();

@@ -13,7 +13,7 @@ public class CloseApplicationAction implements ActionListener {
     /**
      * {@inheritDoc}
      */
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(final ActionEvent actionEvent) {
         System.exit(0);
     }
 }

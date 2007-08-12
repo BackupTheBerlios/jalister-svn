@@ -54,10 +54,10 @@ public class FileUtilsUnitTest {
     public void testGetContents() throws Exception {
 
         file = File.createTempFile("tempFile", "test");
-        byte[] bytes = "The Test String".getBytes();
+        final byte[] bytes = "The Test String".getBytes();
         FileUtils.putContents(file, bytes);
 
-        byte[] contents = FileUtils.getContents(file);
+        final byte[] contents = FileUtils.getContents(file);
 
         assertArrayEquals(bytes, contents);
     }
@@ -99,7 +99,7 @@ public class FileUtilsUnitTest {
     public void testDeleteNonEmptyDirectory() throws Exception {
         file = new File("rootDirectory");
         file.mkdirs();
-        File subFile = new File(file, "file");
+        final File subFile = new File(file, "file");
         subFile.createNewFile();
 
         assertTrue(subFile.exists());

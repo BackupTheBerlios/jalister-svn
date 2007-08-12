@@ -68,7 +68,7 @@ public class ResourceHandlerUnitTest {
     public void testGetMessage() throws Exception {
         final String s = resourceHandler.getMessage("MainWindow");
         assertNotNull(s);
-        assertEquals("Directory Lister", s);
+        assertEquals("JaLister", s);
     }
 
     /**

@@ -35,7 +35,7 @@ public enum SearchField {
      * @param store of type Store
      * @param index of type Index
      */
-    SearchField(Field.Store store, Field.Index index) {
+    SearchField(final Field.Store store, final Field.Index index) {
         this.store = store;
         this.index = index;
     }

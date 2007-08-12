@@ -78,7 +78,7 @@ public class MainMenuUnitTest {
      */
     @Test()
     public void testFileItemsAreAdded() throws Exception {
-        MenuItem file = menuBar.getMenu(resourceHandler.getMessage("MainMenu.File"));
+        final MenuItem file = menuBar.getMenu(resourceHandler.getMessage("MainMenu.File"));
         Assert.assertTrue(file.isEnabled().isTrue());
     }
 }

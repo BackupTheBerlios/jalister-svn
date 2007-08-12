@@ -30,7 +30,7 @@ public class DirectoryChooser extends JFileChooser {
     /**
      * @param arg0
      */
-    public DirectoryChooser(String arg0) {
+    public DirectoryChooser(final String arg0) {
         super(arg0);
         init();
     }
@@ -38,7 +38,7 @@ public class DirectoryChooser extends JFileChooser {
     /**
      * @param arg0
      */
-    public DirectoryChooser(File arg0) {
+    public DirectoryChooser(final File arg0) {
         super(arg0);
         init();
     }
@@ -46,7 +46,7 @@ public class DirectoryChooser extends JFileChooser {
     /**
      * @param arg0
      */
-    public DirectoryChooser(FileSystemView arg0) {
+    public DirectoryChooser(final FileSystemView arg0) {
         super(arg0);
         init();
     }
@@ -55,7 +55,7 @@ public class DirectoryChooser extends JFileChooser {
      * @param arg0
      * @param arg1
      */
-    public DirectoryChooser(File arg0, FileSystemView arg1) {
+    public DirectoryChooser(final File arg0, final FileSystemView arg1) {
         super(arg0, arg1);
         init();
     }
@@ -64,7 +64,7 @@ public class DirectoryChooser extends JFileChooser {
      * @param arg0
      * @param arg1
      */
-    public DirectoryChooser(String arg0, FileSystemView arg1) {
+    public DirectoryChooser(final String arg0, final FileSystemView arg1) {
         super(arg0, arg1);
         init();
     }

@@ -20,7 +20,7 @@ import java.io.IOException;
 public class LoadDirectoryPlugin implements FileOpenSavePlugin {
     private static final Log logger = LogFactory.getLog(LoadDirectoryPlugin.class);
 
-    public void handleFile(File selectedFile, ProgressListener frame) {
+    public void handleFile(final File selectedFile, final ProgressListener frame) {
         FileEntry fileEntry = null;
         try {
             fileEntry = parseFile(selectedFile, frame);

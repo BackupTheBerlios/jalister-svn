@@ -36,9 +36,9 @@ public class SettingsSetLanguageAction implements ActionListener {
     /**
      * {@inheritDoc}
      */
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         ResourceHandler.getInstance().setLocale(newLocale);
-        Localizer localizer = new Localizer();
+        final Localizer localizer = new Localizer();
         localizer.localize(mainWindow);
 
         mainWindow.repaint();

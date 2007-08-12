@@ -14,7 +14,7 @@ public class ShowAboutBoxAction implements ActionListener {
     /**
      * {@inheritDoc}
      */
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         new AboutBox().setVisible(true);
     }
 }

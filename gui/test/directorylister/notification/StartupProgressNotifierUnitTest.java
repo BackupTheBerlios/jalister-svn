@@ -57,7 +57,7 @@ public class StartupProgressNotifierUnitTest {
      */
     @Test()
     public void testAddListenerTwice() throws Exception {
-        ProgressListener listener = new TestStartupListener();
+        final ProgressListener listener = new TestStartupListener();
         notifier.addListener(listener);
         Assert.assertFalse(notifier.addListener(listener));
     }
@@ -69,7 +69,7 @@ public class StartupProgressNotifierUnitTest {
      */
     @Test()
     public void testNotifySendsMessages() throws Exception {
-        TestStartupListener listener = new TestStartupListener();
+        final TestStartupListener listener = new TestStartupListener();
         notifier.addListener(listener);
 
         notifier.notifyListeners("message", false);
@@ -94,7 +94,7 @@ public class StartupProgressNotifierUnitTest {
          *
          * @see ProgressListener#notify(Notification)
          */
-        public void notify(Notification message) {
+        public void notify(final Notification message) {
             notifyReceived = true;
         }
     }

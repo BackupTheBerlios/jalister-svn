@@ -2,11 +2,16 @@ package directorylister.resources;
 
 import junit.framework.JUnit4TestAdapter;
 import org.junit.After;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import java.util.Locale;
 
 /**
@@ -43,12 +48,12 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationWorkForButton() {
-        JButton button = new JButton();
+        final JButton button = new JButton();
         button.setName("MainWindow");
 
         localizer.localize(button);
 
-        assertEquals("Directory Lister", button.getText());
+        assertEquals("JaLister", button.getText());
     }
 
     /**
@@ -56,10 +61,10 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationWorkForJMenu() {
-        JMenu menu = new JMenu();
+        final JMenu menu = new JMenu();
         menu.setName("MainWindow");
         localizer.localize(menu);
-        assertEquals("Directory Lister", menu.getText());
+        assertEquals("JaLister", menu.getText());
     }
 
     /**
@@ -67,10 +72,10 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationWorkForJFrame() {
-        JFrame frame = new JFrame();
+        final JFrame frame = new JFrame();
         frame.setName("MainWindow");
         localizer.localize(frame);
-        assertEquals("Directory Lister", frame.getTitle());
+        assertEquals("JaLister", frame.getTitle());
     }
 
     /**
@@ -78,10 +83,10 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationWorkForJMenuItem() {
-        JMenuItem menuItem = new JMenuItem();
+        final JMenuItem menuItem = new JMenuItem();
         menuItem.setName("MainWindow");
         localizer.localize(menuItem);
-        assertEquals("Directory Lister", menuItem.getText());
+        assertEquals("JaLister", menuItem.getText());
     }
 
     /**
@@ -89,10 +94,10 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationWorkForJLabel() {
-        JLabel label = new JLabel();
+        final JLabel label = new JLabel();
         label.setName("MainWindow");
         localizer.localize(label);
-        assertEquals("Directory Lister", label.getText());
+        assertEquals("JaLister", label.getText());
     }
 
     /**
@@ -100,10 +105,10 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationWorkForJDialog() {
-        JDialog dialog = new JDialog();
+        final JDialog dialog = new JDialog();
         dialog.setName("MainWindow");
         localizer.localize(dialog);
-        assertEquals("Directory Lister", dialog.getTitle());
+        assertEquals("JaLister", dialog.getTitle());
     }
 
     /**
@@ -111,7 +116,7 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationForNonExistentNameButton() {
-        JButton button = new JButton();
+        final JButton button = new JButton();
         button.setName("Non Existent");
 
         localizer.localize(button);
@@ -124,7 +129,7 @@ public class LocalizerUnitTest {
      */
     @Test()
     public void testLocalizationForNullNameButton() {
-        JButton button = new JButton();
+        final JButton button = new JButton();
 
         localizer.localize(button);
 
@@ -137,7 +142,7 @@ public class LocalizerUnitTest {
     @Test()
     public void testLocalizationWork2() {
         ResourceHandler.getInstance().setLocale(new Locale("RU"));
-        JButton button = new JButton();
+        final JButton button = new JButton();
         button.setName("MainWindow");
 
         localizer.localize(button);

@@ -64,7 +64,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
                 final String s = field.stringValue();
                 addParentDirectories(s);
                 searchResult.add(s);
-            } catch(IOException e) {
+            } catch (IOException e) {
                 logger.error(e);
             }
         }
@@ -108,12 +108,12 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
      * {@inheritDoc}
      */
     @Override
-    public void levelStarted(FileEntry newRoot) {
+    public void levelStarted(final FileEntry newRoot) {
         if (searchResult.contains(newRoot.getFileName())) {
             if (!newRoot.equals(stack.peek())) {
                 final FileEntry root = stack.peek();
                 final List<FileEntry> childs = root.getChilds();
-                for (FileEntry child : childs) {
+                for (final FileEntry child : childs) {
                     if (child.equals(newRoot)) {
                         stack.push(child);
                     }
@@ -126,7 +126,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
      * {@inheritDoc}
      */
     @Override
-    public void levelEnded(FileEntry entry) {
+    public void levelEnded(final FileEntry entry) {
         if (searchResult.contains(entry.getFileName())) {
             stack.pop();
         }

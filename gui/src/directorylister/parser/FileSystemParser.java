@@ -37,7 +37,7 @@ public class FileSystemParser extends ProgressNotifier {
         /**
          * {@inheritDoc}
          */
-        public boolean accept(File pathname) {
+        public boolean accept(final File pathname) {
             if (pathname.getName().equals(".svn")) {
                 return false;
             }
@@ -83,7 +83,7 @@ public class FileSystemParser extends ProgressNotifier {
     private FileEntry parse(final File startFile, final FileEntry result) throws IOException {
         final File[] files = startFile.listFiles(FILTER);
         if (null != files) {
-            for (File file : files) {
+            for (final File file : files) {
                 logger.debug("Parsing: " + file.getAbsolutePath());
                 final FileEntry fileEntry = fileEntryBuilder.buildFrom(file);
                 result.addChild(fileEntry);

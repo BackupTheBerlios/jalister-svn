@@ -1,6 +1,10 @@
 package directorylister.utils;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -30,7 +34,7 @@ public class SwingUtils {
 
         if (component instanceof Container) {
             final Component[] components = ((Container) component).getComponents();
-            for (Component subComponent : components) {
+            for (final Component subComponent : components) {
                 processWithSubComponents(subComponent, processor);
             }
         }
@@ -38,14 +42,14 @@ public class SwingUtils {
             final JMenuBar menuBar = ((JFrame) component).getJMenuBar();
             if (null != menuBar) {
                 final Component[] components = menuBar.getComponents();
-                for (Component subComponent : components) {
+                for (final Component subComponent : components) {
                     processWithSubComponents(subComponent, processor);
                 }
             }
         }
         if (component instanceof JMenu) {
             final Component[] components = ((JMenu) component).getMenuComponents();
-            for (Component subComponent : components) {
+            for (final Component subComponent : components) {
                 processWithSubComponents(subComponent, processor);
             }
 
@@ -60,7 +64,7 @@ public class SwingUtils {
      * @return T
      */
     public static <T extends Component> T findComponent(final String componentName, final Component container) {
-        FindComponentProcessor componentProcessor = new FindComponentProcessor<T>(componentName);
+        final FindComponentProcessor componentProcessor = new FindComponentProcessor<T>(componentName);
         processWithSubComponents(container, componentProcessor);
         return (T) componentProcessor.getFoundComponent();
     }
@@ -71,16 +75,16 @@ public class SwingUtils {
      * @param originalButton of type JMenuItem
      * @return JButton
      */
-    public static JButton createButton(JMenuItem originalButton) {
+    public static JButton createButton(final JMenuItem originalButton) {
         // TODO: Looks like hack.
         final JButton result = new JButton();
         try {
-            ActionListener[] listeners = originalButton.getActionListeners();
-            for (ActionListener listener : listeners) {
+            final ActionListener[] listeners = originalButton.getActionListeners();
+            for (final ActionListener listener : listeners) {
                 result.addActionListener(listener);
             }
             result.setName(originalButton.getName());
-        } catch(Exception err) {
+        } catch (Exception err) {
             System.err.println("error");
             //TODO implement
         }

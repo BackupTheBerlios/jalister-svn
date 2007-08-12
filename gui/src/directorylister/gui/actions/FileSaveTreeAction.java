@@ -43,8 +43,8 @@ public final class FileSaveTreeAction extends AbstractFileOpenSaveActionWithProg
 
     private static class FileSaveTreePlugin implements FileOpenSavePlugin {
 
-        public void handleFile(File selectedFile, ProgressListener listener) {
-            FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
+        public void handleFile(final File selectedFile, final ProgressListener listener) {
+            final FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
             if (null != fileEntry) {
                 OutputStream outputStream = null;
                 try {

@@ -27,21 +27,21 @@ public class XMLSerializer {
      * @param outputStream of type OutputStream
      * @param entry        of type XMLSerializable
      */
-    public void serialize(OutputStream outputStream, XMLSerializable entry) {
+    public void serialize(final OutputStream outputStream, final XMLSerializable entry) {
 
         // extract creation of document in the method.
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = null;
         try {
             documentBuilder = factory.newDocumentBuilder();
-        } catch(ParserConfigurationException e) {
+        } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
         if (documentBuilder == null) {
             logger.error("documentBuilder is null");
             return;
         }
-        Document document = documentBuilder.newDocument();
+        final Document document = documentBuilder.newDocument();
         document.setXmlVersion("1.0");
 
         entry.serializeToXML(document);

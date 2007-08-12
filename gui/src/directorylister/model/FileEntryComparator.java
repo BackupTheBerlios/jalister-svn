@@ -30,7 +30,7 @@ public class FileEntryComparator implements Comparator<FileEntry>, Serializable 
     /**
      * {@inheritDoc}
      */
-    public int compare(FileEntry firstEntry, FileEntry secondEntry) {
+    public int compare(final FileEntry firstEntry, final FileEntry secondEntry) {
         // TODO: check this code.
         if (firstEntry.getFileType().equals(FileType.DIRECTORY) && secondEntry.getFileType().equals(FileType.DIRECTORY)) {
             return firstEntry.getShortName().compareTo(secondEntry.getShortName());

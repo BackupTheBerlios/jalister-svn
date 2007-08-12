@@ -41,7 +41,7 @@ public class XMLSerializerUnitTest {
      */
     @Test()
     public void testThatSimpleFileEntryCanBeSerialized() {
-        FileEntry entry = new FileEntry();
+        final FileEntry entry = new FileEntry();
 
         entry.setFileType(FileType.DIRECTORY);
         entry.setFileName("fileName");
@@ -50,9 +50,9 @@ public class XMLSerializerUnitTest {
 
         serializer.serialize(outputStream, entry);
 
-        String result = new String(outputStream.toByteArray());
+        final String result = new String(outputStream.toByteArray());
 
-        String expected = "<?xml version=\"1.0\"?>";
+        final String expected = "<?xml version=\"1.0\"?>";
         Assert.assertEquals(expected, result);
     }
 

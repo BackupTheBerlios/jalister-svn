@@ -42,7 +42,7 @@ public class WorkspacePanel extends JPanel {
         splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
         splitPane.setTopComponent(topPanel);
 
-        SelectedFilesPanel bottomPanel = new SelectedFilesPanel();
+        final SelectedFilesPanel bottomPanel = new SelectedFilesPanel();
         splitPane.setBottomComponent(bottomPanel);
 
         add(splitPane, BorderLayout.CENTER);

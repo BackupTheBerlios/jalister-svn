@@ -58,7 +58,7 @@ public class SplashScreenUnitTest {
      */
     @Test()
     public void testProgressbarExists() throws Exception {
-        ProgressBar progressBar = splashWindow.getProgressBar("progressBar");
+        final ProgressBar progressBar = splashWindow.getProgressBar("progressBar");
         Assert.assertTrue(progressBar.isEnabled().isTrue());
     }
 
@@ -69,7 +69,7 @@ public class SplashScreenUnitTest {
      */
     @Test()
     public void testLabelExists() throws Exception {
-        TextBox messageLabel = getLabel();
+        final TextBox messageLabel = getLabel();
         Assert.assertTrue(messageLabel.isEnabled().isTrue());
     }
 
@@ -89,7 +89,7 @@ public class SplashScreenUnitTest {
      */
     @Test()
     public void testLabelChangesItsText() throws Exception {
-        TextBox label = getLabel();
+        final TextBox label = getLabel();
 
         splashScreen.notify(new Notification("New Message"));
 

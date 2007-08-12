@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Notification implements Serializable {
     private final String message;
 
-    public Notification(String message) {
+    public Notification(final String message) {
         this.message = message;
     }
 

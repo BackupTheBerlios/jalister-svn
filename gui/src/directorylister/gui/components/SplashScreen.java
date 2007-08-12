@@ -25,10 +25,10 @@ public class SplashScreen extends ProgressBarFrame {
      *
      * @param args of type String[]
      */
-    public static void main(String[] args) {
-        SplashScreen screen = new SplashScreen();
+    public static void main(final String[] args) {
+        final SplashScreen screen = new SplashScreen();
         screen.setVisible(true);
-        ProgressNotifier notifier = new ProgressNotifier();
+        final ProgressNotifier notifier = new ProgressNotifier();
         notifier.addListener(screen);
 
         notifier.notifyListeners("Starting up...", false);

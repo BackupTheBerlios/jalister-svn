@@ -35,7 +35,7 @@ public class ProgressNotifier {
         if (localized) {
             localizedMessage = ResourceHandler.getInstance().getMessage(message);
         }
-        Notification notification = new Notification(localizedMessage);
+        final Notification notification = new Notification(localizedMessage);
         for (final ProgressListener listener : listeners) {
             listener.notify(notification);
         }

@@ -26,7 +26,7 @@ public abstract class AbstractFileOpenSaveActionWithProgressBar implements Actio
     private static final Executor EXECUTOR = Executors.newSingleThreadExecutor();
     private final JFrame frame;
 
-    public AbstractFileOpenSaveActionWithProgressBar(JFrame frame) {
+    public AbstractFileOpenSaveActionWithProgressBar(final JFrame frame) {
         this.frame = frame;
     }
 
@@ -42,7 +42,7 @@ public abstract class AbstractFileOpenSaveActionWithProgressBar implements Actio
         final FileOpenSavePlugin openSavePlugin = getFileOpenSavePligin();
         final JFileChooser directoryChooser = openSavePlugin.getFileChooser();
 
-        int returnVal = showDialog(openSavePlugin.isOpenDialog(), directoryChooser);
+        final int returnVal = showDialog(openSavePlugin.isOpenDialog(), directoryChooser);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             final File selectedFile = directoryChooser.getSelectedFile();
@@ -66,8 +66,8 @@ public abstract class AbstractFileOpenSaveActionWithProgressBar implements Actio
         }
     }
 
-    private int showDialog(boolean openDialog, JFileChooser directoryChooser) {
-        int returnVal;
+    private int showDialog(final boolean openDialog, final JFileChooser directoryChooser) {
+        final int returnVal;
         if (openDialog) {
             returnVal = directoryChooser.showOpenDialog(frame);
         } else {

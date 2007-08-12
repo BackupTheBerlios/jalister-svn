@@ -34,9 +34,9 @@ final class FileEntryListener extends FileEntryListenerAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void notifyCurrentFileEntryChanged(FileEntry currentEntry, FileEntry newEntry) {
+    public void notifyCurrentFileEntryChanged(final FileEntry currentEntry, final FileEntry newEntry) {
         if (newEntry != null) {
-            DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+            final DefaultMutableTreeNode root = new DefaultMutableTreeNode();
             root.setUserObject(newEntry);
 
             buildTree(root, newEntry.getChilds(SortedFileEntryListTransformer.TRANSFORMER));
@@ -53,14 +53,14 @@ final class FileEntryListener extends FileEntryListenerAdapter {
      * @param root    of type DefaultMutableTreeNode
      * @param entries of type List<FileEntry>
      */
-    private void buildTree(DefaultMutableTreeNode root, List<FileEntry> entries) {
+    private void buildTree(final DefaultMutableTreeNode root, final List<FileEntry> entries) {
 
-        for (FileEntry entry : entries) {
-            DefaultMutableTreeNode node = new DefaultMutableTreeNode(entry);
+        for (final FileEntry entry : entries) {
+            final DefaultMutableTreeNode node = new DefaultMutableTreeNode(entry);
 
             root.add(node);
 
-            List<FileEntry> childs = entry.getChilds(SortedFileEntryListTransformer.TRANSFORMER);
+            final List<FileEntry> childs = entry.getChilds(SortedFileEntryListTransformer.TRANSFORMER);
             if (!childs.isEmpty()) {
                 buildTree(node, childs);
             }

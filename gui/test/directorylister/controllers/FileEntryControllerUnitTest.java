@@ -110,7 +110,7 @@ public class FileEntryControllerUnitTest {
          * @see FileEntryListenerAdapter#notifyCurrentFileEntryChanged(FileEntry,FileEntry)
          */
         @Override
-        public void notifyCurrentFileEntryChanged(FileEntry currentEntry, FileEntry newEntry) {
+        public void notifyCurrentFileEntryChanged(final FileEntry currentEntry, final FileEntry newEntry) {
             wasCalled = true;
         }
     }

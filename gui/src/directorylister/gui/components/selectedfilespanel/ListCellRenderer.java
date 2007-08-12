@@ -17,9 +17,9 @@ class ListCellRenderer extends DefaultListCellRenderer {
      * {@inheritDoc}
      */
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
         final JLabel cellRendererComponent = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        FileEntry entry = (FileEntry) value;
+        final FileEntry entry = (FileEntry) value;
         cellRendererComponent.setText(entry.getFileName());
         return cellRendererComponent;
     }

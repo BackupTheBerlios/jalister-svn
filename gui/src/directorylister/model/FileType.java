@@ -14,7 +14,7 @@ public enum FileType {
     DIRECTORY,
     SYMLINK;
 
-    public static FileType getType(File file) {
+    public static FileType getType(final File file) {
         if (FileUtils.isLink(file)) {
             return SYMLINK;
         } else if (file.isDirectory()) {

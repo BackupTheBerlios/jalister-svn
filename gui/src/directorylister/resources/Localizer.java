@@ -67,14 +67,14 @@ public class Localizer {
          *
          * @see directorylister.utils.ComponentProcessor#process(Component)
          */
-        public void process(Component component) {
+        public void process(final Component component) {
             logger.debug("Processing:" + component.getClass() + " name: " + component.getName());
             final String componentName = component.getName();
             if (componentName == null) {
                 return;
             }
 
-            String value = getValueForComponent(componentName);
+            final String value = getValueForComponent(componentName);
 
             if (component instanceof JLabel) {
                 ((JLabel) component).setText(value);

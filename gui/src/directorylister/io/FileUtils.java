@@ -3,7 +3,15 @@ package directorylister.io;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Class FileUtils ...
@@ -35,10 +43,10 @@ public class FileUtils {
      * @return byte[]
      * @throws IOException when
      */
-    public static byte[] getContents(File file) throws IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+    public static byte[] getContents(final File file) throws IOException {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        InputStream in = new BufferedInputStream(new FileInputStream(file));
+        final InputStream in = new BufferedInputStream(new FileInputStream(file));
 
         int c = in.read();
 
@@ -61,8 +69,8 @@ public class FileUtils {
      * @param bytes of type byte[]
      * @throws IOException when
      */
-    public static void putContents(File file, byte[] bytes) throws IOException {
-        OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
+    public static void putContents(final File file, final byte[] bytes) throws IOException {
+        final OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
 
         os.write(bytes);
 
@@ -75,9 +83,9 @@ public class FileUtils {
      *
      * @param file of type File
      */
-    public static void delete(File file) {
+    public static void delete(final File file) {
         if (file.isDirectory()) {
-            for (File child : file.listFiles()) {
+            for (final File child : file.listFiles()) {
                 delete(child);
             }
         }
@@ -91,10 +99,10 @@ public class FileUtils {
      * @param pathname file to check.
      * @return <code>true</code> if pathname is link. <code>false</code> otherwise.
      */
-    public static boolean isLink(File pathname) {
+    public static boolean isLink(final File pathname) {
         try {
             return !pathname.getCanonicalPath().equals(pathname.getAbsolutePath());
-        } catch(IOException e) {
+        } catch (IOException e) {
             logger.error(e);
             return false;
         }

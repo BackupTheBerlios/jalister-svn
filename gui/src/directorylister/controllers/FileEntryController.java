@@ -61,7 +61,7 @@ public class FileEntryController {
      */
     public void setCurrentFileEntry(final FileEntry newEntry) {
 
-        for (FileEntryListener fileEntryListener : LISTENERS) {
+        for (final FileEntryListener fileEntryListener : LISTENERS) {
             fileEntryListener.notifyCurrentFileEntryChanged(currentEntry, newEntry);
         }
         currentEntry = newEntry;
@@ -82,7 +82,7 @@ public class FileEntryController {
      * @param fileEntry
      */
     public void selectFileEntry(final FileEntry fileEntry) {
-        for (FileEntryListener fileEntryListener : LISTENERS) {
+        for (final FileEntryListener fileEntryListener : LISTENERS) {
             fileEntryListener.notifyFileEntryToSelect(fileEntry);
         }
 

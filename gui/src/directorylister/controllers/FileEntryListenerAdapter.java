@@ -15,7 +15,7 @@ public class FileEntryListenerAdapter implements FileEntryListener {
      *
      * @see FileEntryListener#notifyCurrentFileEntryChanged(FileEntry,FileEntry)
      */
-    public void notifyCurrentFileEntryChanged(FileEntry currentEntry, FileEntry newEntry) {
+    public void notifyCurrentFileEntryChanged(final FileEntry currentEntry, final FileEntry newEntry) {
     }
 
     /**

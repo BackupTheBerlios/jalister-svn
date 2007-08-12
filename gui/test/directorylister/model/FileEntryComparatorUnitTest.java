@@ -38,8 +38,8 @@ public final class FileEntryComparatorUnitTest {
      */
     @Test()
     public void testComparingTwoDirectories1() {
-        FileEntry fileEntry1 = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
-        FileEntry fileEntry2 = new FileEntry("def", FileType.DIRECTORY, 0, null, "def");
+        final FileEntry fileEntry1 = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
+        final FileEntry fileEntry2 = new FileEntry("def", FileType.DIRECTORY, 0, null, "def");
         Assert.assertTrue(0 > comparator.compare(fileEntry1, fileEntry2));
     }
 
@@ -48,8 +48,8 @@ public final class FileEntryComparatorUnitTest {
      */
     @Test()
     public void testComparingTwoDirectories2() {
-        FileEntry fileEntry1 = new FileEntry("def", FileType.DIRECTORY, 0, null, "def");
-        FileEntry fileEntry2 = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
+        final FileEntry fileEntry1 = new FileEntry("def", FileType.DIRECTORY, 0, null, "def");
+        final FileEntry fileEntry2 = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
         Assert.assertTrue(0 < comparator.compare(fileEntry1, fileEntry2));
     }
 
@@ -58,8 +58,8 @@ public final class FileEntryComparatorUnitTest {
      */
     @Test()
     public void testComparingTwoFiles1() {
-        FileEntry fileEntry1 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
-        FileEntry fileEntry2 = new FileEntry("def", FileType.FILE, 0, null, "def");
+        final FileEntry fileEntry1 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
+        final FileEntry fileEntry2 = new FileEntry("def", FileType.FILE, 0, null, "def");
         Assert.assertTrue(0 > comparator.compare(fileEntry1, fileEntry2));
     }
 
@@ -68,8 +68,8 @@ public final class FileEntryComparatorUnitTest {
      */
     @Test()
     public void testComparingTwoFiles2() {
-        FileEntry fileEntry1 = new FileEntry("def", FileType.FILE, 0, null, "def");
-        FileEntry fileEntry2 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
+        final FileEntry fileEntry1 = new FileEntry("def", FileType.FILE, 0, null, "def");
+        final FileEntry fileEntry2 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
         Assert.assertTrue(0 < comparator.compare(fileEntry1, fileEntry2));
     }
 
@@ -78,8 +78,8 @@ public final class FileEntryComparatorUnitTest {
      */
     @Test()
     public void testCompareDirectoryAndFile() {
-        FileEntry directory = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
-        FileEntry file = new FileEntry("abc", FileType.FILE, 0, null, "abc");
+        final FileEntry directory = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
+        final FileEntry file = new FileEntry("abc", FileType.FILE, 0, null, "abc");
         Assert.assertTrue(0 > comparator.compare(directory, file));
     }
 
@@ -88,8 +88,8 @@ public final class FileEntryComparatorUnitTest {
      */
     @Test()
     public void testCompareFileAndDirectory() {
-        FileEntry file = new FileEntry("abc", FileType.FILE, 0, null, "abc");
-        FileEntry directory = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
+        final FileEntry file = new FileEntry("abc", FileType.FILE, 0, null, "abc");
+        final FileEntry directory = new FileEntry("abc", FileType.DIRECTORY, 0, null, "abc");
         Assert.assertTrue(0 < comparator.compare(file, directory));
     }
 }

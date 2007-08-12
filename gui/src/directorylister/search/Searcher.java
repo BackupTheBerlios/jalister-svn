@@ -11,7 +11,13 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.search.*;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Hits;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
@@ -43,12 +49,12 @@ public class Searcher implements Serializable {
     public Searcher() {
         try {
             directory = new RAMDirectory(".");
-        } catch(IOException e) {
+        } catch (IOException e) {
             logger.error(e);
             throw new RuntimeException("Cannot initialize searcher", e);
         }
 
-        FileEntryListener listener = new FileEntryListener();
+        final FileEntryListener listener = new FileEntryListener();
         FileEntryController.getInstance().addListener(listener);
 
     }
@@ -66,18 +72,18 @@ public class Searcher implements Serializable {
         try {
             indexSearcher = new IndexSearcher(directory);
             final Hits hits = indexSearcher.search(buildQuery(condition));
-            IndexSearcherFileEntryVisitor fileEntryVisitor = new IndexSearcherFileEntryVisitor(hits);
+            final IndexSearcherFileEntryVisitor fileEntryVisitor = new IndexSearcherFileEntryVisitor(hits);
             oldFileEntry.acceptVisitor(fileEntryVisitor);
 
             return fileEntryVisitor.getRoot();
-        } catch(IOException e) {
+        } catch (IOException e) {
             logger.error(e);
         }
         finally {
             if (indexSearcher != null) {
                 try {
                     indexSearcher.close();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     logger.error(e);
                 }
             }
@@ -91,19 +97,19 @@ public class Searcher implements Serializable {
      * @param condition of type String
      * @return Query
      */
-    private Query buildQuery(String condition) {
-        String[] strings = StringUtils.split(condition.trim().toLowerCase());
-        BooleanQuery booleanQuery = new BooleanQuery();
-        for (String string : strings) {
+    private Query buildQuery(final String condition) {
+        final String[] strings = StringUtils.split(condition.trim().toLowerCase());
+        final BooleanQuery booleanQuery = new BooleanQuery();
+        for (final String string : strings) {
             final String searchString = "*" + string + "*";
 
-            WildcardQuery fileNameQuery = new WildcardQuery(new Term(SearchField.FILE_NAME.name(), searchString));
+            final WildcardQuery fileNameQuery = new WildcardQuery(new Term(SearchField.FILE_NAME.name(), searchString));
             booleanQuery.add(fileNameQuery, BooleanClause.Occur.SHOULD);
 
-            WildcardQuery shortNameQuery = new WildcardQuery(new Term(SearchField.SHORT_NAME.name(), searchString));
+            final WildcardQuery shortNameQuery = new WildcardQuery(new Term(SearchField.SHORT_NAME.name(), searchString));
             booleanQuery.add(shortNameQuery, BooleanClause.Occur.SHOULD);
 
-            TermQuery query = new TermQuery(new Term(SearchField.SHORT_NAME.name(), searchString));
+            final TermQuery query = new TermQuery(new Term(SearchField.SHORT_NAME.name(), searchString));
             booleanQuery.add(query, BooleanClause.Occur.SHOULD);
         }
         return booleanQuery;
@@ -122,12 +128,12 @@ public class Searcher implements Serializable {
          * @see directorylister.controllers.FileEntryListenerAdapter#notifyCurrentFileEntryChanged(FileEntry,FileEntry)
          */
         @Override
-        public void notifyCurrentFileEntryChanged(FileEntry currentEntry, final FileEntry newEntry) {
+        public void notifyCurrentFileEntryChanged(final FileEntry currentEntry, final FileEntry newEntry) {
             executeWithIndexWriter(new Executable<IndexWriter>() {
                 /**
                  * {@inheritDoc}
                  */
-                public void execute(IndexWriter indexWriter) throws IOException {
+                public void execute(final IndexWriter indexWriter) throws IOException {
                     newEntry.acceptVisitor(new IndexWriterFileEntryVisitor(indexWriter));
                     indexWriter.optimize();
                 }
@@ -163,11 +169,11 @@ public class Searcher implements Serializable {
          * @see directorylister.model.FileEntryVisitorAdapter#acceptEntry(FileEntry)
          */
         @Override
-        public void acceptEntry(FileEntry fileEntry) {
+        public void acceptEntry(final FileEntry fileEntry) {
             final Document document = buildDocument(fileEntry);
             try {
                 indexWriter.addDocument(document);
-            } catch(IOException e) {
+            } catch (IOException e) {
                 logger.error(e);
 
             }
@@ -179,8 +185,8 @@ public class Searcher implements Serializable {
          * @param fileEntry of type FileEntry
          * @return Document
          */
-        private Document buildDocument(FileEntry fileEntry) {
-            Document document = new Document();
+        private Document buildDocument(final FileEntry fileEntry) {
+            final Document document = new Document();
             document.add(SearchField.ID.createField(fileEntry.getFileName()));
             document.add(SearchField.FILE_NAME.createField(fileEntry.getFileName()));
             document.add(SearchField.SHORT_NAME.createField(fileEntry.getShortName()));
@@ -194,19 +200,19 @@ public class Searcher implements Serializable {
      *
      * @param executable of type Executable<IndexWriter>
      */
-    private void executeWithIndexWriter(Executable<IndexWriter> executable) {
+    private void executeWithIndexWriter(final Executable<IndexWriter> executable) {
         IndexWriter indexWriter = null;
         try {
             indexWriter = new IndexWriter(directory, new StandardAnalyzer());
             executable.execute(indexWriter);
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             logger.error(e);
         } finally {
             if (indexWriter != null) {
                 try {
                     indexWriter.close();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     logger.error(e);
                 }
             }

@@ -57,7 +57,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param fileName Value to set for property 'fileName'.
      */
-    public void setFileName(String fileName) {
+    public void setFileName(final String fileName) {
         this.fileName = fileName;
     }
 
@@ -66,7 +66,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param shortName Value to set for property 'shortName'.
      */
-    public void setShortName(String shortName) {
+    public void setShortName(final String shortName) {
         this.shortName = shortName;
     }
 
@@ -75,7 +75,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param fileType Value to set for property 'fileType'.
      */
-    public void setFileType(FileType fileType) {
+    public void setFileType(final FileType fileType) {
         this.fileType = fileType;
     }
 
@@ -84,7 +84,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param lastModified Value to set for property 'lastModified'.
      */
-    public void setLastModified(long lastModified) {
+    public void setLastModified(final long lastModified) {
         this.lastModified = lastModified;
     }
 
@@ -93,7 +93,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param md5 Value to set for property 'md5'.
      */
-    public void setMd5(String md5) {
+    public void setMd5(final String md5) {
         this.md5 = md5;
     }
 
@@ -127,7 +127,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param metaData of type FileEntryMetaData
      */
-    public void addMetaData(FileEntryMetaData metaData) {
+    public void addMetaData(final FileEntryMetaData metaData) {
         metadatas.add(metaData);
     }
 
@@ -146,7 +146,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param metadatas Value to set for property 'metadatas'.
      */
-    public void setMetadatas(Set<FileEntryMetaData> metadatas) {
+    public void setMetadatas(final Set<FileEntryMetaData> metadatas) {
         this.metadatas = metadatas;
     }
 
@@ -255,7 +255,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param parent Value to set for property 'parent'.
      */
-    private void setParent(FileEntry parent) {
+    private void setParent(final FileEntry parent) {
         this.parent = parent;
     }
 
@@ -284,7 +284,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @param transformer of type Transformer<List<FileEntry>, T>
      * @return T
      */
-    public <T> T getChilds(Transformer<List<FileEntry>, T> transformer) {
+    public <T> T getChilds(final Transformer<List<FileEntry>, T> transformer) {
         return transformer.transform(childs);
     }
 
@@ -309,21 +309,21 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @see XMLSerializable#serializeToXML(Document)
      */
-    public Element serializeToXML(Document document) {
+    public Element serializeToXML(final Document document) {
         //    logger.debug((fileType?"fileType ":"file")+shortName);
-        Element xmlNode = document.createElement(fileType.name().toLowerCase());
+        final Element xmlNode = document.createElement(fileType.name().toLowerCase());
 
         xmlNode.setAttribute("Name", shortName);
         xmlNode.setAttribute("lastModified", "" + lastModified);
 
-        for (FileEntryMetaData data : metadatas) {
+        for (final FileEntryMetaData data : metadatas) {
             xmlNode.setAttribute(data.getKey().toString(), data.getValue().toString());
         }
         //  logger.debug(xmlNode.toString());
         if (fileType.equals(FileType.FILE)) {
-            List<FileEntry> childs = getChilds();
+            final List<FileEntry> childs = getChilds();
             Element el;
-            for (FileEntry child : childs) {
+            for (final FileEntry child : childs) {
                 el = child.serializeToXML(document);
                 if (null != el) xmlNode.appendChild(el);
             }
@@ -336,7 +336,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param fileEntryVisitor of type FileEntryVisitor
      */
-    public void acceptVisitor(FileEntryVisitor fileEntryVisitor) {
+    public void acceptVisitor(final FileEntryVisitor fileEntryVisitor) {
         accept(fileEntryVisitor, this);
     }
 
@@ -346,13 +346,13 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @param fileEntryVisitor of type FileEntryVisitor
      * @param entry            of type FileEntry
      */
-    private void accept(FileEntryVisitor fileEntryVisitor, FileEntry entry) {
+    private void accept(final FileEntryVisitor fileEntryVisitor, final FileEntry entry) {
         fileEntryVisitor.acceptEntry(entry);
-        List<FileEntry> fileEntries = entry.getChilds();
+        final List<FileEntry> fileEntries = entry.getChilds();
 
         if (!fileEntries.isEmpty()) {
             fileEntryVisitor.levelStarted(entry);
-            for (FileEntry fileEntry : fileEntries) {
+            for (final FileEntry fileEntry : fileEntries) {
                 accept(fileEntryVisitor, fileEntry);
             }
             fileEntryVisitor.levelEnded(entry);

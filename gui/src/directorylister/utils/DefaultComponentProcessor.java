@@ -13,7 +13,7 @@ public class DefaultComponentProcessor implements ComponentProcessor {
      *
      * @see ComponentProcessor#process(Component)
      */
-    public void process(Component component) {
+    public void process(final Component component) {
 
     }
 }

@@ -32,7 +32,7 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
      *
      * @param document of type Document
      */
-    public XMLSerializerFileEntryVisitor(Document document) {
+    public XMLSerializerFileEntryVisitor(final Document document) {
         this.document = document;
         stack = new Stack<Element>();
     }
@@ -41,9 +41,9 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void acceptEntry(FileEntry fileEntry) {
-        Element lastEntry = stack.lastElement();
-        Element node = document.createElement(fileEntry.getFileType().name().toLowerCase());
+    public void acceptEntry(final FileEntry fileEntry) {
+        final Element lastEntry = stack.lastElement();
+        final Element node = document.createElement(fileEntry.getFileType().name().toLowerCase());
         lastEntry.appendChild(node);
     }
 
@@ -51,14 +51,14 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void levelStarted(FileEntry newRoot) {
-        Element xmlNode =
+    public void levelStarted(final FileEntry newRoot) {
+        final Element xmlNode =
                 document.createElement("fileEntry");
         xmlNode.setAttribute("type", newRoot.getFileType().name().toLowerCase());
         xmlNode.setAttribute("shortName", newRoot.getShortName());
         xmlNode.setAttribute("lastModified", String.valueOf(newRoot.getLastModified()));
 
-        for (FileEntryMetaData data : newRoot.getMetadatas()) {
+        for (final FileEntryMetaData data : newRoot.getMetadatas()) {
             xmlNode.setAttribute(String.valueOf(data.getKey()), String.valueOf(data.getValue()));
         }
         document.appendChild(xmlNode);
@@ -69,7 +69,7 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void levelEnded(FileEntry entry) {
+    public void levelEnded(final FileEntry entry) {
         stack.pop();
     }
 }

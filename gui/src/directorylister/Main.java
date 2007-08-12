@@ -26,11 +26,11 @@ public class Main {
      *
      * @param args of type String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         BasicConfigurator.configure();
 
-        ProgressNotifier
+        final ProgressNotifier
                 progressNotifier = new ProgressNotifier();
 
         final SplashScreen splashScreen = initializeSplash();

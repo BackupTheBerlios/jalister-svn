@@ -55,7 +55,7 @@ public class FileEntryUnitTest {
     @Test()
     public void testThatByDefaultCreatedFile() {
         fileEntry = new FileEntry("the name.txt", new Date().getTime(), "", null);
-        assertEquals(false, fileEntry.getFileType());
+        assertEquals(FileType.FILE, fileEntry.getFileType());
     }
 
     /**
@@ -64,7 +64,7 @@ public class FileEntryUnitTest {
     @Test()
     public void testThatDirectoryCanBeCreated() {
         fileEntry = new FileEntry("the name.txt", FileType.DIRECTORY, new Date().getTime(), "", null);
-        assertEquals(true, fileEntry.getFileType());
+        assertEquals(FileType.DIRECTORY, fileEntry.getFileType());
     }
 
     /**

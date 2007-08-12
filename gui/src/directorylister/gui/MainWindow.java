@@ -8,7 +8,13 @@ import directorylister.gui.components.WorkspacePanel;
 import directorylister.gui.components.fileentrytree.FileEntryTree;
 import directorylister.utils.SwingUtils;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JToolBar;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -44,7 +50,7 @@ public final class MainWindow extends JFrame {
 
 
         fileTree = new FileEntryTree();
-        JScrollPane scrollPane = new JScrollPane(fileTree);
+        final JScrollPane scrollPane = new JScrollPane(fileTree);
         splitPane.setLeftComponent(scrollPane);
         // TODO: Store in settings.
         scrollPane.setPreferredSize(new Dimension(350, 0));
@@ -53,24 +59,24 @@ public final class MainWindow extends JFrame {
         menubar = new MainMenu(this);
         setJMenuBar(menubar);
 
-        JToolBar toolBar = new JToolBar();
+        final JToolBar toolBar = new JToolBar();
         add(toolBar, BorderLayout.PAGE_START);
-        JMenuItem chooseDirectory = SwingUtils.findComponent("MainMenu.ChooseDirectory", menubar);
+        final JMenuItem chooseDirectory = SwingUtils.findComponent("MainMenu.ChooseDirectory", menubar);
         toolBar.add(SwingUtils.createButton(chooseDirectory));
 
-        JMenuItem openSavedTree = SwingUtils.findComponent("MainMenu.OpenSavedTree", menubar);
+        final JMenuItem openSavedTree = SwingUtils.findComponent("MainMenu.OpenSavedTree", menubar);
         toolBar.add(SwingUtils.createButton(openSavedTree));
 
-        JMenuItem saveTree = SwingUtils.findComponent("MainMenu.SaveTree", menubar);
+        final JMenuItem saveTree = SwingUtils.findComponent("MainMenu.SaveTree", menubar);
         toolBar.add(SwingUtils.createButton(saveTree));
 
         toolBar.addSeparator();
-        JMenuItem saveXML = SwingUtils.findComponent("MainMenu.SaveXML", menubar);
+        final JMenuItem saveXML = SwingUtils.findComponent("MainMenu.SaveXML", menubar);
         toolBar.add(SwingUtils.createButton(saveXML));
 
         toolBar.addSeparator();
 
-        JMenuItem close = SwingUtils.findComponent("MainMenu.Close", menubar);
+        final JMenuItem close = SwingUtils.findComponent("MainMenu.Close", menubar);
         toolBar.add(SwingUtils.createButton(close));
 
         // TODO: store in settings.

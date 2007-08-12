@@ -4,7 +4,12 @@ import directorylister.controllers.FileEntryController;
 import directorylister.controllers.FileEntryListener;
 import directorylister.gui.actions.SaveSelectedFilesAction;
 
-import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import java.awt.BorderLayout;
@@ -34,7 +39,7 @@ public final class SelectedFilesPanel extends JPanel {
 
         add(new JScrollPane(files), BorderLayout.CENTER);
 
-        JPanel toolBar = new JPanel();
+        final JPanel toolBar = new JPanel();
         toolBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         add(toolBar, BorderLayout.SOUTH);
 
@@ -46,7 +51,7 @@ public final class SelectedFilesPanel extends JPanel {
 
         files.setCellRenderer(new ListCellRenderer());
 
-        FileEntryListener listener = new FileEntryListenerAdapter(files, saveSelection);
+        final FileEntryListener listener = new FileEntryListenerAdapter(files, saveSelection);
         FileEntryController.getInstance().addListener(listener);
 
         files.addMouseListener(new SelectedFilesListMouseAction(files));
@@ -56,7 +61,7 @@ public final class SelectedFilesPanel extends JPanel {
             /**
              * {@inheritDoc}
              */
-            public void intervalAdded(ListDataEvent e) {
+            public void intervalAdded(final ListDataEvent e) {
                 checkModel();
             }
 
@@ -64,8 +69,8 @@ public final class SelectedFilesPanel extends JPanel {
              * Method checkModel ...
              */
             private void checkModel() {
-                ListModel listModel = files.getModel();
-                boolean isEmpty = listModel.getSize() == 0;
+                final ListModel listModel = files.getModel();
+                final boolean isEmpty = listModel.getSize() == 0;
                 files.setEnabled(!isEmpty);
                 saveSelection.setEnabled(!isEmpty);
 
@@ -74,14 +79,14 @@ public final class SelectedFilesPanel extends JPanel {
             /**
              * {@inheritDoc}
              */
-            public void intervalRemoved(ListDataEvent e) {
+            public void intervalRemoved(final ListDataEvent e) {
                 checkModel();
             }
 
             /**
              * {@inheritDoc}
              */
-            public void contentsChanged(ListDataEvent e) {
+            public void contentsChanged(final ListDataEvent e) {
                 checkModel();
             }
         });

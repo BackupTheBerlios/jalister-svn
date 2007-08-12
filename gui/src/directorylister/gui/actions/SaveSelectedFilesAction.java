@@ -9,7 +9,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 
 /**
@@ -41,11 +46,11 @@ public class SaveSelectedFilesAction implements ActionListener {
     /**
      * {@inheritDoc}
      */
-    public void actionPerformed(ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
+    public void actionPerformed(final ActionEvent e) {
+        final JFileChooser fileChooser = new JFileChooser();
         fileChooser.showSaveDialog(null);
 
-        File selectedFile = fileChooser.getSelectedFile();
+        final File selectedFile = fileChooser.getSelectedFile();
         if (null == selectedFile) {
             return;
         }
@@ -61,10 +66,10 @@ public class SaveSelectedFilesAction implements ActionListener {
             while (enumeration.hasMoreElements()) {
                 outputStream.println(enumeration.nextElement().getFileName());
             }
-        } catch(FileNotFoundException e0) {
+        } catch (FileNotFoundException e0) {
             logger.error(e0.toString());
         }
-        catch(IOException e1) {
+        catch (IOException e1) {
             logger.error(e1.toString());
 
         } finally {

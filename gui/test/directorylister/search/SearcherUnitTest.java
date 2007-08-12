@@ -3,7 +3,11 @@ package directorylister.search;
 import directorylister.controllers.FileEntryController;
 import directorylister.model.FileEntry;
 import org.apache.log4j.BasicConfigurator;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * Searcher Tester.
@@ -54,7 +58,7 @@ public class SearcherUnitTest {
 
         FileEntryController.getInstance().setCurrentFileEntry(entry);
 
-        FileEntry searchResult = searcher.search(entry, "oo");
+        final FileEntry searchResult = searcher.search(entry, "oo");
         Assert.assertEquals(entry, searchResult);
     }
 
@@ -69,20 +73,20 @@ public class SearcherUnitTest {
         entry.setFileName("root");
         entry.setShortName("root");
 
-        FileEntry child1 = new FileEntry();
+        final FileEntry child1 = new FileEntry();
         child1.setFileName("root/baz");
         child1.setShortName("baz");
         entry.addChild(child1);
 
 
-        FileEntry child2 = new FileEntry();
+        final FileEntry child2 = new FileEntry();
         child2.setFileName("root/bar");
         child2.setShortName("bar");
         entry.addChild(child2);
 
         FileEntryController.getInstance().setCurrentFileEntry(entry);
 
-        FileEntry searchResult = searcher.search(entry, "ba");
+        final FileEntry searchResult = searcher.search(entry, "ba");
         Assert.assertEquals(entry, searchResult);
         Assert.assertEquals(2, searchResult.getChilds().size());
     }

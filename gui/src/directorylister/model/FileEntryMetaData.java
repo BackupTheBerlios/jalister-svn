@@ -45,7 +45,7 @@ public class FileEntryMetaData implements Serializable {
      *
      * @param key Value to set for property 'key'.
      */
-    public void setKey(MetaDataKey key) {
+    public void setKey(final MetaDataKey key) {
         this.key = key;
     }
 
@@ -63,7 +63,7 @@ public class FileEntryMetaData implements Serializable {
      *
      * @param value Value to set for property 'value'.
      */
-    public void setValue(MetaDataValue value) {
+    public void setValue(final MetaDataValue value) {
         this.value = value;
     }
 
@@ -71,11 +71,11 @@ public class FileEntryMetaData implements Serializable {
      * {@inheritDoc}
      */
     @Override()
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FileEntryMetaData that = (FileEntryMetaData) o;
+        final FileEntryMetaData that = (FileEntryMetaData) o;
 
         return key == that.key && !(value != null ? !value.equals(that.value) : that.value != null);
 

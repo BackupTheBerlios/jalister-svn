@@ -41,12 +41,12 @@ public class SortedFileEntryListTransformerUnitTest {
      */
     @Test()
     public void testTransformation() {
-        List<FileEntry> entries = new ArrayList<FileEntry>();
-        FileEntry entry1 = new FileEntry("def", FileType.FILE, 0, null, "def");
-        FileEntry entry2 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
+        final List<FileEntry> entries = new ArrayList<FileEntry>();
+        final FileEntry entry1 = new FileEntry("def", FileType.FILE, 0, null, "def");
+        final FileEntry entry2 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
         entries.add(entry1);
         entries.add(entry2);
-        List<FileEntry> sorted = transformer.transform(entries);
+        final List<FileEntry> sorted = transformer.transform(entries);
         Assert.assertNotSame(entries, sorted);
         Assert.assertEquals(entries.size(), sorted.size());
         Assert.assertTrue(sorted.contains(entry1));
@@ -60,8 +60,8 @@ public class SortedFileEntryListTransformerUnitTest {
      */
     @Test()
     public void testInterfaceIsImplemented() {
-        Class<?>[] interfaces = SortedFileEntryListTransformer.class.getInterfaces();
-        for (Class<?> anInterface : interfaces) {
+        final Class<?>[] interfaces = SortedFileEntryListTransformer.class.getInterfaces();
+        for (final Class<?> anInterface : interfaces) {
             if (anInterface.equals(Transformer.class)) {
                 return;
             }

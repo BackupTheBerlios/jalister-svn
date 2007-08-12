@@ -12,7 +12,7 @@ public class FileEntryVisitorAdapter implements FileEntryVisitor {
      *
      * @see FileEntryVisitor#acceptEntry(FileEntry)
      */
-    public void acceptEntry(FileEntry fileEntry) {
+    public void acceptEntry(final FileEntry fileEntry) {
 
     }
 
@@ -21,7 +21,7 @@ public class FileEntryVisitorAdapter implements FileEntryVisitor {
      *
      * @see FileEntryVisitor#levelStarted(FileEntry)
      */
-    public void levelStarted(FileEntry newRoot) {
+    public void levelStarted(final FileEntry newRoot) {
     }
 
     /**
@@ -29,7 +29,7 @@ public class FileEntryVisitorAdapter implements FileEntryVisitor {
      *
      * @see FileEntryVisitor#levelEnded(FileEntry)
      */
-    public void levelEnded(FileEntry entry) {
+    public void levelEnded(final FileEntry entry) {
 
     }
 }

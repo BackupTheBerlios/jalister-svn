@@ -35,12 +35,12 @@ public class ProgressBarFrame extends JFrame implements ProgressListener {
 
         centerWindow();
 
-        GridLayout layout = new GridLayout();
+        final GridLayout layout = new GridLayout();
         layout.setColumns(1);
         layout.setRows(2);
         setLayout(layout);
 
-        Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+        final Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 
         label = new JLabel();
         label.setName("messageLabel");

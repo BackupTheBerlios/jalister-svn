@@ -34,11 +34,11 @@ final class TreeMouseListener extends MouseAdapter {
      * {@inheritDoc}
      */
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(final MouseEvent e) {
         if (1 == e.getClickCount() && e.getButton() == MouseEvent.BUTTON3) {
             final TreePath path = tree.getPathForLocation(e.getX(), e.getY());
             if (path != null) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                 final Object userObject = node.getUserObject();
                 if (userObject instanceof FileEntry) {
                     FileEntryController.getInstance().selectFileEntry((FileEntry) userObject);

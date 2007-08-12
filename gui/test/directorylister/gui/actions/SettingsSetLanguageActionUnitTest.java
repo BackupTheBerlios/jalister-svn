@@ -51,7 +51,7 @@ public class SettingsSetLanguageActionUnitTest {
      */
     @Test()
     public void testAction() {
-        JButton button = new JButton();
+        final JButton button = new JButton();
         button.setName("MainMenu.File");
         action = new SettingsSetLanguageAction(button, new Locale("RU"));
         action.actionPerformed(null);

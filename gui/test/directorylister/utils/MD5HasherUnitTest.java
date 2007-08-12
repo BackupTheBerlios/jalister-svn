@@ -1,6 +1,6 @@
 package directorylister.utils;
 
-import static directorylister.utils.MD5Hasher.*;
+import static directorylister.utils.MD5Hasher.getMD5;
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import static org.junit.Assert.*;
@@ -98,8 +98,8 @@ public class MD5HasherUnitTest {
      * @param test of type File
      * @throws IOException when
      */
-    private void writeContent(File test) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(test);
+    private void writeContent(final File test) throws IOException {
+        final FileOutputStream fileOutputStream = new FileOutputStream(test);
         fileOutputStream.write("Test string".getBytes());
         fileOutputStream.close();
     }

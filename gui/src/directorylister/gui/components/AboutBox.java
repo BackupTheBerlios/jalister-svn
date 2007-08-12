@@ -41,23 +41,23 @@ public final class AboutBox extends JDialog {
         setLocationRelativeTo(null);
 
 
-        GridLayout layout = new GridLayout();
+        final GridLayout layout = new GridLayout();
         layout.setColumns(1);
         layout.setRows(1);
         setLayout(layout);
 
-        Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+        final Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 
         label = new JEditorPane();
         label.setBorder(border);
         label.setEditable(false);
 
 
-        String message = ResourceHandler.getInstance().getMessage("AboutBox.Label");
+        final String message = ResourceHandler.getInstance().getMessage("AboutBox.Label");
         label.setContentType("text/html");
         try {
             label.read(new ByteArrayInputStream(message.getBytes()), null);
-        } catch(IOException e) {
+        } catch (IOException e) {
             logger.error(e);
         }
 
@@ -69,13 +69,13 @@ public final class AboutBox extends JDialog {
             /**
              * {@inheritDoc}
              */
-            public void windowGainedFocus(WindowEvent e) {
+            public void windowGainedFocus(final WindowEvent e) {
             }
 
             /**
              * {@inheritDoc}
              */
-            public void windowLostFocus(WindowEvent e) {
+            public void windowLostFocus(final WindowEvent e) {
                 dispose();
             }
         });

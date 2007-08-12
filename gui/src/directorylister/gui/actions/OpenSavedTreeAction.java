@@ -37,30 +37,30 @@ public final class OpenSavedTreeAction implements ActionListener {
      *
      * @param mainWindow of type MainWindow
      */
-    public OpenSavedTreeAction(MainWindow mainWindow) {
+    public OpenSavedTreeAction(final MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void actionPerformed(ActionEvent actionEvent) {
-        JFileChooser fileChooser = new JFileChooser();
+    public void actionPerformed(final ActionEvent actionEvent) {
+        final JFileChooser fileChooser = new JFileChooser();
 
         fileChooser.showOpenDialog(mainWindow);
 
-        File selectedFile = fileChooser.getSelectedFile();
+        final File selectedFile = fileChooser.getSelectedFile();
         if (null != selectedFile) {
             try {
-                InputStream inputStream = new FileInputStream(selectedFile);
-                FileEntry fileEntry = (FileEntry) SerializationUtils.deserialize(inputStream);
+                final InputStream inputStream = new FileInputStream(selectedFile);
+                final FileEntry fileEntry = (FileEntry) SerializationUtils.deserialize(inputStream);
 
                 FileEntryController.getInstance().setCurrentFileEntry(fileEntry);
 
-            } catch(FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 logger.error(e.toString());
             }
-            catch(SerializationException e) {
+            catch (SerializationException e) {
                 logger.error(e.toString());
             }
         }

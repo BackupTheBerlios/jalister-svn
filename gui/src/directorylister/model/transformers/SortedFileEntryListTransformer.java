@@ -30,7 +30,7 @@ public class SortedFileEntryListTransformer implements Transformer<List<FileEntr
      * {@inheritDoc}
      */
     public List<FileEntry> transform(final List<FileEntry> childs) {
-        List<FileEntry> result = new LinkedList<FileEntry>(childs);
+        final List<FileEntry> result = new LinkedList<FileEntry>(childs);
         Collections.sort(result, FileEntryComparator.COMPARATOR);
         return result;
     }
