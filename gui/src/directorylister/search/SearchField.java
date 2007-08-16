@@ -1,5 +1,6 @@
 package directorylister.search;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.document.Field;
 
 /**
@@ -65,6 +66,9 @@ public enum SearchField {
      * @return Field
      */
     public Field createField(final String value) {
-        return new Field(name(), value, getStore(), getIndex());
+        if (!StringUtils.isEmpty(value)) {
+            return new Field(name(), value, getStore(), getIndex());
+        }
+        return null;
     }
 }

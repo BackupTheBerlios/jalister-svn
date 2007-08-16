@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
@@ -187,10 +188,25 @@ public class Searcher implements Serializable {
          */
         private Document buildDocument(final FileEntry fileEntry) {
             final Document document = new Document();
-            document.add(SearchField.ID.createField(fileEntry.getFileName()));
-            document.add(SearchField.FILE_NAME.createField(fileEntry.getFileName()));
-            document.add(SearchField.SHORT_NAME.createField(fileEntry.getShortName()));
+            final SearchField[] searchFields = SearchField.values();
+            for (final SearchField searchField : searchFields) {
+                addField(document, searchField, fileEntry);
+            }
             return document;
+        }
+
+        /**
+         * Adds field to the document.
+         *
+         * @param document    - Lucene document.
+         * @param searchField - search field to add.
+         * @param fileEntry   - file entry to add to document.
+         */
+        private void addField(final Document document, final SearchField searchField, final FileEntry fileEntry) {
+            final Field field = searchField.createField(fileEntry.getFileName());
+            if (null != field) {
+                document.add(field);
+            }
         }
 
     }
