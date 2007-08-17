@@ -79,7 +79,7 @@ public class FileEntryController {
     /**
      * Select new file entry.
      *
-     * @param fileEntry
+     * @param fileEntry to select.
      */
     public void selectFileEntry(final FileEntry fileEntry) {
         for (final FileEntryListener fileEntryListener : LISTENERS) {

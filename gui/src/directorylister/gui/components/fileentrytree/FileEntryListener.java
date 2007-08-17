@@ -32,6 +32,8 @@ final class FileEntryListener extends FileEntryListenerAdapter {
 
     /**
      * {@inheritDoc}
+     *
+     * @see directorylister.controllers.FileEntryListenerAdapter#notifyCurrentFileEntryChanged(FileEntry,FileEntry)
      */
     @Override
     public void notifyCurrentFileEntryChanged(final FileEntry currentEntry, final FileEntry newEntry) {

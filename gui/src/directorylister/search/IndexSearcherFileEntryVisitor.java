@@ -64,7 +64,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
                 final String s = field.stringValue();
                 addParentDirectories(s);
                 searchResult.add(s);
-            } catch (IOException e) {
+            } catch(IOException e) {
                 logger.error(e);
             }
         }
@@ -88,6 +88,8 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
 
     /**
      * {@inheritDoc}
+     *
+     * @see directorylister.model.FileEntryVisitorAdapter#acceptEntry(FileEntry)
      */
     @Override
     public void acceptEntry(final FileEntry fileEntry) {
@@ -106,6 +108,8 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
 
     /**
      * {@inheritDoc}
+     *
+     * @see directorylister.model.FileEntryVisitorAdapter#levelStarted(FileEntry)
      */
     @Override
     public void levelStarted(final FileEntry newRoot) {
@@ -124,6 +128,8 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
 
     /**
      * {@inheritDoc}
+     *
+     * @see directorylister.model.FileEntryVisitorAdapter#levelEnded(FileEntry)
      */
     @Override
     public void levelEnded(final FileEntry entry) {

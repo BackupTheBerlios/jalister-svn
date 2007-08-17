@@ -33,6 +33,8 @@ final class FileEntryListenerAdapter extends directorylister.controllers.FileEnt
 
     /**
      * {@inheritDoc}
+     *
+     * @see directorylister.controllers.FileEntryListenerAdapter#notifyFileEntryToSelect(FileEntry)
      */
     @Override
     public void notifyFileEntryToSelect(final FileEntry fileEntry) {

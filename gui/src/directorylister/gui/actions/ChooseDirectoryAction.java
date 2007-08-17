@@ -10,6 +10,9 @@ import javax.swing.JFrame;
  * @since 15.07.2007 17:02:31
  */
 public final class ChooseDirectoryAction extends AbstractFileOpenSaveActionWithProgressBar {
+    /**
+     * Field plugin
+     */
     private final LoadDirectoryPlugin plugin;
 
     /**
@@ -23,6 +26,10 @@ public final class ChooseDirectoryAction extends AbstractFileOpenSaveActionWithP
     }
 
 
+    /**
+     * {@inheritDoc} ** @see directorylister.gui.actions.AbstractFileOpenSaveActionWithProgressBar#getFileOpenSavePligin()
+     */
+    @Override
     public FileOpenSavePlugin getFileOpenSavePligin() {
         return plugin;
     }

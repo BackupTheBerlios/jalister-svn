@@ -39,6 +39,8 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
 
     /**
      * {@inheritDoc}
+     *
+     * @see FileEntryVisitorAdapter#acceptEntry(FileEntry)
      */
     @Override
     public void acceptEntry(final FileEntry fileEntry) {
@@ -49,6 +51,8 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
 
     /**
      * {@inheritDoc}
+     *
+     * @see FileEntryVisitorAdapter#levelStarted(FileEntry)
      */
     @Override
     public void levelStarted(final FileEntry newRoot) {
@@ -67,6 +71,8 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
 
     /**
      * {@inheritDoc}
+     *
+     * @see FileEntryVisitorAdapter#levelEnded(FileEntry)
      */
     @Override
     public void levelEnded(final FileEntry entry) {

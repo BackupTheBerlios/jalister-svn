@@ -2,12 +2,9 @@ package directorylister.search;
 
 import directorylister.controllers.FileEntryController;
 import directorylister.model.FileEntry;
+import directorylister.model.FileType;
 import org.apache.log4j.BasicConfigurator;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * Searcher Tester.
@@ -72,16 +69,19 @@ public class SearcherUnitTest {
         final FileEntry entry = new FileEntry();
         entry.setFileName("root");
         entry.setShortName("root");
+        entry.setFileType(FileType.DIRECTORY);
 
         final FileEntry child1 = new FileEntry();
         child1.setFileName("root/baz");
         child1.setShortName("baz");
+        child1.setFileType(FileType.FILE);
         entry.addChild(child1);
 
 
         final FileEntry child2 = new FileEntry();
         child2.setFileName("root/bar");
         child2.setShortName("bar");
+        child2.setFileType(FileType.FILE);
         entry.addChild(child2);
 
         FileEntryController.getInstance().setCurrentFileEntry(entry);

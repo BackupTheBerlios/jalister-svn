@@ -10,11 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,12 +33,25 @@ public final class FileSaveTreeAction extends AbstractFileOpenSaveActionWithProg
         super(frame);
     }
 
+    /**
+     * {@inheritDoc} ** @see directorylister.gui.actions.AbstractFileOpenSaveActionWithProgressBar#getFileOpenSavePligin()
+     */
+    @Override
     public FileOpenSavePlugin getFileOpenSavePligin() {
         return new FileSaveTreePlugin();
     }
 
+    /**
+     * Class FileSaveTreePlugin ...
+     *
+     * @author schakal
+     *         Created on 17.08.2007
+     */
     private static class FileSaveTreePlugin implements FileOpenSavePlugin {
 
+        /**
+         * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#handleFile(File, ProgressListener)
+         */
         public void handleFile(final File selectedFile, final ProgressListener listener) {
             final FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
             if (null != fileEntry) {
@@ -53,14 +62,14 @@ public final class FileSaveTreeAction extends AbstractFileOpenSaveActionWithProg
                     outputStream = new FileOutputStream(selectedFile);
                     SerializationUtils.serialize(fileEntry, outputStream);
                     listener.notify(new Notification("Done."));
-                } catch (FileNotFoundException e) {
+                } catch(FileNotFoundException e) {
                     logger.error(e.toString());
                 }
                 finally {
                     if (outputStream != null) {
                         try {
                             outputStream.close();
-                        } catch (IOException e) {
+                        } catch(IOException e) {
                             logger.error(e.toString());
                         }
                     }
@@ -68,10 +77,16 @@ public final class FileSaveTreeAction extends AbstractFileOpenSaveActionWithProg
             }
         }
 
+        /**
+         * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#getFileChooser()
+         */
         public JFileChooser getFileChooser() {
             return new JFileChooser();
         }
 
+        /**
+         * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#isOpenDialog()
+         */
         public boolean isOpenDialog() {
             return false;
         }

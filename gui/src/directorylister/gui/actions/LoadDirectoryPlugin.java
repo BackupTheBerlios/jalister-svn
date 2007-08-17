@@ -18,13 +18,19 @@ import java.io.IOException;
  * @since 11.08.2007 3:13:18
  */
 public class LoadDirectoryPlugin implements FileOpenSavePlugin {
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(LoadDirectoryPlugin.class);
 
+    /**
+     * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#handleFile(File, ProgressListener)
+     */
     public void handleFile(final File selectedFile, final ProgressListener frame) {
         FileEntry fileEntry = null;
         try {
             fileEntry = parseFile(selectedFile, frame);
-        } catch (IOException e) {
+        } catch(IOException e) {
             logger.error(e);
         }
         if (null != fileEntry) {
@@ -33,10 +39,16 @@ public class LoadDirectoryPlugin implements FileOpenSavePlugin {
     }
 
 
+    /**
+     * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#getFileChooser()
+     */
     public JFileChooser getFileChooser() {
         return new DirectoryChooser();
     }
 
+    /**
+     * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#isOpenDialog()
+     */
     public boolean isOpenDialog() {
         return true;
     }
