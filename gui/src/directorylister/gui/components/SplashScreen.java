@@ -10,6 +10,10 @@ import java.awt.HeadlessException;
  * @since 17.07.2007 1:19:00
  */
 public class SplashScreen extends ProgressBarFrame {
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = -9221290082431846456L;
 
     /**
      * Constructs a new SplashScreen.
@@ -35,7 +39,7 @@ public class SplashScreen extends ProgressBarFrame {
 
         try {
             Thread.sleep(2000);
-        } catch (InterruptedException e) {
+        } catch(InterruptedException e) {
             e.printStackTrace();
         }
 

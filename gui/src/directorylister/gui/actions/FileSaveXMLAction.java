@@ -1,9 +1,9 @@
 package directorylister.gui.actions;
 
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
-import directorylister.controllers.FileEntryController;
+import directorylister.controllers.JaListerDatabaseController;
 import directorylister.gui.MainWindow;
-import directorylister.model.FileEntry;
+import directorylister.model.JaListerDatabase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
@@ -60,9 +60,9 @@ public final class FileSaveXMLAction implements ActionListener {
             return;
         }
 
-        final FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
+        final JaListerDatabase listerDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
 
-        if (null != fileEntry) {
+        if (null != listerDatabase) {
             //OutputStream outputStream = null;
             //outputStream = new FileOutputStream(selectedFile);
             final DocumentBuilderFactory factory;
@@ -70,7 +70,7 @@ public final class FileSaveXMLAction implements ActionListener {
             DocumentBuilder documentBuilder = null;
             try {
                 documentBuilder = factory.newDocumentBuilder();
-            } catch (ParserConfigurationException pce) {
+            } catch(ParserConfigurationException pce) {
                 logger.error(pce.toString());
             }
             final Document document;
@@ -78,7 +78,7 @@ public final class FileSaveXMLAction implements ActionListener {
                 document = documentBuilder.newDocument();
                 document.setXmlVersion("1.1");
 
-                final Element xmlNode = fileEntry.serializeToXML(document);
+                final Element xmlNode = listerDatabase.serializeToXML(document);
                 document.appendChild(xmlNode);
                 /*logger.debug(document.getElementsByTagName("directory").item(0));*/
                 try {
@@ -86,11 +86,11 @@ public final class FileSaveXMLAction implements ActionListener {
                             false);
                     final XMLSerializer xmlSer = new XMLSerializer(fWriter, null);
                     xmlSer.serialize(document);
-                } catch (IOException ioe) {
+                } catch(IOException ioe) {
                     logger.error(ioe.toString());
                 }
             }
-            //  SerializationUtils.serialize(fileEntry, outputStream);
+            //  SerializationUtils.serialize(listerDatabase, outputStream);
 
         }
         /*finally{

@@ -1,17 +1,13 @@
 package directorylister.gui.components.fileentrytree;
 
-import directorylister.controllers.FileEntryController;
-import directorylister.model.FileEntry;
+import directorylister.controllers.JaListerDatabaseController;
+import directorylister.model.JaListerDatabase;
 import directorylister.resources.ResourceHandler;
+import directorylister.search.SearchResult;
 import directorylister.search.Searcher;
 import org.apache.commons.lang.StringUtils;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -42,6 +38,14 @@ public final class FileEntryTree extends JPanel {
      * Field searchButton
      */
     private final JButton searchButton;
+    /**
+     * Field treeUpdater
+     */
+    private final TreeUpdater treeUpdater;
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = -7795558676747892696L;
 
 
     /**
@@ -50,8 +54,8 @@ public final class FileEntryTree extends JPanel {
     public FileEntryTree() {
         tree = new JTree();
         tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Root")));
-        final FileEntryListener fileEntryListener = new FileEntryListener(tree);
-        FileEntryController.getInstance().addListener(fileEntryListener);
+        treeUpdater = new TreeUpdater(tree);
+        JaListerDatabaseController.getInstance().addListener(treeUpdater);
         tree.setName("FileTree");
 
 
@@ -70,25 +74,15 @@ public final class FileEntryTree extends JPanel {
         searchButton.setEnabled(false);
         searchButton.addActionListener(new ActionListener() {
             /**
-             * Field oldFileEntry
-             */
-            public FileEntry oldFileEntry;
-
-            /**
              * {@inheritDoc}
              */
             public void actionPerformed(final ActionEvent e) {
-                final Searcher searcher = new Searcher();
+                JaListerDatabase oldDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
+                final Searcher searcher = oldDatabase.getService(Searcher.class);
                 final String condition = searchBox.getText();
-                if (condition.equals(" ")) {
-                    FileEntryController.getInstance().setCurrentFileEntry(oldFileEntry);
-                } else {
-                    if (null == oldFileEntry) {
-                        oldFileEntry = FileEntryController.getInstance().getCurrentEntry();
-                    }
-                    final FileEntry fileEntry = searcher.search(oldFileEntry, condition);
-                    FileEntryController.getInstance().setCurrentFileEntry(fileEntry);
-                }
+
+                final SearchResult searchResult = searcher.search(condition);
+                updateTree(searchResult);
 
             }
         });
@@ -136,6 +130,15 @@ public final class FileEntryTree extends JPanel {
 
         searchBox.addFocusListener(new SearchBoxFocusListener(searchBox.getForeground()));
         searchBox.setForeground(searchBox.getDisabledTextColor());
+    }
+
+    /**
+     * Method updateTree ...
+     *
+     * @param searchResult of type SearchResult
+     */
+    private void updateTree(final SearchResult searchResult) {
+        treeUpdater.updateTree(searchResult.getRoot());
     }
 
     /**

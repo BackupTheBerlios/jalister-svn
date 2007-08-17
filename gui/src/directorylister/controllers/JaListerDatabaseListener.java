@@ -1,6 +1,7 @@
 package directorylister.controllers;
 
 import directorylister.model.FileEntry;
+import directorylister.model.JaListerDatabase;
 
 /**
  * Defines interface for listening events about FileEntry.
@@ -9,15 +10,15 @@ import directorylister.model.FileEntry;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:02:14
  */
-public interface FileEntryListener {
+public interface JaListerDatabaseListener {
 
     /**
      * Called when new FileEntry is selected in the tree.
      *
-     * @param currentEntry current entry in tree.
-     * @param newEntry     new entry.
+     * @param currentDatabase current entry in tree.
+     * @param newDatabase     new entry.
      */
-    void notifyCurrentFileEntryChanged(FileEntry currentEntry, FileEntry newEntry);
+    void notifyJaListerDatabaseChanged(final JaListerDatabase currentDatabase, final JaListerDatabase newDatabase);
 
     /**
      * Called when entry is selected in tree.

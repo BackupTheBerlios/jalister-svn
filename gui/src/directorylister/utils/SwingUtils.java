@@ -1,10 +1,9 @@
 package directorylister.utils;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.swing.*;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -15,6 +14,10 @@ import java.awt.event.ActionListener;
  * @since 29.07.2007 23:56:34
  */
 public class SwingUtils {
+    /**
+     * Field logger
+     */
+    private static final Log logger = LogFactory.getLog(SwingUtils.class.getName());
 
     /**
      * Do not instantiate SwingUtils.
@@ -84,9 +87,8 @@ public class SwingUtils {
                 result.addActionListener(listener);
             }
             result.setName(originalButton.getName());
-        } catch (Exception err) {
-            System.err.println("error");
-            //TODO implement
+        } catch(Exception err) {
+            logger.error(err);
         }
         return result;
     }

@@ -1,8 +1,8 @@
 package directorylister.search;
 
-import directorylister.controllers.FileEntryController;
 import directorylister.model.FileEntry;
 import directorylister.model.FileType;
+import directorylister.model.JaListerDatabase;
 import org.apache.log4j.BasicConfigurator;
 import org.junit.*;
 
@@ -49,14 +49,16 @@ public class SearcherUnitTest {
      */
     @Test()
     public void testSearchSimple() throws Exception {
-        final FileEntry entry = new FileEntry();
-        entry.setFileName("root");
-        entry.setShortName("root");
+        final JaListerDatabase database = new JaListerDatabase();
+        final FileEntry root = new FileEntry();
+        root.setFileName("root");
+        root.setShortName("root");
+        database.setRootEntry(root);
 
-        FileEntryController.getInstance().setCurrentFileEntry(entry);
+        database.attachService(searcher);
 
-        final FileEntry searchResult = searcher.search(entry, "oo");
-        Assert.assertEquals(entry, searchResult);
+        final SearchResult searchResult = searcher.search("oo");
+        Assert.assertEquals(root, searchResult.getRoot());
     }
 
     /**
@@ -66,6 +68,7 @@ public class SearcherUnitTest {
      */
     @Test()
     public void testSearchWithChilds() throws Exception {
+        JaListerDatabase database = new JaListerDatabase();
         final FileEntry entry = new FileEntry();
         entry.setFileName("root");
         entry.setShortName("root");
@@ -84,11 +87,13 @@ public class SearcherUnitTest {
         child2.setFileType(FileType.FILE);
         entry.addChild(child2);
 
-        FileEntryController.getInstance().setCurrentFileEntry(entry);
+        database.setRootEntry(entry);
 
-        final FileEntry searchResult = searcher.search(entry, "ba");
-        Assert.assertEquals(entry, searchResult);
-        Assert.assertEquals(2, searchResult.getChilds().size());
+        database.attachService(searcher);
+
+        final SearchResult searchResult = searcher.search("ba");
+        Assert.assertEquals(entry, searchResult.getRoot());
+        Assert.assertEquals(2, searchResult.getRoot().getChilds().size());
     }
 
     /**

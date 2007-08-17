@@ -1,9 +1,9 @@
 package directorylister.search;
 
-import directorylister.controllers.FileEntryController;
-import directorylister.controllers.FileEntryListenerAdapter;
 import directorylister.model.FileEntry;
 import directorylister.model.FileEntryVisitorAdapter;
+import directorylister.model.JaListerDatabase;
+import directorylister.model.Service;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,24 +12,20 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Hits;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TermQuery;
-import org.apache.lucene.search.WildcardQuery;
+import org.apache.lucene.search.*;
 import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
 import java.io.Serializable;
 
 /**
+ * Lucene searcher.
+ *
  * @version 1.0
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 31.07.2007 23:43:45
  */
-public class Searcher implements Serializable {
+public class Searcher implements Service<JaListerDatabase>, Serializable {
 
     /**
      * Field logger
@@ -43,6 +39,10 @@ public class Searcher implements Serializable {
      * Field serialVersionUID
      */
     private static final long serialVersionUID = 5995659523609039692L;
+    /**
+     * Field database
+     */
+    private JaListerDatabase database;
 
     /**
      * Constructs a new Searcher.
@@ -50,46 +50,43 @@ public class Searcher implements Serializable {
     public Searcher() {
         try {
             directory = new RAMDirectory(".");
-        } catch (IOException e) {
+        } catch(IOException e) {
             logger.error(e);
             throw new RuntimeException("Cannot initialize searcher", e);
         }
-
-        final FileEntryListener listener = new FileEntryListener();
-        FileEntryController.getInstance().addListener(listener);
 
     }
 
     /**
      * Method search ...
      *
-     * @param oldFileEntry of type FileEntry
-     * @param condition    of type String
+     * @param condition of type String
      * @return FileEntry
      */
-    public FileEntry search(final FileEntry oldFileEntry, final String condition) {
-
+    public SearchResult search(final String condition) {
+        final SearchResult searchResult = new SearchResult();
         IndexSearcher indexSearcher = null;
         try {
             indexSearcher = new IndexSearcher(directory);
             final Hits hits = indexSearcher.search(buildQuery(condition));
             final IndexSearcherFileEntryVisitor fileEntryVisitor = new IndexSearcherFileEntryVisitor(hits);
-            oldFileEntry.acceptVisitor(fileEntryVisitor);
+            database.getRootEntry().acceptVisitor(fileEntryVisitor);
 
-            return fileEntryVisitor.getRoot();
-        } catch (IOException e) {
+            searchResult.setRoot(fileEntryVisitor.getRoot());
+            return searchResult;
+        } catch(IOException e) {
             logger.error(e);
         }
         finally {
             if (indexSearcher != null) {
                 try {
                     indexSearcher.close();
-                } catch (IOException e) {
+                } catch(IOException e) {
                     logger.error(e);
                 }
             }
         }
-        return oldFileEntry;
+        return searchResult;
     }
 
     /**
@@ -104,42 +101,56 @@ public class Searcher implements Serializable {
         for (final String string : strings) {
             final String searchString = "*" + string + "*";
 
-            final WildcardQuery fileNameQuery = new WildcardQuery(new Term(SearchField.FILE_NAME.name(), searchString));
+            final WildcardQuery fileNameQuery = new WildcardQuery(buildTerm(SearchField.FILE_NAME, searchString));
             booleanQuery.add(fileNameQuery, BooleanClause.Occur.SHOULD);
 
-            final WildcardQuery shortNameQuery = new WildcardQuery(new Term(SearchField.SHORT_NAME.name(), searchString));
+            final WildcardQuery shortNameQuery = new WildcardQuery(buildTerm(SearchField.SHORT_NAME, searchString));
             booleanQuery.add(shortNameQuery, BooleanClause.Occur.SHOULD);
 
-            final TermQuery query = new TermQuery(new Term(SearchField.SHORT_NAME.name(), searchString));
+            final TermQuery query = new TermQuery(buildTerm(SearchField.SHORT_NAME, searchString));
             booleanQuery.add(query, BooleanClause.Occur.SHOULD);
         }
         return booleanQuery;
     }
 
     /**
-     * Class FileEntryListener ...
+     * Method buildTerm ...
      *
-     * @author schakal
-     *         Created on 05.08.2007
+     * @param shortName    of type SearchField
+     * @param searchString of type String
+     * @return Term
      */
-    private class FileEntryListener extends FileEntryListenerAdapter {
-        /**
-         * {@inheritDoc}
-         *
-         * @see directorylister.controllers.FileEntryListenerAdapter#notifyCurrentFileEntryChanged(FileEntry,FileEntry)
-         */
-        @Override
-        public void notifyCurrentFileEntryChanged(final FileEntry currentEntry, final FileEntry newEntry) {
-            executeWithIndexWriter(new Executable<IndexWriter>() {
-                /**
-                 * {@inheritDoc}
-                 */
-                public void execute(final IndexWriter indexWriter) throws IOException {
-                    newEntry.acceptVisitor(new IndexWriterFileEntryVisitor(indexWriter));
+    private Term buildTerm(final SearchField shortName, final String searchString) {
+        return new Term(shortName.name(), searchString);
+    }
+
+    /**
+     * @see directorylister.model.Nameable#getName()
+     */
+    public String getName() {
+        return "Searcher";
+    }
+
+
+    /**
+     * Method notifyAttached ...
+     *
+     * @param serviceable of type JaListerDatabase
+     */
+    public void notifyAttached(final JaListerDatabase serviceable) {
+        database = serviceable;
+        final FileEntry rootEntry = serviceable.getRootEntry();
+        executeWithIndexWriter(new Executable<IndexWriter>() {
+            /**
+             * {@inheritDoc}
+             */
+            public void execute(final IndexWriter indexWriter) throws IOException {
+                if (null != rootEntry) {
+                    rootEntry.acceptVisitor(new IndexWriterFileEntryVisitor(indexWriter));
                     indexWriter.optimize();
                 }
-            });
-        }
+            }
+        });
     }
 
 
@@ -174,7 +185,7 @@ public class Searcher implements Serializable {
             final Document document = buildDocument(fileEntry);
             try {
                 indexWriter.addDocument(document);
-            } catch (IOException e) {
+            } catch(IOException e) {
                 logger.error(e);
 
             }
@@ -222,13 +233,13 @@ public class Searcher implements Serializable {
             indexWriter = new IndexWriter(directory, new StandardAnalyzer());
             executable.execute(indexWriter);
 
-        } catch (IOException e) {
+        } catch(IOException e) {
             logger.error(e);
         } finally {
             if (indexWriter != null) {
                 try {
                     indexWriter.close();
-                } catch (IOException e) {
+                } catch(IOException e) {
                     logger.error(e);
                 }
             }

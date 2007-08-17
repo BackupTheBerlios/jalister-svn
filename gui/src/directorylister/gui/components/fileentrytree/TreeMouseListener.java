@@ -1,6 +1,6 @@
 package directorylister.gui.components.fileentrytree;
 
-import directorylister.controllers.FileEntryController;
+import directorylister.controllers.JaListerDatabaseController;
 import directorylister.model.FileEntry;
 
 import javax.swing.JTree;
@@ -41,7 +41,7 @@ final class TreeMouseListener extends MouseAdapter {
                 final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                 final Object userObject = node.getUserObject();
                 if (userObject instanceof FileEntry) {
-                    FileEntryController.getInstance().selectFileEntry((FileEntry) userObject);
+                    JaListerDatabaseController.getInstance().selectFileEntry((FileEntry) userObject);
                 }
             }
         }

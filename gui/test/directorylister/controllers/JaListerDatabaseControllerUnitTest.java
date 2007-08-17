@@ -1,6 +1,6 @@
 package directorylister.controllers;
 
-import directorylister.model.FileEntry;
+import directorylister.model.JaListerDatabase;
 import junit.framework.JUnit4TestAdapter;
 import org.junit.After;
 import org.junit.Assert;
@@ -8,28 +8,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * FileEntryController Tester.
+ * JaListerDatabaseController Tester.
  *
  * @author schakal Oleg Atamanenko
  * @since 07/25/2007
  */
-public class FileEntryControllerUnitTest {
+public class JaListerDatabaseControllerUnitTest {
 
     /**
      * Field controller
      */
-    private FileEntryController controller;
+    private JaListerDatabaseController controller;
     /**
      * Field NEW_ENTRY
      */
-    private static final FileEntry NEW_ENTRY = new FileEntry();
+    private static final JaListerDatabase NEW_ENTRY = new JaListerDatabase();
 
     /**
      * Method setUp ...
      */
     @Before()
     public void setUp() {
-        controller = FileEntryController.getInstance();
+        controller = JaListerDatabaseController.getInstance();
     }
 
     /**
@@ -65,9 +65,9 @@ public class FileEntryControllerUnitTest {
      */
     @Test()
     public void testThatListenerCanBeAdded() {
-        final TestFileEntryListener testFileEntryListener = new TestFileEntryListener();
+        final TestJaListerDatabaseListener testFileEntryListener = new TestJaListerDatabaseListener();
         controller.addListener(testFileEntryListener);
-        controller.setCurrentFileEntry(NEW_ENTRY);
+        controller.setCurrentJaListerDatabase(NEW_ENTRY);
         Assert.assertTrue(testFileEntryListener.wasCalled);
     }
 
@@ -78,9 +78,9 @@ public class FileEntryControllerUnitTest {
      */
     @org.junit.Test()
     public void testGetCurrentEntry() throws Exception {
-        controller.setCurrentFileEntry(NEW_ENTRY);
+        controller.setCurrentJaListerDatabase(NEW_ENTRY);
 
-        Assert.assertEquals(NEW_ENTRY, controller.getCurrentEntry());
+        Assert.assertEquals(NEW_ENTRY, controller.getCurrentDatabase());
     }
 
     /**
@@ -89,16 +89,16 @@ public class FileEntryControllerUnitTest {
      * @return Test
      */
     public static junit.framework.Test suite() {
-        return new JUnit4TestAdapter(FileEntryControllerUnitTest.class);
+        return new JUnit4TestAdapter(JaListerDatabaseControllerUnitTest.class);
     }
 
     /**
-     * Class TestFileEntryListener ...
+     * Class TestJaListerDatabaseListener ...
      *
      * @author schakal
      *         Created on 05.08.2007
      */
-    private class TestFileEntryListener extends FileEntryListenerAdapter {
+    private class TestJaListerDatabaseListener extends JaListerDatabaseListenerAdapter {
         /**
          * Field wasCalled
          */
@@ -107,10 +107,10 @@ public class FileEntryControllerUnitTest {
         /**
          * {@inheritDoc}
          *
-         * @see FileEntryListenerAdapter#notifyCurrentFileEntryChanged(FileEntry,FileEntry)
+         * @see JaListerDatabaseListenerAdapter#notifyJaListerDatabaseChanged(JaListerDatabase,JaListerDatabase)
          */
         @Override
-        public void notifyCurrentFileEntryChanged(final FileEntry currentEntry, final FileEntry newEntry) {
+        public void notifyJaListerDatabaseChanged(final JaListerDatabase currentEntry, final JaListerDatabase newEntry) {
             wasCalled = true;
         }
     }

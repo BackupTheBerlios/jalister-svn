@@ -32,7 +32,8 @@ class TreeCellRenderer extends DefaultTreeCellRenderer {
         if (userObject instanceof FileEntry) {
             final FileEntry entry = (FileEntry) userObject;
             cellRendererComponent.setText(entry.getShortName());
-        } else {
+        }
+        else {
             cellRendererComponent.setText(userObject.toString());
         }
         return cellRendererComponent;

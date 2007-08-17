@@ -2,16 +2,11 @@ package directorylister.resources;
 
 import junit.framework.JUnit4TestAdapter;
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 import java.util.Locale;
 
 /**

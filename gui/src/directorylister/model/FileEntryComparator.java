@@ -34,12 +34,15 @@ public class FileEntryComparator implements Comparator<FileEntry>, Serializable 
         // TODO: check this code.
         if (firstEntry.getFileType().equals(FileType.DIRECTORY) && secondEntry.getFileType().equals(FileType.DIRECTORY)) {
             return firstEntry.getShortName().compareTo(secondEntry.getShortName());
-        } else
+        }
+        else
         if (!firstEntry.getFileType().equals(FileType.DIRECTORY) && !secondEntry.getFileType().equals(FileType.DIRECTORY)) {
             return firstEntry.getShortName().compareTo(secondEntry.getShortName());
-        } else if (firstEntry.getFileType().equals(FileType.DIRECTORY)) {
+        }
+        else if (firstEntry.getFileType().equals(FileType.DIRECTORY)) {
             return -1;
-        } else {
+        }
+        else {
             return 1;
         }
     }

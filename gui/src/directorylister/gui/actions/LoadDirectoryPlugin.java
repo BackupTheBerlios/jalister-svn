@@ -1,8 +1,8 @@
 package directorylister.gui.actions;
 
-import directorylister.controllers.FileEntryController;
+import directorylister.controllers.JaListerDatabaseController;
 import directorylister.gui.components.DirectoryChooser;
-import directorylister.model.FileEntry;
+import directorylister.model.JaListerDatabase;
 import directorylister.notification.ProgressListener;
 import directorylister.parser.FileSystemParser;
 import org.apache.commons.logging.Log;
@@ -27,14 +27,14 @@ public class LoadDirectoryPlugin implements FileOpenSavePlugin {
      * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#handleFile(File, ProgressListener)
      */
     public void handleFile(final File selectedFile, final ProgressListener frame) {
-        FileEntry fileEntry = null;
+        JaListerDatabase jaListerDatabase = null;
         try {
-            fileEntry = parseFile(selectedFile, frame);
+            jaListerDatabase = parseFile(selectedFile, frame);
         } catch(IOException e) {
             logger.error(e);
         }
-        if (null != fileEntry) {
-            FileEntryController.getInstance().setCurrentFileEntry(fileEntry);
+        if (null != jaListerDatabase) {
+            JaListerDatabaseController.getInstance().setCurrentJaListerDatabase(jaListerDatabase);
         }
     }
 
@@ -62,7 +62,7 @@ public class LoadDirectoryPlugin implements FileOpenSavePlugin {
      * @return FileEntry
      * @throws IOException when
      */
-    private FileEntry parseFile(final File selectedFile, final ProgressListener frame) throws IOException {
+    private JaListerDatabase parseFile(final File selectedFile, final ProgressListener frame) throws IOException {
         final FileSystemParser systemParser = new FileSystemParser(selectedFile);
         systemParser.addListener(frame);
         return systemParser.parse();

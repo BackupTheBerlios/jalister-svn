@@ -3,7 +3,9 @@ package directorylister.parser;
 import directorylister.io.FileUtils;
 import directorylister.model.FileEntry;
 import directorylister.model.FileEntryBuilder;
+import directorylister.model.JaListerDatabase;
 import directorylister.notification.ProgressNotifier;
+import directorylister.search.Searcher;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -64,12 +66,15 @@ public class FileSystemParser extends ProgressNotifier {
      * @return FileEntry
      * @throws IOException when
      */
-    public FileEntry parse() throws IOException {
+    public JaListerDatabase parse() throws IOException {
         notifyListeners("Parsing file: " + startFile, false);
-        final FileEntry result = fileEntryBuilder.buildFrom(startFile);
+        final FileEntry rootEntry = fileEntryBuilder.buildFrom(startFile);
+        parse(startFile, rootEntry);
 
-        parse(startFile, result);
-        return result;
+        final JaListerDatabase jaListerDatabase = new JaListerDatabase();
+        jaListerDatabase.setRootEntry(rootEntry);
+        jaListerDatabase.attachService(new Searcher());
+        return jaListerDatabase;
     }
 
     /**

@@ -1,8 +1,8 @@
 package directorylister.gui.actions;
 
-import directorylister.controllers.FileEntryController;
+import directorylister.controllers.JaListerDatabaseController;
 import directorylister.gui.MainWindow;
-import directorylister.model.FileEntry;
+import directorylister.model.JaListerDatabase;
 import org.apache.commons.lang.SerializationException;
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
@@ -53,14 +53,14 @@ public final class OpenSavedTreeAction implements ActionListener {
         if (null != selectedFile) {
             try {
                 final InputStream inputStream = new FileInputStream(selectedFile);
-                final FileEntry fileEntry = (FileEntry) SerializationUtils.deserialize(inputStream);
+                final JaListerDatabase listerDatabase = (JaListerDatabase) SerializationUtils.deserialize(inputStream);
 
-                FileEntryController.getInstance().setCurrentFileEntry(fileEntry);
+                JaListerDatabaseController.getInstance().setCurrentJaListerDatabase(listerDatabase);
 
-            } catch (FileNotFoundException e) {
+            } catch(FileNotFoundException e) {
                 logger.error(e.toString());
             }
-            catch (SerializationException e) {
+            catch(SerializationException e) {
                 logger.error(e.toString());
             }
         }

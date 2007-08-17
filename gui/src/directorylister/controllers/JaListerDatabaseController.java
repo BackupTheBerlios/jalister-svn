@@ -1,6 +1,7 @@
 package directorylister.controllers;
 
 import directorylister.model.FileEntry;
+import directorylister.model.JaListerDatabase;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -13,21 +14,21 @@ import java.util.List;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:01:20
  */
-public class FileEntryController {
+public class JaListerDatabaseController {
 
     /**
      * Field LISTENERS
      */
-    private final List<FileEntryListener> LISTENERS = Collections.synchronizedList(new LinkedList<FileEntryListener>());
+    private final List<JaListerDatabaseListener> LISTENERS = Collections.synchronizedList(new LinkedList<JaListerDatabaseListener>());
 
     /**
      * Field INSTANCE
      */
-    private static final FileEntryController INSTANCE = new FileEntryController();
+    private static final JaListerDatabaseController INSTANCE = new JaListerDatabaseController();
     /**
-     * Field currentEntry
+     * Field currentDatabase
      */
-    private FileEntry currentEntry;
+    private JaListerDatabase currentDatabase;
     /**
      * Field selectedFileEntry
      */
@@ -38,7 +39,7 @@ public class FileEntryController {
      *
      * @return Value for property 'instance'.
      */
-    public static FileEntryController getInstance() {
+    public static JaListerDatabaseController getInstance() {
         return INSTANCE;
     }
 
@@ -48,10 +49,12 @@ public class FileEntryController {
      *
      * @param listener listener to add.
      */
-    public void addListener(final FileEntryListener listener) {
+    public void addListener(final JaListerDatabaseListener listener) {
         LISTENERS.add(listener);
 
-        listener.notifyCurrentFileEntryChanged(currentEntry, currentEntry);
+        if (null != currentDatabase) {
+            listener.notifyJaListerDatabaseChanged(currentDatabase, currentDatabase);
+        }
     }
 
     /**
@@ -59,21 +62,21 @@ public class FileEntryController {
      *
      * @param newEntry Value to set for property 'currentFileEntry'.
      */
-    public void setCurrentFileEntry(final FileEntry newEntry) {
+    public void setCurrentJaListerDatabase(final JaListerDatabase newEntry) {
 
-        for (final FileEntryListener fileEntryListener : LISTENERS) {
-            fileEntryListener.notifyCurrentFileEntryChanged(currentEntry, newEntry);
+        for (final JaListerDatabaseListener listerDatabaseListener : LISTENERS) {
+            listerDatabaseListener.notifyJaListerDatabaseChanged(currentDatabase, newEntry);
         }
-        currentEntry = newEntry;
+        currentDatabase = newEntry;
     }
 
     /**
-     * Getter for property 'currentEntry'.
+     * Getter for property 'currentDatabase'.
      *
-     * @return Value for property 'currentEntry'.
+     * @return Value for property 'currentDatabase'.
      */
-    public FileEntry getCurrentEntry() {
-        return currentEntry;
+    public JaListerDatabase getCurrentDatabase() {
+        return currentDatabase;
     }
 
     /**
@@ -82,8 +85,8 @@ public class FileEntryController {
      * @param fileEntry to select.
      */
     public void selectFileEntry(final FileEntry fileEntry) {
-        for (final FileEntryListener fileEntryListener : LISTENERS) {
-            fileEntryListener.notifyFileEntryToSelect(fileEntry);
+        for (final JaListerDatabaseListener listerDatabaseListener : LISTENERS) {
+            listerDatabaseListener.notifyFileEntryToSelect(fileEntry);
         }
 
         selectedFileEntry = fileEntry;

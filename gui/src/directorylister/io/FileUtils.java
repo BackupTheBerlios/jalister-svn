@@ -3,15 +3,7 @@ package directorylister.io;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * Class FileUtils ...
@@ -102,7 +94,7 @@ public class FileUtils {
     public static boolean isLink(final File pathname) {
         try {
             return !pathname.getCanonicalPath().equals(pathname.getAbsolutePath());
-        } catch (IOException e) {
+        } catch(IOException e) {
             logger.error(e);
             return false;
         }

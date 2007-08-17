@@ -5,9 +5,9 @@ import org.w3c.dom.Element;
 
 /**
  * Classes, providing serialization to XML should implement this interface.
- * User: bg
- * Date: 18.07.2007
- * Time: 0:02:27
+ *
+ * @author bg
+ * @since 18.07.2007 0:02:27
  */
 public interface XMLSerializable {
     /**
@@ -16,5 +16,5 @@ public interface XMLSerializable {
      * @param document - DOM document for building XML.
      * @return - root element of the document.
      */
-    public Element serializeToXML(Document document);
+    public Element serializeToXML(final Document document);
 }

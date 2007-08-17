@@ -1,15 +1,10 @@
 package directorylister.gui.components.selectedfilespanel;
 
-import directorylister.controllers.FileEntryController;
-import directorylister.controllers.FileEntryListener;
+import directorylister.controllers.JaListerDatabaseController;
+import directorylister.controllers.JaListerDatabaseListener;
 import directorylister.gui.actions.SaveSelectedFilesAction;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListModel;
+import javax.swing.*;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import java.awt.BorderLayout;
@@ -25,6 +20,10 @@ public final class SelectedFilesPanel extends JPanel {
      * Field files
      */
     private final JList files;
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = -475665762723474676L;
 
     /**
      * Constructs a new SelectedFilesPanel.
@@ -51,8 +50,8 @@ public final class SelectedFilesPanel extends JPanel {
 
         files.setCellRenderer(new ListCellRenderer());
 
-        final FileEntryListener listener = new FileEntryListenerAdapter(files, saveSelection);
-        FileEntryController.getInstance().addListener(listener);
+        final JaListerDatabaseListener listener = new JaListerDatabaseListenerAdapter(files, saveSelection);
+        JaListerDatabaseController.getInstance().addListener(listener);
 
         files.addMouseListener(new SelectedFilesListMouseAction(files));
 

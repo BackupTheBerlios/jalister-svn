@@ -7,7 +7,7 @@ package directorylister.model;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 2:07:45
  */
-public interface Serviceable {
+public interface Serviceable<T extends Serviceable<? extends T>> {
 
     /**
      * Attaches service to the object.
@@ -15,7 +15,7 @@ public interface Serviceable {
      * @param service to attach.
      * @return <code>true</code> if service was attached, <code>false</code> otherwise.
      */
-    boolean attachService(final Service service);
+    boolean attachService(final Service<T> service);
 
     /**
      * Removes service from object.
@@ -23,5 +23,6 @@ public interface Serviceable {
      * @param service to remove.
      * @return <code>true</code> if service was detached, <code>false</code> otherwise.
      */
-    boolean detachService(final Service service);
+    boolean detachService(final Service<T> service);
+
 }

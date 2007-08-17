@@ -10,7 +10,7 @@ import javax.swing.JList;
  * @author schakal Oleg Atamanenko
  * @since 29.07.2007 16:22:57
  */
-final class FileEntryListenerAdapter extends directorylister.controllers.FileEntryListenerAdapter {
+final class JaListerDatabaseListenerAdapter extends directorylister.controllers.JaListerDatabaseListenerAdapter {
     /**
      * Field files
      */
@@ -21,12 +21,12 @@ final class FileEntryListenerAdapter extends directorylister.controllers.FileEnt
     private final JButton button;
 
     /**
-     * Constructor FileEntryListenerAdapter creates a new FileEntryListenerAdapter instance.
+     * Constructor JaListerDatabaseListenerAdapter creates a new JaListerDatabaseListenerAdapter instance.
      *
      * @param files  of type JList
      * @param button of type JButton
      */
-    public FileEntryListenerAdapter(final JList files, final JButton button) {
+    public JaListerDatabaseListenerAdapter(final JList files, final JButton button) {
         this.files = files;
         this.button = button;
     }
@@ -34,7 +34,7 @@ final class FileEntryListenerAdapter extends directorylister.controllers.FileEnt
     /**
      * {@inheritDoc}
      *
-     * @see directorylister.controllers.FileEntryListenerAdapter#notifyFileEntryToSelect(FileEntry)
+     * @see directorylister.controllers.JaListerDatabaseListenerAdapter#notifyFileEntryToSelect(FileEntry)
      */
     @Override
     public void notifyFileEntryToSelect(final FileEntry fileEntry) {

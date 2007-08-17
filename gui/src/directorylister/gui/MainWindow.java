@@ -8,13 +8,7 @@ import directorylister.gui.components.WorkspacePanel;
 import directorylister.gui.components.fileentrytree.FileEntryTree;
 import directorylister.utils.SwingUtils;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JToolBar;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 

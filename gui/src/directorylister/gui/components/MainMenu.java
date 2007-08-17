@@ -1,13 +1,7 @@
 package directorylister.gui.components;
 
 import directorylister.gui.MainWindow;
-import directorylister.gui.actions.ChooseDirectoryAction;
-import directorylister.gui.actions.CloseApplicationAction;
-import directorylister.gui.actions.FileSaveTreeAction;
-import directorylister.gui.actions.FileSaveXMLAction;
-import directorylister.gui.actions.OpenSavedTreeAction;
-import directorylister.gui.actions.SettingsSetLanguageAction;
-import directorylister.gui.actions.ShowAboutBoxAction;
+import directorylister.gui.actions.*;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -21,6 +15,10 @@ import java.util.Locale;
  * Time: 16:54:23
  */
 public class MainMenu extends JMenuBar {
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = -2082541485065653892L;
 
 
     /**

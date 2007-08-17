@@ -34,7 +34,7 @@ public class XMLSerializer {
         DocumentBuilder documentBuilder = null;
         try {
             documentBuilder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
+        } catch(ParserConfigurationException e) {
             e.printStackTrace();
         }
         if (documentBuilder == null) {

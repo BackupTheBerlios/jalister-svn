@@ -31,6 +31,10 @@ public final class AboutBox extends JDialog {
      * Field label
      */
     private final JEditorPane label;
+    /**
+     * Field serialVersionUID
+     */
+    private static final long serialVersionUID = 5426590417757672166L;
 
     /**
      * Constructs a new AboutBox.
@@ -57,7 +61,7 @@ public final class AboutBox extends JDialog {
         label.setContentType("text/html");
         try {
             label.read(new ByteArrayInputStream(message.getBytes()), null);
-        } catch (IOException e) {
+        } catch(IOException e) {
             logger.error(e);
         }
 

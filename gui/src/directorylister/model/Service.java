@@ -9,5 +9,12 @@ import java.io.Serializable;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 2:08:29
  */
-public interface Service extends Serializable, Nameable {
+public interface Service<T extends Serviceable> extends Serializable, Nameable {
+
+    /**
+     * Method notifyAttached ...
+     *
+     * @param serviceable of type T
+     */
+    void notifyAttached(T serviceable);
 }

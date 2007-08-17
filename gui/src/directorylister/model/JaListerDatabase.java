@@ -1,5 +1,8 @@
 package directorylister.model;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.io.Serializable;
 
 /**
@@ -9,7 +12,7 @@ import java.io.Serializable;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 0:21:45
  */
-public class JaListerDatabase extends ServiceableImpl implements Serializable {
+public class JaListerDatabase extends ServiceableImpl<JaListerDatabase> implements Serializable, XMLSerializable {
 
     /**
      * Field creator
@@ -78,6 +81,14 @@ public class JaListerDatabase extends ServiceableImpl implements Serializable {
      */
     public void setRootEntry(final FileEntry rootEntry) {
         this.rootEntry = rootEntry;
+    }
+
+    /**
+     * @see XMLSerializable#serializeToXML(Document)
+     */
+    public Element serializeToXML(final Document document) {
+        // TODO: add properties of the Jalister Database to the document.
+        return getRootEntry().serializeToXML(document);
     }
 
 }

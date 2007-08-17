@@ -26,7 +26,7 @@ public class FileSystemParserUnitTest {
     public void test() throws IOException {
         parser = new FileSystemParser(new File("."));
 
-        final FileEntry fileEntry = parser.parse();
+        final JaListerDatabase fileEntry = parser.parse();
 
         System.out.println("fileEntry: " + fileEntry);
     }

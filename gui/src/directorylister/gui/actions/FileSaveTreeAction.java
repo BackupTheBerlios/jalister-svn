@@ -1,7 +1,7 @@
 package directorylister.gui.actions;
 
-import directorylister.controllers.FileEntryController;
-import directorylister.model.FileEntry;
+import directorylister.controllers.JaListerDatabaseController;
+import directorylister.model.JaListerDatabase;
 import directorylister.notification.Notification;
 import directorylister.notification.ProgressListener;
 import org.apache.commons.lang.SerializationUtils;
@@ -53,14 +53,13 @@ public final class FileSaveTreeAction extends AbstractFileOpenSaveActionWithProg
          * {@inheritDoc} ** @see directorylister.gui.actions.FileOpenSavePlugin#handleFile(File, ProgressListener)
          */
         public void handleFile(final File selectedFile, final ProgressListener listener) {
-            final FileEntry fileEntry = FileEntryController.getInstance().getCurrentEntry();
-            if (null != fileEntry) {
+            final JaListerDatabase listerDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
+            if (null != listerDatabase) {
                 OutputStream outputStream = null;
                 try {
-
                     listener.notify(new Notification("Saving..."));
                     outputStream = new FileOutputStream(selectedFile);
-                    SerializationUtils.serialize(fileEntry, outputStream);
+                    SerializationUtils.serialize(listerDatabase, outputStream);
                     listener.notify(new Notification("Done."));
                 } catch(FileNotFoundException e) {
                     logger.error(e.toString());

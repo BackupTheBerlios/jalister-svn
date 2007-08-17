@@ -1,6 +1,6 @@
 package directorylister.utils;
 
-import static directorylister.utils.MD5Hasher.getMD5;
+import static directorylister.utils.MD5Hasher.*;
 import org.apache.commons.lang.StringUtils;
 import org.junit.After;
 import static org.junit.Assert.*;
