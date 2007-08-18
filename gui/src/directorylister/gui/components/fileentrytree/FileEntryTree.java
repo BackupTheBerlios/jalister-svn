@@ -17,17 +17,17 @@ import javax.swing.JTree;
 import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
 
 /**
  * File Entry tree.
@@ -62,25 +62,9 @@ public final class FileEntryTree extends JPanel {
      * Constructs a new FileEntryTree.
      */
     public FileEntryTree() {
-        tree = new JTree() {
-            public String getToolTipText(final MouseEvent event) {
-                final Point point = event.getPoint();
-                final TreePath path = tree.getPathForLocation((int) point.getX(), (int) point.getY());
-                if (null != path) {
-                    final Object pathComponent = path.getLastPathComponent();
-                    if (null != pathComponent && pathComponent instanceof DefaultMutableTreeNode) {
-                        final Object userObject = ((DefaultMutableTreeNode) pathComponent).getUserObject();
-                        if (userObject instanceof FileEntry) {
-                            final FileEntry entry = (FileEntry) userObject;
-                            return entry.getFileName();
-                        }
-                        return userObject.toString();
-                    }
-                }
-                return super.getToolTipText(event);
-            }
-        };
-
+        tree = new TooltipTree();
+        tree.setName("FileTree");
+        tree.setToggleClickCount(1);
         final ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
         toolTipManager.setEnabled(true);
         toolTipManager.setInitialDelay(50);
@@ -90,8 +74,21 @@ public final class FileEntryTree extends JPanel {
         tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Root")));
         treeUpdater = new TreeUpdater(tree);
         JaListerDatabaseController.getInstance().addListener(treeUpdater);
-        tree.setName("FileTree");
 
+        tree.addTreeSelectionListener(new TreeSelectionListener() {
+
+            public void valueChanged(final TreeSelectionEvent e) {
+                final TreePath path = e.getNewLeadSelectionPath();
+                if (path != null) {
+                    final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                    final Object userObject = node.getUserObject();
+                    if (userObject instanceof FileEntry) {
+                        final FileEntry fileEntry = (FileEntry) userObject;
+                        JaListerDatabaseController.getInstance().fileEntrySelected(fileEntry);
+                    }
+                }
+            }
+        });
 
         tree.addMouseListener(new TreeMouseListener(tree));
         tree.setCellRenderer(new TreeCellRenderer());
@@ -107,20 +104,7 @@ public final class FileEntryTree extends JPanel {
         searchButton = new JButton();
         searchButton.setName("FileEntryTree.SearchButton");
         searchButton.setEnabled(false);
-        searchButton.addActionListener(new ActionListener() {
-            /**
-             * {@inheritDoc}
-             */
-            public void actionPerformed(final ActionEvent e) {
-                final JaListerDatabase oldDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
-                final Searcher searcher = oldDatabase.getService(Searcher.class);
-                final String condition = searchBox.getText();
-
-                final SearchResult searchResult = searcher.search(condition);
-                updateTree(searchResult);
-
-            }
-        });
+        searchButton.addActionListener(new SearchAction());
         final JPanel searchBar = new JPanel();
         final BoxLayout layout = new BoxLayout(searchBar, BoxLayout.X_AXIS);
         searchBar.setLayout(layout);
@@ -132,36 +116,7 @@ public final class FileEntryTree extends JPanel {
 
         tree.setEnabled(false);
 
-        searchBox.getDocument().addDocumentListener(new DocumentListener() {
-
-            /**
-             * {@inheritDoc}
-             */
-            public void insertUpdate(final DocumentEvent e) {
-                updateButtonState();
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            public void removeUpdate(final DocumentEvent e) {
-                updateButtonState();
-            }
-
-            /**
-             * Method updateButtonState ...
-             */
-            private void updateButtonState() {
-                searchButton.setEnabled(StringUtils.isNotEmpty(searchBox.getText()) && searchBox.isFocusOwner());
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            public void changedUpdate(final DocumentEvent e) {
-                updateButtonState();
-            }
-        });
+        searchBox.getDocument().addDocumentListener(new ButtonStateUpdater());
 
         searchBox.addFocusListener(new SearchBoxFocusListener(searchBox.getForeground()));
         searchBox.setForeground(searchBox.getDisabledTextColor());
@@ -216,6 +171,52 @@ public final class FileEntryTree extends JPanel {
                 color = searchBox.getForeground();
                 searchBox.setForeground(searchBox.getDisabledTextColor());
             }
+        }
+    }
+
+    private class SearchAction implements ActionListener {
+        /**
+         * {@inheritDoc}
+         */
+        public void actionPerformed(final ActionEvent e) {
+            final JaListerDatabase oldDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
+            final Searcher searcher = oldDatabase.getService(Searcher.class);
+            final String condition = searchBox.getText();
+
+            final SearchResult searchResult = searcher.search(condition);
+            updateTree(searchResult);
+
+        }
+    }
+
+    private class ButtonStateUpdater implements DocumentListener {
+
+        /**
+         * {@inheritDoc}
+         */
+        public void insertUpdate(final DocumentEvent e) {
+            updateButtonState();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void removeUpdate(final DocumentEvent e) {
+            updateButtonState();
+        }
+
+        /**
+         * Method updateButtonState ...
+         */
+        private void updateButtonState() {
+            searchButton.setEnabled(StringUtils.isNotEmpty(searchBox.getText()) && searchBox.isFocusOwner());
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void changedUpdate(final DocumentEvent e) {
+            updateButtonState();
         }
     }
 }

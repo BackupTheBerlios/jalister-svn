@@ -5,6 +5,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.AbstractButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ import java.awt.Component;
  * @author schakal Oleg Atamanenko
  * @since 22.07.2007 15:07:49
  */
-public class Localizer {
+public final class Localizer {
     /**
      * Field logger
      */
@@ -25,7 +26,7 @@ public class Localizer {
     /**
      * Field processor
      */
-    private ComponentProcessor processor;
+    private final ComponentProcessor processor;
 
     /**
      * Constructs a new Localizer.
@@ -91,6 +92,12 @@ public class Localizer {
             if (component instanceof JTextComponent) {
                 ((JTextComponent) component).setText(value);
             }
+
+            // TODO: Use different keys for tooltips. I.e. add suffix .tooltip.
+            if (component instanceof JComponent) {
+                ((JComponent) component).setToolTipText(value);
+            }
+
         }
     }
 }

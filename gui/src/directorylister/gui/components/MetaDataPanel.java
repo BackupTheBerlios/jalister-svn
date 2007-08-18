@@ -14,28 +14,32 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ToolTipManager;
 import java.awt.Dimension;
 import java.util.Collection;
 
 /**
+ * Panel with metadata information.
+ *
  * @version 1.0
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 19.08.2007 2:22:21
  */
-public class MetaDataPanel extends JPanel {
-    private Localizer localizer;
+public final class MetaDataPanel extends JPanel {
+    private final Localizer localizer;
 
 
     public MetaDataPanel() {
         localizer = new Localizer();
 
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-        JaListerDatabaseController.getInstance().addListener(new JaListerDatabaseListenerAdapter() {
 
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JaListerDatabaseController.getInstance().addListener(new JaListerDatabaseListenerAdapter() {
             @Override()
             public void notifyFileEntrySelected(final FileEntry fileEntry) {
                 removeAll();
+                final ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
                 final Collection<FileEntryMetaData> metaDatas = fileEntry.getMetadatas(new SortedMetaDataTransformer());
                 for (final FileEntryMetaData metaData : metaDatas) {
                     final MetaDataKey key = metaData.getKey();
@@ -46,17 +50,19 @@ public class MetaDataPanel extends JPanel {
                     keyLabel.setName(key.getLocalizeKey());
 
                     final JLabel valueLabel = new JLabel();
-                    valueLabel.setText(String.valueOf(value.getValue()));
+                    final String textValue = String.valueOf(value.getValue());
+                    valueLabel.setText(textValue);
+                    valueLabel.setToolTipText(textValue);
 
-                    JPanel panel = new JPanel();
-                    BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+                    final JPanel panel = new JPanel();
+                    final BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
                     panel.setLayout(boxLayout);
                     panel.add(keyLabel);
                     panel.add(Box.createRigidArea(new Dimension(10, 0)));
                     panel.add(valueLabel);
                     panel.add(Box.createHorizontalGlue());
-                    panel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
+                    panel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
                     add(panel);
                 }
 
