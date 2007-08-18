@@ -11,6 +11,7 @@ import java.util.LinkedList;
 public class MetadataProviderFactory {
     private static final MetadataProviderFactory INSTANCE = new MetadataProviderFactory();
     private Collection<MetadataProvider> providers = Collections.synchronizedList(new LinkedList<MetadataProvider>());
+    private Collection<MetaDataKey> keys = Collections.synchronizedCollection(new LinkedList<MetaDataKey>());
 
     private MetadataProviderFactory() {
     }
@@ -25,5 +26,15 @@ public class MetadataProviderFactory {
 
     public void addMetadataProvider(final MetadataProvider metadataProvider) {
         providers.add(metadataProvider);
+    }
+
+    public void addMetadataKey(final MetaDataKey metaDataKey) {
+        if(!keys.contains(metaDataKey)){
+            keys.add(metaDataKey);
+        }
+    }
+
+    public Collection<MetaDataKey> getMetaDataKeys() {
+        return keys;
     }
 }

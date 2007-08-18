@@ -258,6 +258,10 @@ public class FileEntry implements Serializable, XMLSerializable {
         return transformer.transform(childs);
     }
 
+    public <T> T getMetadatas(final Transformer<Collection<FileEntryMetaData>, T> transformer) {
+        return transformer.transform(metadatas);
+    }
+
 
     /**
      * {@inheritDoc}

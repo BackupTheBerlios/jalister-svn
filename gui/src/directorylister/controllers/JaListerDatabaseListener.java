@@ -25,5 +25,7 @@ public interface JaListerDatabaseListener {
      *
      * @param fileEntry selected entry.
      */
-    void notifyFileEntryToSelect(final FileEntry fileEntry);
+    void notifyFileEntryRightClicked(final FileEntry fileEntry);
+
+    void notifyFileEntrySelected(final FileEntry fileEntry);
 }

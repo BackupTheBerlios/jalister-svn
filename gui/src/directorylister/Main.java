@@ -41,12 +41,11 @@ public class Main {
         ResourceHandler.getInstance();
         progressNotifier.notifyListeners("Startup.LoadingResources", true);
 
+        progressNotifier.notifyListeners("Startup.InitMetaData", true);
+        initializeMetaDataSuppor();
 
         progressNotifier.notifyListeners("Startup.InitGUI", true);
         initializeGUI();
-
-        progressNotifier.notifyListeners("Startup.InitMetaData", true);
-        initializeMetaDataSuppor();
 
         progressNotifier.notifyListeners("Startup.Done", true);
         SwingUtilities.invokeLater(new Runnable() {

@@ -84,9 +84,17 @@ public class JaListerDatabaseController {
      *
      * @param fileEntry to select.
      */
-    public void selectFileEntry(final FileEntry fileEntry) {
+    public void fileEntryRightClicked(final FileEntry fileEntry) {
         for (final JaListerDatabaseListener listerDatabaseListener : LISTENERS) {
-            listerDatabaseListener.notifyFileEntryToSelect(fileEntry);
+            listerDatabaseListener.notifyFileEntryRightClicked(fileEntry);
+        }
+
+        selectedFileEntry = fileEntry;
+    }
+
+    public void fileEntrySelected(final FileEntry fileEntry) {
+        for (final JaListerDatabaseListener listerDatabaseListener : LISTENERS) {
+            listerDatabaseListener.notifyFileEntrySelected(fileEntry);
         }
 
         selectedFileEntry = fileEntry;

@@ -1,6 +1,7 @@
 package directorylister.model.metadata;
 
 import directorylister.model.Nameable;
+import directorylister.model.Localizable;
 
 import java.io.Serializable;
 
@@ -11,5 +12,5 @@ import java.io.Serializable;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:44:16
  */
-public interface MetaDataKey extends Nameable, Serializable {
+public interface MetaDataKey extends Nameable, Serializable, Localizable {
 }

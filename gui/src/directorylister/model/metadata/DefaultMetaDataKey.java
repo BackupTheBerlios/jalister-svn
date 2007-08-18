@@ -7,6 +7,8 @@ package directorylister.model.metadata;
 public class DefaultMetaDataKey implements MetaDataKey {
     public DefaultMetaDataKey(final String name) {
         this.name = name;
+
+        MetadataProviderFactory.getInstance().addMetadataKey(this);
     }
 
     private final String name;
@@ -19,5 +21,24 @@ public class DefaultMetaDataKey implements MetaDataKey {
     @Override
     public String toString() {
         return getName();
+    }
+
+    public String getLocalizeKey() {
+        return "MetaDataKey." + name;
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DefaultMetaDataKey that = (DefaultMetaDataKey) o;
+
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        return (name != null ? name.hashCode() : 0);
     }
 }

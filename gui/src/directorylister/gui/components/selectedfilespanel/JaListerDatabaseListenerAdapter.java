@@ -34,10 +34,10 @@ final class JaListerDatabaseListenerAdapter extends directorylister.controllers.
     /**
      * {@inheritDoc}
      *
-     * @see directorylister.controllers.JaListerDatabaseListenerAdapter#notifyFileEntryToSelect(FileEntry)
+     * @see directorylister.controllers.JaListerDatabaseListenerAdapter#notifyFileEntryRightClicked(FileEntry)
      */
     @Override
-    public void notifyFileEntryToSelect(final FileEntry fileEntry) {
+    public void notifyFileEntryRightClicked(final FileEntry fileEntry) {
         final DefaultListModel listModel = (DefaultListModel) files.getModel();
         if (listModel.contains(fileEntry)) {
             listModel.removeElement(fileEntry);
