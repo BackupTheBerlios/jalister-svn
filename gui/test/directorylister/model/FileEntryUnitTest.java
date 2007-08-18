@@ -1,5 +1,6 @@
 package directorylister.model;
 
+import directorylister.model.metadata.FileEntryMetaData;
 import directorylister.model.transformers.SortedFileEntryListTransformer;
 import org.jmock.Expectations;
 import org.jmock.Mockery;

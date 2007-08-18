@@ -1,4 +1,4 @@
-package directorylister.model;
+package directorylister.model.metadata;
 
 import directorylister.utils.ObjectUtils;
 

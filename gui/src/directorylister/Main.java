@@ -2,6 +2,8 @@ package directorylister;
 
 import directorylister.gui.MainWindow;
 import directorylister.gui.components.SplashScreen;
+import directorylister.model.metadata.GenericInfoMetaDataProvider;
+import directorylister.model.metadata.MetadataProviderFactory;
 import directorylister.notification.ProgressNotifier;
 import directorylister.resources.Localizer;
 import directorylister.resources.ResourceHandler;
@@ -43,6 +45,8 @@ public class Main {
         progressNotifier.notifyListeners("Startup.InitGUI", true);
         initializeGUI();
 
+        progressNotifier.notifyListeners("Startup.InitMetaData", true);
+        initializeMetaDataSuppor();
 
         progressNotifier.notifyListeners("Startup.Done", true);
         SwingUtilities.invokeLater(new Runnable() {
@@ -54,6 +58,11 @@ public class Main {
             }
         });
 
+    }
+
+    private static void initializeMetaDataSuppor() {
+        final MetadataProviderFactory metadataProviderFactory = MetadataProviderFactory.getInstance();
+        metadataProviderFactory.addMetadataProvider(new GenericInfoMetaDataProvider());
     }
 
     /**

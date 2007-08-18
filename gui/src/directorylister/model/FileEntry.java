@@ -1,6 +1,7 @@
 package directorylister.model;
 
 
+import directorylister.model.metadata.FileEntryMetaData;
 import directorylister.model.transformers.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,10 +9,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author schakal Oleg Atamanenko
@@ -338,5 +336,9 @@ public class FileEntry implements Serializable, XMLSerializable {
         final FileEntry fileEntry = new FileEntry(fileName, fileType, md5, shortName);
         fileEntry.setMetadatas(metadatas);
         return fileEntry;
+    }
+
+    public void addMetaDatas(final Collection<FileEntryMetaData> metaDatas) {
+        metadatas.addAll(metaDatas);
     }
 }

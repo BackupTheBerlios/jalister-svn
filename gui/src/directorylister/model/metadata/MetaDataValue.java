@@ -1,4 +1,4 @@
-package directorylister.model;
+package directorylister.model.metadata;
 
 import java.io.Serializable;
 
@@ -9,5 +9,7 @@ import java.io.Serializable;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:44:40
  */
-public interface MetaDataValue extends Serializable {
+public interface MetaDataValue<T> extends Serializable {
+
+    T getValue();
 }
