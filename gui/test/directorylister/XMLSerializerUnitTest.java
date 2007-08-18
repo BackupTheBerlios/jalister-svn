@@ -45,8 +45,6 @@ public class XMLSerializerUnitTest {
 
         entry.setFileType(FileType.DIRECTORY);
         entry.setFileName("fileName");
-        entry.setLastModified(System.currentTimeMillis() / 1000);
-
 
         serializer.serialize(outputStream, entry);
 

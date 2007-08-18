@@ -42,8 +42,8 @@ public class SortedFileEntryListTransformerUnitTest {
     @Test()
     public void testTransformation() {
         final List<FileEntry> entries = new ArrayList<FileEntry>();
-        final FileEntry entry1 = new FileEntry("def", FileType.FILE, 0, null, "def");
-        final FileEntry entry2 = new FileEntry("abc", FileType.FILE, 0, null, "abc");
+        final FileEntry entry1 = new FileEntry("def", FileType.FILE, null, "def");
+        final FileEntry entry2 = new FileEntry("abc", FileType.FILE, null, "abc");
         entries.add(entry1);
         entries.add(entry2);
         final List<FileEntry> sorted = transformer.transform(entries);

@@ -35,10 +35,6 @@ public class FileEntry implements Serializable, XMLSerializable {
      */
     private FileType fileType;
     /**
-     * Field lastModified
-     */
-    private long lastModified;
-    /**
      * Field parent
      */
     private FileEntry parent;
@@ -77,15 +73,6 @@ public class FileEntry implements Serializable, XMLSerializable {
      */
     public void setFileType(final FileType fileType) {
         this.fileType = fileType;
-    }
-
-    /**
-     * Setter for property 'lastModified'.
-     *
-     * @param lastModified Value to set for property 'lastModified'.
-     */
-    public void setLastModified(final long lastModified) {
-        this.lastModified = lastModified;
     }
 
     /**
@@ -155,14 +142,12 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param absolutePath of type String
      * @param directory    of type boolean
-     * @param lastModified of type long
      * @param md5          of type String
      * @param shortName    of type String
      */
-    public FileEntry(final String absolutePath, final FileType directory, final long lastModified, final String md5,
+    public FileEntry(final String absolutePath, final FileType directory, final String md5,
                      final String shortName) {
         this.md5 = md5;
-        this.lastModified = lastModified;
         this.fileName = absolutePath;
         this.fileType = directory;
         this.shortName = shortName;
@@ -171,14 +156,12 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Constructor FileEntry creates a new FileEntry instance.
      *
-     * @param fileName     of type String
-     * @param lastModified of type long
-     * @param md5          of type String
-     * @param shortName    of type String
+     * @param fileName  of type String
+     * @param md5       of type String
+     * @param shortName of type String
      */
-    public FileEntry(final String fileName, final long lastModified, final String md5, final String shortName) {
+    public FileEntry(final String fileName, final String md5, final String shortName) {
         this.md5 = md5;
-        this.lastModified = lastModified;
         this.fileName = fileName;
         this.shortName = shortName;
         fileType = FileType.FILE;
@@ -205,15 +188,6 @@ public class FileEntry implements Serializable, XMLSerializable {
 
 
     /**
-     * Getter for property 'lastModified'.
-     *
-     * @return Value for property 'lastModified'.
-     */
-    public long getLastModified() {
-        return lastModified;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -224,7 +198,6 @@ public class FileEntry implements Serializable, XMLSerializable {
         final FileEntry fileEntry = (FileEntry) o;
 
         return fileType == fileEntry.fileType &&
-                lastModified == fileEntry.lastModified &&
                 fileName.equals(fileEntry.fileName);
 
     }
@@ -237,7 +210,6 @@ public class FileEntry implements Serializable, XMLSerializable {
         int result;
         result = fileName.hashCode();
         result = 31 * result + (fileType.ordinal());
-        result = 31 * result + (int) (lastModified ^ (lastModified >>> 32));
         return result;
     }
 
@@ -298,7 +270,6 @@ public class FileEntry implements Serializable, XMLSerializable {
                 "fileName='" + fileName + '\'' +
                 ", shortName='" + shortName + '\'' +
                 ", fileType=" + fileType +
-                ", lastModified=" + lastModified +
                 ", metadatas=" + metadatas +
                 ", md5='" + md5 + '\'' +
                 '}';
@@ -314,7 +285,6 @@ public class FileEntry implements Serializable, XMLSerializable {
         final Element xmlNode = document.createElement(fileType.name().toLowerCase());
 
         xmlNode.setAttribute("Name", shortName);
-        xmlNode.setAttribute("lastModified", "" + lastModified);
 
         for (final FileEntryMetaData data : metadatas) {
             xmlNode.setAttribute(data.getKey().toString(), data.getValue().toString());
@@ -365,7 +335,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @return FileEntry
      */
     public FileEntry cloneFirstLevel() {
-        final FileEntry fileEntry = new FileEntry(fileName, fileType, lastModified, md5, shortName);
+        final FileEntry fileEntry = new FileEntry(fileName, fileType, md5, shortName);
         fileEntry.setMetadatas(metadatas);
         return fileEntry;
     }

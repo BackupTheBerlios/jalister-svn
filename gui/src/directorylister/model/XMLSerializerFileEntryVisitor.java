@@ -60,7 +60,6 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
                 document.createElement("fileEntry");
         xmlNode.setAttribute("type", newRoot.getFileType().name().toLowerCase());
         xmlNode.setAttribute("shortName", newRoot.getShortName());
-        xmlNode.setAttribute("lastModified", String.valueOf(newRoot.getLastModified()));
 
         for (final FileEntryMetaData data : newRoot.getMetadatas()) {
             xmlNode.setAttribute(String.valueOf(data.getKey()), String.valueOf(data.getValue()));

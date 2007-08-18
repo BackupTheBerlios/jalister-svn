@@ -9,7 +9,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +34,7 @@ public class FileEntryUnitTest {
     @Before()
     public void setUp() {
         context = new Mockery();
-        fileEntry = new FileEntry("the name.txt", FileType.DIRECTORY, new Date().getTime(), "", null);
+        fileEntry = new FileEntry("the name.txt", FileType.DIRECTORY, "", null);
     }
 
     /**
@@ -43,7 +42,7 @@ public class FileEntryUnitTest {
      */
     @Test()
     public void testThatFileNameCanBeGetted() {
-        fileEntry = new FileEntry("text.txt", new Date().getTime(), "", null);
+        fileEntry = new FileEntry("text.txt", "", null);
         Assert.assertNotNull("Filename is null", fileEntry.getFileName());
 
         assertEquals("Filename is wrong", "text.txt", fileEntry.getFileName());
@@ -54,7 +53,7 @@ public class FileEntryUnitTest {
      */
     @Test()
     public void testThatByDefaultCreatedFile() {
-        fileEntry = new FileEntry("the name.txt", new Date().getTime(), "", null);
+        fileEntry = new FileEntry("the name.txt", "", null);
         assertEquals(FileType.FILE, fileEntry.getFileType());
     }
 
@@ -63,18 +62,8 @@ public class FileEntryUnitTest {
      */
     @Test()
     public void testThatDirectoryCanBeCreated() {
-        fileEntry = new FileEntry("the name.txt", FileType.DIRECTORY, new Date().getTime(), "", null);
+        fileEntry = new FileEntry("the name.txt", FileType.DIRECTORY, "", null);
         assertEquals(FileType.DIRECTORY, fileEntry.getFileType());
-    }
-
-    /**
-     * Method testThatDateCanBeGetted ...
-     */
-    @Test()
-    public void testThatDateCanBeGetted() {
-        final long modified = new Date().getTime();
-        fileEntry = new FileEntry("the name.txt", modified, "", null);
-        assertEquals(modified, fileEntry.getLastModified());
     }
 
     /**
@@ -130,8 +119,8 @@ public class FileEntryUnitTest {
      */
     @Test()
     public void testGetChildsWithTransformer() {
-        final FileEntry def = new FileEntry("def", 0, null, "def");
-        final FileEntry abc = new FileEntry("abc", 0, null, "abc");
+        final FileEntry def = new FileEntry("def", null, "def");
+        final FileEntry abc = new FileEntry("abc", null, "abc");
 
         fileEntry.addChild(def);
         fileEntry.addChild(abc);
