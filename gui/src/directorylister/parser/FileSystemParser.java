@@ -73,7 +73,9 @@ public class FileSystemParser extends ProgressNotifier {
 
         final JaListerDatabase jaListerDatabase = new JaListerDatabase();
         jaListerDatabase.setRootEntry(rootEntry);
+        notifyListeners("Building indexes...", false);
         jaListerDatabase.attachService(new Searcher());
+        notifyListeners("Done.", false);
         return jaListerDatabase;
     }
 

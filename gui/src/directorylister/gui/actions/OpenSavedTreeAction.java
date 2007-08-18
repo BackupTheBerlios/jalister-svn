@@ -3,6 +3,7 @@ package directorylister.gui.actions;
 import directorylister.controllers.JaListerDatabaseController;
 import directorylister.gui.MainWindow;
 import directorylister.model.JaListerDatabase;
+import directorylister.search.Searcher;
 import org.apache.commons.lang.SerializationException;
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
@@ -54,7 +55,7 @@ public final class OpenSavedTreeAction implements ActionListener {
             try {
                 final InputStream inputStream = new FileInputStream(selectedFile);
                 final JaListerDatabase listerDatabase = (JaListerDatabase) SerializationUtils.deserialize(inputStream);
-
+                listerDatabase.attachService(new Searcher());
                 JaListerDatabaseController.getInstance().setCurrentJaListerDatabase(listerDatabase);
 
             } catch(FileNotFoundException e) {
