@@ -2,7 +2,7 @@ package directorylister.gui.components.selectedfilespanel;
 
 import directorylister.controllers.JaListerDatabaseController;
 import directorylister.controllers.JaListerDatabaseListener;
-import directorylister.gui.actions.SaveSelectedFilesAction;
+import directorylister.gui.actions.io.SaveSelectedFilesAction;
 
 import javax.swing.*;
 import javax.swing.event.ListDataEvent;

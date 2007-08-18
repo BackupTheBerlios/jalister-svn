@@ -1,7 +1,13 @@
 package directorylister.gui.components;
 
 import directorylister.gui.MainWindow;
-import directorylister.gui.actions.*;
+import directorylister.gui.actions.CloseApplicationAction;
+import directorylister.gui.actions.SettingsSetLanguageAction;
+import directorylister.gui.actions.ShowAboutBoxAction;
+import directorylister.gui.actions.io.ChooseDirectoryAction;
+import directorylister.gui.actions.io.FileSaveTreeAction;
+import directorylister.gui.actions.io.FileSaveXMLAction;
+import directorylister.gui.actions.io.OpenSavedTreeAction;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;

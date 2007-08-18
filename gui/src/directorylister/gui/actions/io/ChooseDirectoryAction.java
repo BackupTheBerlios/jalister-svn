@@ -1,4 +1,7 @@
-package directorylister.gui.actions;
+package directorylister.gui.actions.io;
+
+import directorylister.gui.actions.io.plugins.FileOpenSavePlugin;
+import directorylister.gui.actions.io.plugins.LoadDirectoryPlugin;
 
 import javax.swing.JFrame;
 

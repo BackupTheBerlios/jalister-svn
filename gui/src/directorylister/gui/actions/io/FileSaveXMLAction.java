@@ -1,4 +1,4 @@
-package directorylister.gui.actions;
+package directorylister.gui.actions.io;
 
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import directorylister.controllers.JaListerDatabaseController;

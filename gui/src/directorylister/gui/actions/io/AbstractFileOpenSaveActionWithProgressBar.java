@@ -1,5 +1,6 @@
-package directorylister.gui.actions;
+package directorylister.gui.actions.io;
 
+import directorylister.gui.actions.io.plugins.FileOpenSavePlugin;
 import directorylister.gui.components.ProgressBarFrame;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -48,12 +49,12 @@ public abstract class AbstractFileOpenSaveActionWithProgressBar implements Actio
      */
     public void actionPerformed(final ActionEvent actionEvent) {
         final FileOpenSavePlugin openSavePlugin = getFileOpenSavePligin();
-        final JFileChooser directoryChooser = openSavePlugin.getFileChooser();
+        final JFileChooser fileChooser = openSavePlugin.getFileChooser();
 
-        final int returnVal = showDialog(openSavePlugin.isOpenDialog(), directoryChooser);
+        final int returnVal = showDialog(openSavePlugin.isOpenDialog(), fileChooser);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            final File selectedFile = directoryChooser.getSelectedFile();
+            final File selectedFile = getSelectedFile(fileChooser, openSavePlugin);
             logger.info("You've chosen: " + selectedFile.getAbsolutePath());
             EXECUTOR.execute(
                     new Runnable() {
@@ -72,6 +73,22 @@ public abstract class AbstractFileOpenSaveActionWithProgressBar implements Actio
                         }
                     });
         }
+    }
+
+    /**
+     * Method getSelectedFile ...
+     *
+     * @param fileChooser    of type JFileChooser
+     * @param openSavePlugin of type FileOpenSavePlugin
+     * @return File selected file.
+     */
+    private static File getSelectedFile(final JFileChooser fileChooser, final FileOpenSavePlugin openSavePlugin) {
+        File selectedFile = fileChooser.getSelectedFile();
+        if (!fileChooser.getFileFilter().accept(selectedFile) && !openSavePlugin.isOpenDialog()) {
+            final String fileName = selectedFile.getAbsolutePath() + openSavePlugin.getFileExtension();
+            selectedFile = new File(fileName);
+        }
+        return selectedFile;
     }
 
     /**

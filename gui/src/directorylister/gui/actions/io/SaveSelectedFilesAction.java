@@ -1,4 +1,4 @@
-package directorylister.gui.actions;
+package directorylister.gui.actions.io;
 
 import directorylister.model.FileEntry;
 import org.apache.commons.logging.Log;

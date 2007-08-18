@@ -1,4 +1,4 @@
-package directorylister.gui.actions;
+package directorylister.gui.actions.io.plugins;
 
 import directorylister.controllers.JaListerDatabaseController;
 import directorylister.gui.components.DirectoryChooser;
@@ -44,6 +44,13 @@ public class LoadDirectoryPlugin implements FileOpenSavePlugin {
      */
     public JFileChooser getFileChooser() {
         return new DirectoryChooser();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getFileExtension() {
+        return null;
     }
 
     /**

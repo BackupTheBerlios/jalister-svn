@@ -1,4 +1,4 @@
-package directorylister.gui.actions;
+package directorylister.gui.actions.io.plugins;
 
 import directorylister.notification.ProgressListener;
 
@@ -28,6 +28,13 @@ public interface FileOpenSavePlugin {
      * @return - filechooser.
      */
     JFileChooser getFileChooser();
+
+    /**
+     * Returns file extension used.
+     *
+     * @return file extension.
+     */
+    String getFileExtension();
 
     /**
      * Check, if dialog is for opening.
