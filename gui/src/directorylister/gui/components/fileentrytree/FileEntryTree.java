@@ -1,23 +1,33 @@
 package directorylister.gui.components.fileentrytree;
 
 import directorylister.controllers.JaListerDatabaseController;
+import directorylister.model.FileEntry;
 import directorylister.model.JaListerDatabase;
 import directorylister.resources.ResourceHandler;
 import directorylister.search.SearchResult;
 import directorylister.search.Searcher;
 import org.apache.commons.lang.StringUtils;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.ToolTipManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
 
 /**
  * File Entry tree.
@@ -52,7 +62,31 @@ public final class FileEntryTree extends JPanel {
      * Constructs a new FileEntryTree.
      */
     public FileEntryTree() {
-        tree = new JTree();
+        tree = new JTree() {
+            public String getToolTipText(final MouseEvent event) {
+                final Point point = event.getPoint();
+                final TreePath path = tree.getPathForLocation((int) point.getX(), (int) point.getY());
+                if (null != path) {
+                    final Object pathComponent = path.getLastPathComponent();
+                    if (null != pathComponent && pathComponent instanceof DefaultMutableTreeNode) {
+                        final Object userObject = ((DefaultMutableTreeNode) pathComponent).getUserObject();
+                        if (userObject instanceof FileEntry) {
+                            final FileEntry entry = (FileEntry) userObject;
+                            return entry.getFileName();
+                        }
+                        return userObject.toString();
+                    }
+                }
+                return super.getToolTipText(event);
+            }
+        };
+
+        final ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
+        toolTipManager.setEnabled(true);
+        toolTipManager.setInitialDelay(50);
+        toolTipManager.registerComponent(tree);
+        toolTipManager.setLightWeightPopupEnabled(true);
+
         tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Root")));
         treeUpdater = new TreeUpdater(tree);
         JaListerDatabaseController.getInstance().addListener(treeUpdater);
@@ -61,6 +95,7 @@ public final class FileEntryTree extends JPanel {
 
         tree.addMouseListener(new TreeMouseListener(tree));
         tree.setCellRenderer(new TreeCellRenderer());
+
 
         setLayout(new BorderLayout());
         add(new JScrollPane(tree), BorderLayout.CENTER);
@@ -77,7 +112,7 @@ public final class FileEntryTree extends JPanel {
              * {@inheritDoc}
              */
             public void actionPerformed(final ActionEvent e) {
-                JaListerDatabase oldDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
+                final JaListerDatabase oldDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
                 final Searcher searcher = oldDatabase.getService(Searcher.class);
                 final String condition = searchBox.getText();
 
