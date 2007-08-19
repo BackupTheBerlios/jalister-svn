@@ -4,6 +4,7 @@ import directorylister.gui.MainWindow;
 import directorylister.gui.components.SplashScreen;
 import directorylister.model.metadata.GenericInfoMetaDataProvider;
 import directorylister.model.metadata.MetadataProviderFactory;
+import directorylister.model.metadata.MimeTypeProvider;
 import directorylister.notification.ProgressNotifier;
 import directorylister.resources.Localizer;
 import directorylister.resources.ResourceHandler;
@@ -60,8 +61,10 @@ public class Main {
     }
 
     private static void initializeMetaDataSuppor() {
+        // TODO: Find automatically implementations.
         final MetadataProviderFactory metadataProviderFactory = MetadataProviderFactory.getInstance();
         metadataProviderFactory.addMetadataProvider(new GenericInfoMetaDataProvider());
+        metadataProviderFactory.addMetadataProvider(new MimeTypeProvider());
     }
 
     /**
