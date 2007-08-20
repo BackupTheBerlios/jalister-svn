@@ -115,7 +115,7 @@
                 <attribute name="Built-By" value="${user.name}"/>
                 <attribute name="Main-Class" value="directorylister.Main"/>
                 <attribute name="Class-Path"
-                           value="commons-codec-1.3.jar commons-lang-2.2.jar commons-logging-1.1.jar junit-4.3.1.jar log4j.jar uispec4j-1.4.jar"/>
+                           value="activation.jar commons-codec-1.3.jar commons-lang-2.2.jar commons-logging-1.1.jar jmimemagic-0.1.0.jar log4j.jar lucene-core-2.1.0.jar"/>
             </manifest>
             <fileset dir="${build.dir}">
                 <patternset>
@@ -174,7 +174,7 @@
         </svn>
     </target>
 
-    <target name="dist-bin" depends="prepare, update-svn, status-svn, jar">
+    <target name="dist-bin" depends="prepare, status-svn, jar" description="Build binary distribution.">
         <delete file="${dist.dir}/${binary-distribution}-r${revision}.zip"/>
         <zip zipfile="${dist.dir}/${binary-distribution}-r${revision}.zip"
              compress="yes">
@@ -188,23 +188,26 @@
             </zipfileset>
             <zipfileset dir="${lib.dir}" prefix="${application.name}/lib">
                 <patternset>
+                    <include name="activation.jar"/>
                     <include name="commons-codec-1.3.jar"/>
                     <include name="commons-lang-2.2.jar"/>
                     <include name="commons-logging-1.1.jar"/>
+                    <include name="jmimemagic-0.1.0.jar"/>
                     <include name="log4j.jar"/>
+                    <include name="lucene-core-2.1.0.jar"/>
                 </patternset>
             </zipfileset>
         </zip>
     </target>
 
-    <target name="dist-src" depends="prepare, update-svn, status-svn">
+    <target name="dist-src" depends="prepare, status-svn" description="Build source distribution.">
         <delete file="${dist.dir}/${source-distribution}-r${revision}.zip"/>
         <zip basedir="${basedir}" zipfile="${dist.dir}/${source-distribution}-r${revision}.zip"
              compress="yes" excludes="classes/**, dist/**, reports/**, javadoc/**, instrumented/**">
         </zip>
     </target>
 
-    <target name="dist" depends="dist-bin, dist-src" description="Builds distribution."
+    <target name="dist" depends="dist-bin, dist-src" description="Builds source and binary distributions."
             />
 
     <target name="instrument" depends="init,compile">
@@ -237,7 +240,7 @@
         </cobertura-instrument>
     </target>
 
-    <target name="javadoc" depends="prepare">
+    <target name="javadoc" depends="prepare" description="Create javadoc for sources.">
         <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"
                  author="true"
                  use="true"
@@ -249,7 +252,7 @@
         </javadoc>
     </target>
 
-    <target name="test" depends="prepare,compile,native2ascii">
+    <target name="test" depends="prepare,compile,native2ascii" description="Run tests.">
         <junit fork="yes" dir="${basedir}" failureProperty="test.failed">
             <!--
                 Note the classpath order: instrumented classes are before the

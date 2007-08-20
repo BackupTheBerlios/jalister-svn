@@ -1,10 +1,6 @@
 package directorylister.model.metadata;
 
-import net.sf.jmimemagic.Magic;
-import net.sf.jmimemagic.MagicException;
-import net.sf.jmimemagic.MagicMatch;
-import net.sf.jmimemagic.MagicMatchNotFoundException;
-import net.sf.jmimemagic.MagicParseException;
+import net.sf.jmimemagic.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -24,7 +20,7 @@ import java.util.Collection;
 public class MimeTypeProvider implements MetadataProvider {
 
     private static final Log logger = LogFactory.getLog(MimeTypeProvider.class);
-    private static final int BUFFER_SIZE = 2 << 16;
+    private static final int BUFFER_SIZE = 65536;
 
     public MimeTypeProvider() {
 
@@ -34,7 +30,8 @@ public class MimeTypeProvider implements MetadataProvider {
         String mimeType;
         if (file.isDirectory()) {
             mimeType = "Directory";
-        } else {
+        }
+        else {
 
             mimeType = getMimeTypeUsingJMimeMagic(file);
 
@@ -50,8 +47,8 @@ public class MimeTypeProvider implements MetadataProvider {
     }
 
     private String getMimeTypeUsingJMimeMagic(final File file) {
-        // TODO: 
-        if(true){
+        // TODO:
+        if (true) {
             return null;
         }
         String mimeType = null;
@@ -59,11 +56,11 @@ public class MimeTypeProvider implements MetadataProvider {
             final byte[] content = readFirstBytes(file);
             final MagicMatch magicMatch = Magic.getMagicMatch(content);
             mimeType = magicMatch.getMimeType();
-        } catch (MagicParseException e) {
+        } catch(MagicParseException e) {
             logger.warn(e);
-        } catch (MagicMatchNotFoundException e) {
+        } catch(MagicMatchNotFoundException e) {
             logger.warn(e);
-        } catch (MagicException e) {
+        } catch(MagicException e) {
             logger.warn(e);
         }
         return mimeType;
@@ -78,14 +75,14 @@ public class MimeTypeProvider implements MetadataProvider {
             inputStream = new FileInputStream(file);
             inputStream.read(buffer);
         }
-        catch (IOException e) {
+        catch(IOException e) {
             logger.error(e);
         }
         finally {
             if (null != inputStream) {
                 try {
                     inputStream.close();
-                } catch (IOException e) {
+                } catch(IOException e) {
                     logger.error(e);
                 }
             }
