@@ -20,7 +20,7 @@ import java.util.Collection;
 public class MimeTypeProvider implements MetadataProvider {
 
     private static final Log logger = LogFactory.getLog(MimeTypeProvider.class);
-    private static final int BUFFER_SIZE = 65536;
+    private static final int BUFFER_SIZE = 262144; //256 KB.
 
     public MimeTypeProvider() {
 
@@ -47,10 +47,6 @@ public class MimeTypeProvider implements MetadataProvider {
     }
 
     private String getMimeTypeUsingJMimeMagic(final File file) {
-        // TODO:
-        if (true) {
-            return null;
-        }
         String mimeType = null;
         try {
             final byte[] content = readFirstBytes(file);
