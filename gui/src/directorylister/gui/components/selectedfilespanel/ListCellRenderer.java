@@ -12,6 +12,7 @@ import java.awt.Component;
  * @since 29.07.2007 16:22:41
  */
 class ListCellRenderer extends DefaultListCellRenderer {
+    private static final long serialVersionUID = 7645523489678085320L;
 
     /**
      * {@inheritDoc}

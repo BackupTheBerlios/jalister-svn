@@ -3,6 +3,7 @@ package directorylister.resources;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -91,5 +92,10 @@ public class ResourceHandler {
             return key;
         }
         return value;
+    }
+
+    public String getFormattedMessage(final String key, Object... values) {
+        final String message = getMessage(key);
+        return MessageFormat.format(message, values);
     }
 }

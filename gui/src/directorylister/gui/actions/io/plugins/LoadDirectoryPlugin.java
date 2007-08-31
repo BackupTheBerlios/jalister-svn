@@ -5,6 +5,7 @@ import directorylister.gui.components.DirectoryChooser;
 import directorylister.model.JaListerDatabase;
 import directorylister.notification.ProgressListener;
 import directorylister.parser.FileSystemParser;
+import directorylister.utils.SwingUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,6 +32,7 @@ public class LoadDirectoryPlugin implements FileOpenSavePlugin {
         try {
             jaListerDatabase = parseFile(selectedFile, frame);
         } catch(IOException e) {
+            SwingUtils.showError(e.getMessage());
             logger.error(e);
         }
         if (null != jaListerDatabase) {

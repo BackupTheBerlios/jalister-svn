@@ -4,7 +4,9 @@ package directorylister.model.metadata;
  * @author schakal Oleg Atamanenko
  * @since 18.08.2007 21:06:30
  */
-public class DefaultMetaDataKey implements MetaDataKey {
+public class DefaultMetaDataKey extends AbstractSearchableMetaDataKey {
+    private static final long serialVersionUID = -5600589833389116491L;
+
     public DefaultMetaDataKey(final String name) {
         this.name = name;
 
@@ -23,7 +25,7 @@ public class DefaultMetaDataKey implements MetaDataKey {
         return getName();
     }
 
-    public String getLocalizeKey() {
+    public String getLocalizationKey() {
         return "MetaDataKey." + name;
     }
 

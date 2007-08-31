@@ -9,12 +9,7 @@ import directorylister.model.metadata.MetaDataValue;
 import directorylister.model.transformers.SortedMetaDataTransformer;
 import directorylister.resources.Localizer;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.ToolTipManager;
+import javax.swing.*;
 import java.awt.Dimension;
 import java.util.Collection;
 
@@ -27,6 +22,7 @@ import java.util.Collection;
  */
 public final class MetaDataPanel extends JPanel {
     private final Localizer localizer;
+    private static final long serialVersionUID = -4979679532670512231L;
 
 
     public MetaDataPanel() {
@@ -39,7 +35,6 @@ public final class MetaDataPanel extends JPanel {
             @Override()
             public void notifyFileEntrySelected(final FileEntry fileEntry) {
                 removeAll();
-                final ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
                 final Collection<FileEntryMetaData> metaDatas = fileEntry.getMetadatas(new SortedMetaDataTransformer());
                 for (final FileEntryMetaData metaData : metaDatas) {
                     final MetaDataKey key = metaData.getKey();
@@ -47,7 +42,7 @@ public final class MetaDataPanel extends JPanel {
 
                     final JLabel keyLabel = new JLabel();
                     keyLabel.setPreferredSize(new Dimension(150, 0));
-                    keyLabel.setName(key.getLocalizeKey());
+                    keyLabel.setName(key.getLocalizationKey());
 
                     final JLabel valueLabel = new JLabel();
                     final String textValue = String.valueOf(value.getValue());

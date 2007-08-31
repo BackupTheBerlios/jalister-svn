@@ -24,6 +24,7 @@ public class ProgressBarFrame extends JFrame implements ProgressListener {
      * Field label
      */
     protected final JLabel label;
+    private static final long serialVersionUID = 3285934927703340287L;
 
     /**
      * Constructs a new ProgressBarFrame.

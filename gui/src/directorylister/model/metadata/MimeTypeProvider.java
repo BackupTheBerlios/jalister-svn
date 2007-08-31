@@ -1,5 +1,6 @@
 package directorylister.model.metadata;
 
+import directorylister.utils.SwingUtils;
 import net.sf.jmimemagic.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,7 +33,6 @@ public class MimeTypeProvider implements MetadataProvider {
             mimeType = "Directory";
         }
         else {
-
             mimeType = getMimeTypeUsingJMimeMagic(file);
 
             if (null == mimeType) {
@@ -48,6 +48,9 @@ public class MimeTypeProvider implements MetadataProvider {
 
     private String getMimeTypeUsingJMimeMagic(final File file) {
         String mimeType = null;
+        if (1 == 1) {
+            return mimeType;
+        }
         try {
             final byte[] content = readFirstBytes(file);
             final MagicMatch magicMatch = Magic.getMagicMatch(content);
@@ -72,6 +75,7 @@ public class MimeTypeProvider implements MetadataProvider {
             inputStream.read(buffer);
         }
         catch(IOException e) {
+            SwingUtils.showError(e.getMessage());
             logger.error(e);
         }
         finally {
@@ -79,6 +83,7 @@ public class MimeTypeProvider implements MetadataProvider {
                 try {
                     inputStream.close();
                 } catch(IOException e) {
+                    SwingUtils.showError(e.getMessage());
                     logger.error(e);
                 }
             }

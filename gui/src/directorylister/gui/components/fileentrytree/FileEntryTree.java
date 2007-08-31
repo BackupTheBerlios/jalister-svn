@@ -8,13 +8,7 @@ import directorylister.search.SearchResult;
 import directorylister.search.Searcher;
 import org.apache.commons.lang.StringUtils;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JTree;
-import javax.swing.ToolTipManager;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -65,11 +59,6 @@ public final class FileEntryTree extends JPanel {
         tree = new TooltipTree();
         tree.setName("FileTree");
         tree.setToggleClickCount(1);
-        final ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
-        toolTipManager.setEnabled(true);
-        toolTipManager.setInitialDelay(50);
-        toolTipManager.registerComponent(tree);
-        toolTipManager.setLightWeightPopupEnabled(true);
 
         tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Root")));
         treeUpdater = new TreeUpdater(tree);
@@ -186,6 +175,11 @@ public final class FileEntryTree extends JPanel {
             final SearchResult searchResult = searcher.search(condition);
             updateTree(searchResult);
 
+            // TODO: Use localization
+            final ResourceHandler resourceHandler = ResourceHandler.getInstance();
+            final String tooltip = resourceHandler.getFormattedMessage("SearchResult.Tooltip",
+                    searchResult.getResultCount(), searchResult.getSearchTime());
+            searchBox.setToolTipText(tooltip);
         }
     }
 

@@ -4,6 +4,11 @@ import directorylister.model.FileEntry;
 import directorylister.model.FileEntryVisitorAdapter;
 import directorylister.model.JaListerDatabase;
 import directorylister.model.Service;
+import directorylister.model.metadata.FileEntryMetaData;
+import directorylister.model.metadata.MetaDataKey;
+import directorylister.model.metadata.MetadataProviderFactory;
+import directorylister.model.metadata.SearchableMetaDataKey;
+import directorylister.utils.SwingUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,6 +22,8 @@ import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * Lucene searcher.
@@ -43,6 +50,7 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
      * Field database
      */
     private JaListerDatabase database;
+    private static final int MAX_CLAUSE_COUNT = 65536;
 
     /**
      * Constructs a new Searcher.
@@ -54,7 +62,7 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
             logger.error(e);
             throw new RuntimeException("Cannot initialize searcher", e);
         }
-
+        BooleanQuery.setMaxClauseCount(MAX_CLAUSE_COUNT);
     }
 
     /**
@@ -68,13 +76,17 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
         IndexSearcher indexSearcher = null;
         try {
             indexSearcher = new IndexSearcher(directory);
+            final long startTime = System.currentTimeMillis();
             final Hits hits = indexSearcher.search(buildQuery(condition));
+            searchResult.setSearchTime(System.currentTimeMillis() - startTime);
+            searchResult.setResultCount(hits.length());
             final IndexSearcherFileEntryVisitor fileEntryVisitor = new IndexSearcherFileEntryVisitor(hits);
             database.getRootEntry().acceptVisitor(fileEntryVisitor);
 
             searchResult.setRoot(fileEntryVisitor.getRoot());
             return searchResult;
         } catch(IOException e) {
+            SwingUtils.showError(e.getMessage());
             logger.error(e);
         }
         finally {
@@ -96,8 +108,12 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
      * @return Query
      */
     private Query buildQuery(final String condition) {
+        // TODO: Refactor and add support for query language in condition.
         final String[] strings = StringUtils.split(condition.trim().toLowerCase());
         final BooleanQuery booleanQuery = new BooleanQuery();
+
+        final Collection<MetaDataKey> metaDataKeys = MetadataProviderFactory.getInstance().getMetaDataKeys();
+
         for (final String string : strings) {
             final String searchString = "*" + string + "*";
 
@@ -107,21 +123,33 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
             final WildcardQuery shortNameQuery = new WildcardQuery(buildTerm(SearchField.SHORT_NAME, searchString));
             booleanQuery.add(shortNameQuery, BooleanClause.Occur.SHOULD);
 
-            final TermQuery query = new TermQuery(buildTerm(SearchField.SHORT_NAME, searchString));
-            booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+            final TermQuery termQuery = new TermQuery(buildTerm(SearchField.SHORT_NAME, searchString));
+            booleanQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+
+            for (MetaDataKey metaDataKey : metaDataKeys) {
+                if (metaDataKey instanceof SearchableMetaDataKey) {
+                    SearchableMetaDataKey key = (SearchableMetaDataKey) metaDataKey;
+                    final WildcardQuery query = new WildcardQuery(buildTerm(key.getName(), searchString));
+                    booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+                }
+            }
         }
         return booleanQuery;
+    }
+
+    private Term buildTerm(final String name, final String searchString) {
+        return new Term(name, searchString);
     }
 
     /**
      * Method buildTerm ...
      *
-     * @param shortName    of type SearchField
+     * @param searchField  of type SearchField
      * @param searchString of type String
      * @return Term
      */
-    private Term buildTerm(final SearchField shortName, final String searchString) {
-        return new Term(shortName.name(), searchString);
+    private Term buildTerm(final SearchField searchField, final String searchString) {
+        return new Term(searchField.name(), searchString);
     }
 
     /**
@@ -140,7 +168,7 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
     public void notifyAttached(final JaListerDatabase serviceable) {
         database = serviceable;
         final FileEntry rootEntry = serviceable.getRootEntry();
-        executeWithIndexWriter(new Executable<IndexWriter>() {
+        executeWithIndexWriter(new Executable<IndexWriter, IOException>() {
             /**
              * {@inheritDoc}
              */
@@ -186,6 +214,7 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
             try {
                 indexWriter.addDocument(document);
             } catch(IOException e) {
+                SwingUtils.showError(e.getMessage());
                 logger.error(e);
 
             }
@@ -203,6 +232,18 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
             for (final SearchField searchField : searchFields) {
                 addField(document, searchField, fileEntry);
             }
+
+            final Set<FileEntryMetaData> metaDatas = fileEntry.getMetadatas();
+            for (FileEntryMetaData metaData : metaDatas) {
+                if (metaData.getKey() instanceof SearchableMetaDataKey) {
+                    SearchableMetaDataKey key = (SearchableMetaDataKey) metaData.getKey();
+                    final Field field = key.createField(String.valueOf(metaData.getValue().getValue()));
+                    if (null != field) {
+                        document.add(field);
+                    }
+                }
+            }
+
             return document;
         }
 
@@ -218,6 +259,7 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
             if (null != field) {
                 document.add(field);
             }
+
         }
 
     }
@@ -227,13 +269,14 @@ public class Searcher implements Service<JaListerDatabase>, Serializable {
      *
      * @param executable of type Executable<IndexWriter>
      */
-    private void executeWithIndexWriter(final Executable<IndexWriter> executable) {
+    private void executeWithIndexWriter(final Executable<IndexWriter, IOException> executable) {
         IndexWriter indexWriter = null;
         try {
             indexWriter = new IndexWriter(directory, new StandardAnalyzer());
             executable.execute(indexWriter);
 
         } catch(IOException e) {
+            SwingUtils.showError(e.getMessage());
             logger.error(e);
         } finally {
             if (indexWriter != null) {

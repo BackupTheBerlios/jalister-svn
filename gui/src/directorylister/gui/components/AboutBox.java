@@ -2,6 +2,7 @@ package directorylister.gui.components;
 
 import directorylister.resources.Localizer;
 import directorylister.resources.ResourceHandler;
+import directorylister.utils.SwingUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -62,6 +63,7 @@ public final class AboutBox extends JDialog {
         try {
             label.read(new ByteArrayInputStream(message.getBytes()), null);
         } catch(IOException e) {
+            SwingUtils.showError(e.getMessage());
             logger.error(e);
         }
 

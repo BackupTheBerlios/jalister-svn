@@ -7,7 +7,9 @@ import java.util.Date;
  * @since 18.08.2007 21:05:06
  */
 public class FileLastModifiedMetaDataValue extends DefaultMetaDataValue<Date> {
-    public FileLastModifiedMetaDataValue(final long l) {
-        super(new Date(l));
+    private static final long serialVersionUID = 1219662304776748985L;
+
+    public FileLastModifiedMetaDataValue(final long lastModified) {
+        super(new Date(lastModified));
     }
 }

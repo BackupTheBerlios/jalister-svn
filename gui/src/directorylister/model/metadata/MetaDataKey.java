@@ -13,4 +13,5 @@ import java.io.Serializable;
  * @since 17.07.2007 1:44:16
  */
 public interface MetaDataKey extends Nameable, Serializable, Localizable {
+
 }

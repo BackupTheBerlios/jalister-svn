@@ -35,7 +35,7 @@ public class SplashScreen extends ProgressBarFrame {
         final ProgressNotifier notifier = new ProgressNotifier();
         notifier.addListener(screen);
 
-        notifier.notifyListeners("Starting up...", false);
+        notifier.notifyListeners("Startup.Start");
 
         try {
             Thread.sleep(2000);
@@ -43,6 +43,6 @@ public class SplashScreen extends ProgressBarFrame {
             e.printStackTrace();
         }
 
-        notifier.notifyListeners("Done...", false);
+        notifier.notifyListeners("Startup.Done");
     }
 }

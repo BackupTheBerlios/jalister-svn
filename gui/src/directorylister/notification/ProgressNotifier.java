@@ -26,15 +26,12 @@ public class ProgressNotifier {
     /**
      * Notifies all listeners about new notification status.
      *
-     * @param message   - notification message to broadcast.
-     * @param localized - if message should be localized.
+     * @param message - notification message to broadcast.
      */
-    public void notifyListeners(final String message, final boolean localized) {
+    public void notifyListeners(final String message, Object... values) {
 
-        String localizedMessage = message;
-        if (localized) {
-            localizedMessage = ResourceHandler.getInstance().getMessage(message);
-        }
+        String localizedMessage = ResourceHandler.getInstance().getFormattedMessage(message, values);
+
         final Notification notification = new Notification(localizedMessage);
         for (final ProgressListener listener : listeners) {
             listener.notify(notification);

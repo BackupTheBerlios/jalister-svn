@@ -6,6 +6,7 @@ package directorylister.model.metadata;
  */
 public class DefaultMetaDataValue<T> implements MetaDataValue<T> {
     private final T value;
+    private static final long serialVersionUID = -6052472009022096426L;
 
     public DefaultMetaDataValue(T value) {
         this.value = value;

@@ -2,6 +2,7 @@ package directorylister.search;
 
 import directorylister.model.FileEntry;
 import directorylister.model.FileEntryVisitorAdapter;
+import directorylister.utils.SwingUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
@@ -65,6 +66,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
                 addParentDirectories(s);
                 searchResult.add(s);
             } catch(IOException e) {
+                SwingUtils.showError(e.getMessage());
                 logger.error(e);
             }
         }

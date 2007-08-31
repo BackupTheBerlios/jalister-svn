@@ -5,6 +5,8 @@ package directorylister.model.metadata;
  * @since 19.08.2007 12:15:45
  */
 public class MimeTypeMetaDataKey extends DefaultMetaDataKey{
+    private static final long serialVersionUID = 4792829209151632601L;
+
     public MimeTypeMetaDataKey() {
         super("MimeType");
     }

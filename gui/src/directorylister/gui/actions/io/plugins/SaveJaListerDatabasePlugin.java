@@ -5,12 +5,14 @@ import directorylister.gui.filters.JaListerDatabaseFileFilter;
 import directorylister.model.JaListerDatabase;
 import directorylister.notification.Notification;
 import directorylister.notification.ProgressListener;
+import directorylister.utils.SwingUtils;
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JFileChooser;
 import java.io.*;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * Class FileSaveTreePlugin ...
@@ -30,17 +32,22 @@ public class SaveJaListerDatabasePlugin implements FileOpenSavePlugin {
             OutputStream outputStream = null;
             try {
                 listener.notify(new Notification("Saving..."));
-                outputStream = new FileOutputStream(selectedFile);
+                outputStream = new GZIPOutputStream(new FileOutputStream(selectedFile));
                 SerializationUtils.serialize(listerDatabase, outputStream);
                 listener.notify(new Notification("Done."));
             } catch(FileNotFoundException e) {
+                SwingUtils.showError(e.getMessage());
                 logger.error(e.toString());
             }
-            finally {
+            catch(IOException e) {
+                SwingUtils.showError(e.getMessage());
+                logger.error(e.toString());
+            } finally {
                 if (outputStream != null) {
                     try {
                         outputStream.close();
                     } catch(IOException e) {
+                        SwingUtils.showError(e.getMessage());
                         logger.error(e.toString());
                     }
                 }

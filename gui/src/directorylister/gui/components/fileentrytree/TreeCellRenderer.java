@@ -15,6 +15,7 @@ import java.awt.Component;
  * @since 29.07.2007 16:19:45
  */
 class TreeCellRenderer extends DefaultTreeCellRenderer {
+    private static final long serialVersionUID = -7238073555022268308L;
 
 
     /**

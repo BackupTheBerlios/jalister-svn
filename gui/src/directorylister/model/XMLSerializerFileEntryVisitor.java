@@ -1,8 +1,6 @@
 package directorylister.model;
 
 import directorylister.model.metadata.FileEntryMetaData;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -23,10 +21,6 @@ public class XMLSerializerFileEntryVisitor extends FileEntryVisitorAdapter {
      * Field document
      */
     private final Document document;
-    /**
-     * Field logger
-     */
-    private static final Log logger = LogFactory.getLog(XMLSerializerFileEntryVisitor.class);
 
     /**
      * Constructor XMLSerializerFileEntryVisitor creates a new XMLSerializerFileEntryVisitor instance.

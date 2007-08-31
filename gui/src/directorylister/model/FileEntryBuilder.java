@@ -5,7 +5,6 @@ import directorylister.model.metadata.MetadataProvider;
 import directorylister.model.metadata.MetadataProviderFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
@@ -30,7 +29,6 @@ public class FileEntryBuilder {
      *
      * @param file for which build FileEntry.
      * @return new FileEntry for the passed file.
-     * @throws IOException - if I/O error occures.
      */
     public FileEntry buildFrom(final File file) {
         final String md5 = null; //directorylister.utils.MD5Hasher.getMD5(file);

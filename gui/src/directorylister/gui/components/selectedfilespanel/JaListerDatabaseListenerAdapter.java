@@ -3,7 +3,6 @@ package directorylister.gui.components.selectedfilespanel;
 import directorylister.model.FileEntry;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JList;
 
 /**
@@ -15,20 +14,14 @@ final class JaListerDatabaseListenerAdapter extends directorylister.controllers.
      * Field files
      */
     private final JList files;
-    /**
-     * Field button
-     */
-    private final JButton button;
 
     /**
      * Constructor JaListerDatabaseListenerAdapter creates a new JaListerDatabaseListenerAdapter instance.
      *
-     * @param files  of type JList
-     * @param button of type JButton
+     * @param files of type JList
      */
-    public JaListerDatabaseListenerAdapter(final JList files, final JButton button) {
+    public JaListerDatabaseListenerAdapter(final JList files) {
         this.files = files;
-        this.button = button;
     }
 
     /**

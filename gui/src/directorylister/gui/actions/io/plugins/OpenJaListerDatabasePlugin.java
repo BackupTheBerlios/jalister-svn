@@ -6,16 +6,15 @@ import directorylister.model.JaListerDatabase;
 import directorylister.notification.Notification;
 import directorylister.notification.ProgressListener;
 import directorylister.search.Searcher;
+import directorylister.utils.SwingUtils;
 import org.apache.commons.lang.SerializationException;
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JFileChooser;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Plugin for opening saved databases.
@@ -28,7 +27,7 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
 
     public void handleFile(File selectedFile, ProgressListener listener) {
         try {
-            final InputStream inputStream = new FileInputStream(selectedFile);
+            final InputStream inputStream = new GZIPInputStream(new FileInputStream(selectedFile));
             listener.notify(new Notification("Loading database..."));
             final JaListerDatabase listerDatabase = (JaListerDatabase) SerializationUtils.deserialize(inputStream);
             listener.notify(new Notification("Building indexes..."));
@@ -37,12 +36,18 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
             listener.notify(new Notification("Done."));
 
         } catch(FileNotFoundException e) {
+            SwingUtils.showError(e.getMessage());
             logger.error(e.toString());
         }
         catch(SerializationException e) {
+            SwingUtils.showError(e.getMessage());
+            logger.error(e.toString());
+        } catch(IOException e) {
+            SwingUtils.showError(e.getMessage());
             logger.error(e.toString());
         }
     }
+
 
     public JFileChooser getFileChooser() {
         final JFileChooser fileChooser = new JFileChooser();

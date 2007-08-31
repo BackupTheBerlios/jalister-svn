@@ -67,15 +67,16 @@ public class FileSystemParser extends ProgressNotifier {
      * @throws IOException when
      */
     public JaListerDatabase parse() throws IOException {
-        notifyListeners("Parsing file: " + startFile, false);
+        
+        notifyListeners("Parser.ParsingFile", startFile);
         final FileEntry rootEntry = fileEntryBuilder.buildFrom(startFile);
         parse(startFile, rootEntry);
 
         final JaListerDatabase jaListerDatabase = new JaListerDatabase();
         jaListerDatabase.setRootEntry(rootEntry);
-        notifyListeners("Building indexes...", false);
+        notifyListeners("Parser.BuildingIndices");
         jaListerDatabase.attachService(new Searcher());
-        notifyListeners("Done.", false);
+        notifyListeners("Parser.Done");
         return jaListerDatabase;
     }
 
@@ -94,8 +95,8 @@ public class FileSystemParser extends ProgressNotifier {
                 logger.debug("Parsing: " + file.getAbsolutePath());
                 final FileEntry fileEntry = fileEntryBuilder.buildFrom(file);
                 result.addChild(fileEntry);
+                notifyListeners("Parser.ParsingEntry", file);
                 if (file.isDirectory() && file.exists()) {
-                    notifyListeners("Parsing: " + file, false);
                     parse(file, fileEntry);
                 }
             }

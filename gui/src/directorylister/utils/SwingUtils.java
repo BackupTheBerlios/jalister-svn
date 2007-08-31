@@ -1,5 +1,6 @@
 package directorylister.utils;
 
+import directorylister.resources.ResourceHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -91,5 +92,18 @@ public class SwingUtils {
             logger.error(err);
         }
         return result;
+    }
+
+    public static void showError(final String message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                final ResourceHandler resourceHandler = ResourceHandler.getInstance();
+                final String localizedMessage = resourceHandler.getFormattedMessage("Application.ErrorOccured", message);
+                final String title = resourceHandler.getMessage("Application.Error");
+                // TODO: Show multiline messages.
+                JOptionPane.showMessageDialog(null, localizedMessage, title, JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
     }
 }

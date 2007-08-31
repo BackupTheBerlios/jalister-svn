@@ -62,13 +62,16 @@ public abstract class AbstractFileOpenSaveActionWithProgressBar implements Actio
                          * {@inheritDoc}
                          */
                         public void run() {
-                            final ProgressBarFrame frame = new ProgressBarFrame();
-                            frame.setVisible(true);
-                            frame.setAlwaysOnTop(true);
+                            frame.setEnabled(false);
+                            final ProgressBarFrame progressBar = new ProgressBarFrame();
+                            progressBar.setVisible(true);
+
+                            progressBar.setAlwaysOnTop(true);
                             try {
-                                openSavePlugin.handleFile(selectedFile, frame);
+                                openSavePlugin.handleFile(selectedFile, progressBar);
                             } finally {
-                                frame.setVisible(false);
+                                progressBar.setVisible(false);
+                                frame.setEnabled(true);
                             }
                         }
                     });

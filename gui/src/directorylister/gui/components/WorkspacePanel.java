@@ -14,6 +14,8 @@ import java.awt.Dimension;
  *         Created on 05.08.2007
  */
 public class WorkspacePanel extends JPanel {
+    private static final long serialVersionUID = 3230458465057238286L;
+
     /**
      * Constructs a new WorkspacePanel.
      */

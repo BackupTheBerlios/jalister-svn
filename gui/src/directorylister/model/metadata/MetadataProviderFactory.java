@@ -29,12 +29,12 @@ public class MetadataProviderFactory {
     }
 
     public void addMetadataKey(final MetaDataKey metaDataKey) {
-        if(!keys.contains(metaDataKey)){
+        if (!keys.contains(metaDataKey)) {
             keys.add(metaDataKey);
         }
     }
 
     public Collection<MetaDataKey> getMetaDataKeys() {
-        return keys;
+        return Collections.unmodifiableCollection(keys);
     }
 }

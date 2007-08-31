@@ -50,7 +50,7 @@ public final class SelectedFilesPanel extends JPanel {
 
         files.setCellRenderer(new ListCellRenderer());
 
-        final JaListerDatabaseListener listener = new JaListerDatabaseListenerAdapter(files, saveSelection);
+        final JaListerDatabaseListener listener = new JaListerDatabaseListenerAdapter(files);
         JaListerDatabaseController.getInstance().addListener(listener);
 
         files.addMouseListener(new SelectedFilesListMouseAction(files));

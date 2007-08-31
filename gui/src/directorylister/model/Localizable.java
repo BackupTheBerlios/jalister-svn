@@ -6,5 +6,5 @@ package directorylister.model;
  * @since 19.08.2007 2:20:58
  */
 public interface Localizable {
-    String getLocalizeKey();
+    String getLocalizationKey();
 }

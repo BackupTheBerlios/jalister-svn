@@ -1,6 +1,7 @@
 package directorylister.gui.actions.io;
 
 import directorylister.model.FileEntry;
+import directorylister.utils.SwingUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -62,9 +63,10 @@ public class SaveSelectedFilesAction implements ActionListener {
                 outputStream.println(enumeration.nextElement().getFileName());
             }
         } catch(FileNotFoundException e0) {
+            SwingUtils.showError(e0.getMessage());
             logger.error(e0.toString());
-        }
-        catch(IOException e1) {
+        } catch(IOException e1) {
+            SwingUtils.showError(e1.getMessage());
             logger.error(e1.toString());
 
         } finally {

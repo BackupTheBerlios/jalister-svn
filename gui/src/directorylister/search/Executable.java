@@ -1,6 +1,5 @@
 package directorylister.search;
 
-import java.io.IOException;
 
 /**
  * Defines interface for executing with some parameter.
@@ -9,13 +8,13 @@ import java.io.IOException;
  * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 05.08.2007 1:20:49
  */
-public interface Executable<T> {
+public interface Executable<T, E extends Exception> {
 
     /**
      * Method execute ...
      *
      * @param t of type T
-     * @throws IOException when
+     * @throws E when
      */
-    void execute(T t) throws IOException;
+    void execute(T t) throws E;
 }

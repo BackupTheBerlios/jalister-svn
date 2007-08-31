@@ -2,8 +2,6 @@ package directorylister.gui.actions.io;
 
 import directorylister.gui.actions.io.plugins.FileOpenSavePlugin;
 import directorylister.gui.actions.io.plugins.SaveJaListerDatabasePlugin;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JFrame;
 
@@ -14,10 +12,6 @@ import javax.swing.JFrame;
  * Time: 23:28:35
  */
 public final class FileSaveTreeAction extends AbstractFileOpenSaveActionWithProgressBar {
-    /**
-     * Field logger
-     */
-    private static final Log logger = LogFactory.getLog(FileSaveXMLAction.class);
 
     /**
      * Constructor FileSaveTreeAction creates a new FileSaveTreeAction instance.
