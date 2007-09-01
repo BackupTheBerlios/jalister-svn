@@ -1,10 +1,12 @@
 package directorylister.utils;
 
+import directorylister.gui.NarrowOptionPane;
 import directorylister.resources.ResourceHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -25,6 +27,7 @@ public class SwingUtils {
      * Field logger
      */
     private static final Log logger = LogFactory.getLog(SwingUtils.class.getName());
+    private static final int MAX_CHARACTERS_PER_LINE_COUNT = 96;
 
     /**
      * Do not instantiate SwingUtils.
@@ -107,8 +110,12 @@ public class SwingUtils {
                 final ResourceHandler resourceHandler = ResourceHandler.getInstance();
                 final String localizedMessage = resourceHandler.getFormattedMessage("Application.ErrorOccured", message);
                 final String title = resourceHandler.getMessage("Application.Error");
-                // TODO: Show multiline messages.
-                JOptionPane.showMessageDialog(null, localizedMessage, title, JOptionPane.ERROR_MESSAGE);
+
+                final JOptionPane optionPane = new NarrowOptionPane(MAX_CHARACTERS_PER_LINE_COUNT);
+                optionPane.setMessage(localizedMessage);
+                optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+                final JDialog dialog = optionPane.createDialog(null, title);
+                dialog.setVisible(true);
             }
         });
 
