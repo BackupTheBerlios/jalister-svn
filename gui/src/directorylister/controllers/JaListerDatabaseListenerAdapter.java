@@ -28,7 +28,7 @@ public class JaListerDatabaseListenerAdapter implements JaListerDatabaseListener
     }
 
     /**
-     * {@inheritDoc}
+     * @see JaListerDatabaseListener#notifyFileEntrySelected(FileEntry)
      */
     public void notifyFileEntrySelected(final FileEntry fileEntry) {
     }

@@ -40,7 +40,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
     /**
      * Field root
      */
-    private FileEntry root;
+    private FileEntry root = null;
 
     /**
      * Getter for property 'root'.
@@ -65,7 +65,8 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
                 final String s = field.stringValue();
                 addParentDirectories(s);
                 searchResult.add(s);
-            } catch(IOException e) {
+            }
+            catch(IOException e) {
                 SwingUtils.showError(e.getMessage());
                 logger.error(e);
             }
@@ -91,7 +92,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
     /**
      * {@inheritDoc}
      *
-     * @see directorylister.model.FileEntryVisitorAdapter#acceptEntry(FileEntry)
+     * @see FileEntryVisitorAdapter#acceptEntry(FileEntry)
      */
     @Override
     public void acceptEntry(final FileEntry fileEntry) {
@@ -111,7 +112,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
     /**
      * {@inheritDoc}
      *
-     * @see directorylister.model.FileEntryVisitorAdapter#levelStarted(FileEntry)
+     * @see FileEntryVisitorAdapter#levelStarted(FileEntry)
      */
     @Override
     public void levelStarted(final FileEntry newRoot) {
@@ -131,7 +132,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
     /**
      * {@inheritDoc}
      *
-     * @see directorylister.model.FileEntryVisitorAdapter#levelEnded(FileEntry)
+     * @see FileEntryVisitorAdapter#levelEnded(FileEntry)
      */
     @Override
     public void levelEnded(final FileEntry entry) {

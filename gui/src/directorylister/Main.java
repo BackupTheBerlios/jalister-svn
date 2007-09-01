@@ -1,7 +1,13 @@
 package directorylister;
 
 import directorylister.notification.ProgressNotifier;
-import directorylister.startup.*;
+import directorylister.startup.FirstAndLastStep;
+import directorylister.startup.InitializeGUIStep;
+import directorylister.startup.InitializeLoggerStep;
+import directorylister.startup.InitializeMetadataStep;
+import directorylister.startup.LoadResourcesStep;
+import directorylister.startup.LoadThemeStep;
+import directorylister.startup.StartupProcess;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -22,7 +28,7 @@ public class Main {
      */
     public static void main(final String[] args) {
 
-        StartupProcess startupProcess = new StartupProcess();
+        final StartupProcess startupProcess = new StartupProcess();
         final ProgressNotifier progressNotifier = new ProgressNotifier();
 
         final FirstAndLastStep firstAndLastStep = new FirstAndLastStep(progressNotifier);

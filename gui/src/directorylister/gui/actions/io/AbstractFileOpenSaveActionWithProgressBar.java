@@ -69,7 +69,8 @@ public abstract class AbstractFileOpenSaveActionWithProgressBar implements Actio
                             progressBar.setAlwaysOnTop(true);
                             try {
                                 openSavePlugin.handleFile(selectedFile, progressBar);
-                            } finally {
+                            }
+                            finally {
                                 progressBar.setVisible(false);
                                 frame.setEnabled(true);
                             }

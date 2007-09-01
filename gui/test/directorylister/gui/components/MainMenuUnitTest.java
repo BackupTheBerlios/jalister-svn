@@ -21,30 +21,20 @@ import java.util.Locale;
 public class MainMenuUnitTest {
 
     /**
-     * Field mainMenu
-     */
-    private MainMenu mainMenu;
-    /**
      * Field menuBar
      */
-    private MenuBar menuBar;
+    private MenuBar menuBar = null;
     /**
      * Field resourceHandler
      */
-    private ResourceHandler resourceHandler;
-
-    /**
-     * Constructs a new MainMenuUnitTest.
-     */
-    public MainMenuUnitTest() {
-    }
+    private ResourceHandler resourceHandler = null;
 
     /**
      * Method setUp ...
      */
     @Before()
     public void setUp() {
-        mainMenu = new MainMenu(null);
+        final MainMenu mainMenu = new MainMenu(null);
 
         resourceHandler = ResourceHandler.getInstance();
         resourceHandler.setLocale(Locale.ENGLISH);

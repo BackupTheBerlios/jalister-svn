@@ -13,11 +13,17 @@ public class SearchResult {
     /**
      * Field root
      */
-    private FileEntry root;
+    private FileEntry root = null;
 
-    private int resultCount;
+    /**
+     * Field resultCount
+     */
+    private int resultCount = 0;
 
-    private long searchTime;
+    /**
+     * Field searchTime
+     */
+    private long searchTime = 0L;
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 

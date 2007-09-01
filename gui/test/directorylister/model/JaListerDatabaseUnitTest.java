@@ -3,6 +3,7 @@ package directorylister.model;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  * JaListerDatabase Tester.
@@ -16,13 +17,7 @@ public class JaListerDatabaseUnitTest {
     /**
      * Field listerDatabase
      */
-    private JaListerDatabase listerDatabase;
-
-    /**
-     * Constructs a new JaListerDatabaseUnitTest.
-     */
-    public JaListerDatabaseUnitTest() {
-    }
+    private JaListerDatabase listerDatabase = null;
 
     /**
      * Method setUp ...
@@ -49,9 +44,9 @@ public class JaListerDatabaseUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testGetCreator() throws Exception {
-        OperatingSystem operatingSystem = listerDatabase.getCreator();
+        final OperatingSystem operatingSystem = listerDatabase.getCreator();
         Assert.assertNotNull(operatingSystem);
         Assert.assertEquals(OperatingSystem.getOperatingSystem(), operatingSystem);
 
@@ -62,7 +57,7 @@ public class JaListerDatabaseUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testSetGetRootPath() throws Exception {
         //TODO: Test goes here...
     }
@@ -72,7 +67,7 @@ public class JaListerDatabaseUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testSetGetRootEntry() throws Exception {
         //TODO: Test goes here...
     }

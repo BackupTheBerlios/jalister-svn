@@ -67,7 +67,7 @@ public class FileSystemParser extends ProgressNotifier {
      * @throws IOException when
      */
     public JaListerDatabase parse() throws IOException {
-        
+
         notifyListeners("Parser.ParsingFile", startFile);
         final FileEntry rootEntry = fileEntryBuilder.buildFrom(startFile);
         parse(startFile, rootEntry);

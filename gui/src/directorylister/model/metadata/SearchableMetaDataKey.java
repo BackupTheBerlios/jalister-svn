@@ -12,14 +12,14 @@ public interface SearchableMetaDataKey extends MetaDataKey {
      *
      * @return Value for property 'store'.
      */
-    public Field.Store getStore();
+    Field.Store getStore();
 
     /**
      * Getter for property 'index'.
      *
      * @return Value for property 'index'.
      */
-    public Field.Index getIndex();
+    Field.Index getIndex();
 
     /**
      * Method createField ...
@@ -27,7 +27,7 @@ public interface SearchableMetaDataKey extends MetaDataKey {
      * @param value of type String
      * @return Field
      */
-    public Field createField(final String value);
+    Field createField(final String value);
 
 
 }

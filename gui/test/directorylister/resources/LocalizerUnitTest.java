@@ -6,7 +6,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import java.util.Locale;
 
 /**
@@ -20,7 +25,7 @@ public class LocalizerUnitTest {
     /**
      * Field localizer
      */
-    private Localizer localizer;
+    private Localizer localizer = null;
 
     /**
      * Method setUp ...
@@ -34,7 +39,7 @@ public class LocalizerUnitTest {
      * Method tearDown ...
      */
     @After()
-    public void tearDown() {
+    public static void tearDown() {
         ResourceHandler.getInstance().setLocale(Locale.ENGLISH);
     }
 

@@ -19,18 +19,6 @@ import java.util.Locale;
 public class SettingsSetLanguageActionUnitTest {
 
     /**
-     * Field action
-     */
-    private SettingsSetLanguageAction action;
-
-    /**
-     * Constructs a new SettingsSetLanguageActionUnitTest.
-     */
-    public SettingsSetLanguageActionUnitTest() {
-
-    }
-
-    /**
      * Method setUp ...
      */
     @Before()
@@ -42,7 +30,7 @@ public class SettingsSetLanguageActionUnitTest {
      * Method tearDown ...
      */
     @After()
-    public void tearDown() {
+    public static void tearDown() {
         ResourceHandler.getInstance().setLocale(Locale.ENGLISH);
     }
 
@@ -53,7 +41,7 @@ public class SettingsSetLanguageActionUnitTest {
     public void testAction() {
         final JButton button = new JButton();
         button.setName("MainMenu.File");
-        action = new SettingsSetLanguageAction(button, new Locale("RU"));
+        final SettingsSetLanguageAction action = new SettingsSetLanguageAction(button, new Locale("RU"));
         action.actionPerformed(null);
 
         Assert.assertEquals("Файл", button.getText());

@@ -8,7 +8,13 @@ import directorylister.gui.components.WorkspacePanel;
 import directorylister.gui.components.fileentrytree.FileEntryTree;
 import directorylister.utils.SwingUtils;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JToolBar;
+import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -19,17 +25,12 @@ import java.awt.Dimension;
 public final class MainWindow extends JFrame {
 
     /**
-     * Field menubar
-     */
-    private final JMenuBar menubar;
-    /**
-     * Field fileTree
-     */
-    private final FileEntryTree fileTree;
-    /**
      *
      */
     private static final long serialVersionUID = 4603441202609788761L;
+    private static final int DEFAULT_WIDTH = 800;
+    private static final int DEFAULT_HEIGHT = 600;
+    private static final int DEFAULT_PANE_WIDTH = 350;
 
     /**
      *
@@ -43,14 +44,14 @@ public final class MainWindow extends JFrame {
         add(splitPane, BorderLayout.CENTER);
 
 
-        fileTree = new FileEntryTree();
+        final FileEntryTree fileTree = new FileEntryTree();
         final JScrollPane scrollPane = new JScrollPane(fileTree);
         splitPane.setLeftComponent(scrollPane);
         // TODO: Store in settings.
-        scrollPane.setPreferredSize(new Dimension(350, 0));
+        scrollPane.setPreferredSize(new Dimension(DEFAULT_PANE_WIDTH, 0));
         splitPane.setRightComponent(new WorkspacePanel());
 
-        menubar = new MainMenu(this);
+        final JMenuBar menubar = new MainMenu(this);
         setJMenuBar(menubar);
 
         final JToolBar toolBar = new JToolBar();
@@ -74,8 +75,8 @@ public final class MainWindow extends JFrame {
         toolBar.add(SwingUtils.createButton(close));
 
         // TODO: store in settings.
-        setSize(800, 600);
+        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-        setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }

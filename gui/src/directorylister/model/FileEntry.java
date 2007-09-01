@@ -9,7 +9,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author schakal Oleg Atamanenko
@@ -23,19 +27,19 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field fileName
      */
-    private String fileName;
+    private String fileName = null;
     /**
      * Field shortName
      */
-    private String shortName;
+    private String shortName = null;
     /**
      * Field fileType
      */
-    private FileType fileType;
+    private FileType fileType = null;
     /**
      * Field parent
      */
-    private FileEntry parent;
+    private FileEntry parent = null;
 
     /**
      * Field metadatas
@@ -89,7 +93,7 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field md5
      */
-    private String md5;
+    private String md5 = null;
 
     /**
      * Getter for property 'shortName'.
@@ -205,9 +209,8 @@ public class FileEntry implements Serializable, XMLSerializable {
      */
     @Override
     public int hashCode() {
-        int result;
-        result = fileName.hashCode();
-        result = 31 * result + (fileType.ordinal());
+        int result = fileName.hashCode();
+        result = 31 * result + fileType.ordinal();
         return result;
     }
 
@@ -294,9 +297,8 @@ public class FileEntry implements Serializable, XMLSerializable {
         //  logger.debug(xmlNode.toString());
         if (fileType.equals(FileType.FILE)) {
             final List<FileEntry> childs = getChilds();
-            Element el;
             for (final FileEntry child : childs) {
-                el = child.serializeToXML(document);
+                Element el = child.serializeToXML(document);
                 if (null != el) xmlNode.appendChild(el);
             }
         }
@@ -318,7 +320,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @param fileEntryVisitor of type FileEntryVisitor
      * @param entry            of type FileEntry
      */
-    private void accept(final FileEntryVisitor fileEntryVisitor, final FileEntry entry) {
+    private static void accept(final FileEntryVisitor fileEntryVisitor, final FileEntry entry) {
         fileEntryVisitor.acceptEntry(entry);
         final List<FileEntry> fileEntries = entry.getChilds();
 

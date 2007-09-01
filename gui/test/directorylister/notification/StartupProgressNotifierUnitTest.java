@@ -16,13 +16,7 @@ public class StartupProgressNotifierUnitTest {
     /**
      * Field notifier
      */
-    private ProgressNotifier notifier;
-
-    /**
-     * Constructs a new StartupProgressNotifierUnitTest.
-     */
-    public StartupProgressNotifierUnitTest() {
-    }
+    private ProgressNotifier notifier = null;
 
     /**
      * Method setUp ...
@@ -87,7 +81,7 @@ public class StartupProgressNotifierUnitTest {
         /**
          * Field notifyReceived
          */
-        private boolean notifyReceived;
+        private boolean notifyReceived = false;
 
         /**
          * {@inheritDoc}

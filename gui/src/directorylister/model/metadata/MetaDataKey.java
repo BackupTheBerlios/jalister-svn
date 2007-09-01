@@ -1,7 +1,7 @@
 package directorylister.model.metadata;
 
-import directorylister.model.Nameable;
 import directorylister.model.Localizable;
+import directorylister.model.Nameable;
 
 import java.io.Serializable;
 

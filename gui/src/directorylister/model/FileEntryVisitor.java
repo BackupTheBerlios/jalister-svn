@@ -14,14 +14,14 @@ public interface FileEntryVisitor {
      *
      * @param fileEntry entry.
      */
-    public void acceptEntry(FileEntry fileEntry);
+    void acceptEntry(FileEntry fileEntry);
 
     /**
      * Called when new level in hierarchy found.
      *
      * @param newRoot new file entry root.
      */
-    public void levelStarted(FileEntry newRoot);
+    void levelStarted(FileEntry newRoot);
 
     /**
      * Called when all subchilds of the entry was detoured.

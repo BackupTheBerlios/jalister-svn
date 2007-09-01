@@ -18,7 +18,7 @@ public class SplashScreen extends ProgressBarFrame {
     /**
      * Constructs a new SplashScreen.
      *
-     * @throws java.awt.HeadlessException in case of error.
+     * @throws HeadlessException in case of error.
      */
     public SplashScreen() throws HeadlessException {
 
@@ -39,7 +39,8 @@ public class SplashScreen extends ProgressBarFrame {
 
         try {
             Thread.sleep(2000);
-        } catch(InterruptedException e) {
+        }
+        catch(InterruptedException e) {
             e.printStackTrace();
         }
 

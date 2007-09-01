@@ -29,20 +29,18 @@ public final class AboutBox extends JDialog {
     private static final Log logger = LogFactory.getLog(AboutBox.class);
 
     /**
-     * Field label
-     */
-    private final JEditorPane label;
-    /**
      * Field serialVersionUID
      */
     private static final long serialVersionUID = 5426590417757672166L;
+    private static final int DEFAULT_WIDTH = 400;
+    private static final int DEFAULT_HEIGHT = 200;
 
     /**
      * Constructs a new AboutBox.
      */
     public AboutBox() {
         setName("AboutBox");
-        setSize(400, 200);
+        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setLocationRelativeTo(null);
 
 
@@ -53,7 +51,7 @@ public final class AboutBox extends JDialog {
 
         final Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 
-        label = new JEditorPane();
+        final JEditorPane label = new JEditorPane();
         label.setBorder(border);
         label.setEditable(false);
 
@@ -62,7 +60,8 @@ public final class AboutBox extends JDialog {
         label.setContentType("text/html");
         try {
             label.read(new ByteArrayInputStream(message.getBytes()), null);
-        } catch(IOException e) {
+        }
+        catch(IOException e) {
             SwingUtils.showError(e.getMessage());
             logger.error(e);
         }

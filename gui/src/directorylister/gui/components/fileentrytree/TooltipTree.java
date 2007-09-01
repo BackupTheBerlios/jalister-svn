@@ -14,11 +14,12 @@ import java.awt.event.MouseEvent;
  * @since 19.08.2007 3:24:31
  */
 public class TooltipTree extends JTree {
+    /**
+     * Field serialVersionUID
+     */
     private static final long serialVersionUID = -7242725135841964962L;
 
-    public TooltipTree() {
-    }
-
+    @Override
     public String getToolTipText(final MouseEvent event) {
         final Point point = event.getPoint();
         final TreePath path = getPathForLocation((int) point.getX(), (int) point.getY());

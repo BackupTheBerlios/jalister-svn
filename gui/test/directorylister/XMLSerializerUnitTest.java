@@ -19,12 +19,12 @@ public class XMLSerializerUnitTest {
     /**
      * Field serializer
      */
-    private XMLSerializer serializer;
+    private XMLSerializer serializer = null;
 
     /**
      * Field outputStream
      */
-    private ByteArrayOutputStream outputStream;
+    private ByteArrayOutputStream outputStream = null;
 
     /**
      * Method setUp ...

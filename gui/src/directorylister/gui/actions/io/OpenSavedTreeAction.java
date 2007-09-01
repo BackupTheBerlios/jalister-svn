@@ -24,6 +24,7 @@ public final class OpenSavedTreeAction extends AbstractFileOpenSaveActionWithPro
     /**
      * {@inheritDoc}
      */
+    @Override
     public FileOpenSavePlugin getFileOpenSavePligin() {
         return new OpenJaListerDatabasePlugin();
     }

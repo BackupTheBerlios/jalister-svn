@@ -22,12 +22,12 @@ public class FileEntryUnitTest {
     /**
      * Field fileEntry
      */
-    private FileEntry fileEntry;
+    private FileEntry fileEntry = null;
 
     /**
      * Field context
      */
-    private Mockery context;
+    private Mockery context = null;
 
     /**
      * Method setUp ...

@@ -6,11 +6,11 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.JTextComponent;
 import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Frame;
 
 /**
  * Performs localization of the GUI.
@@ -80,11 +80,11 @@ public final class Localizer {
             if (component instanceof JLabel) {
                 ((JLabel) component).setText(value);
             }
-            if (component instanceof JFrame) {
-                ((JFrame) component).setTitle(value);
+            if (component instanceof Frame) {
+                ((Frame) component).setTitle(value);
             }
-            if (component instanceof JDialog) {
-                ((JDialog) component).setTitle(value);
+            if (component instanceof Dialog) {
+                ((Dialog) component).setTitle(value);
             }
             if (component instanceof AbstractButton) {
                 ((AbstractButton) component).setText(value);

@@ -27,5 +27,8 @@ public interface JaListerDatabaseListener {
      */
     void notifyFileEntryRightClicked(final FileEntry fileEntry);
 
+    /**
+     * {@inheritDoc}
+     */
     void notifyFileEntrySelected(final FileEntry fileEntry);
 }

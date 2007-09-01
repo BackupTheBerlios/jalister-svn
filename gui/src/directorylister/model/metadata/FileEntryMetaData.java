@@ -13,22 +13,15 @@ public class FileEntryMetaData implements Serializable {
     /**
      * Field key
      */
-    private MetaDataKey key;
+    private MetaDataKey key = null;
     /**
      * Field value
      */
-    private MetaDataValue value;
+    private MetaDataValue value = null;
     /**
      * Field serialVersionUID
      */
     private static final long serialVersionUID = -7192341076454468080L;
-
-
-    /**
-     * Constructs a new FileEntryMetaData.
-     */
-    public FileEntryMetaData() {
-    }
 
 
     /**
@@ -86,8 +79,7 @@ public class FileEntryMetaData implements Serializable {
      */
     @Override()
     public int hashCode() {
-        int result;
-        result = (key != null ? key.hashCode() : 0);
+        int result = key != null ? key.hashCode() : 0;
         result = 31 * result + (value != null ? value.hashCode() : 0);
         return result;
     }

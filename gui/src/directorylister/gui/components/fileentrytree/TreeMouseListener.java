@@ -35,18 +35,18 @@ final class TreeMouseListener extends MouseAdapter {
      */
     @Override
     public void mouseClicked(final MouseEvent e) {
-        FileEntry fileEntry = getFileEntry(e);
+        final FileEntry fileEntry = getFileEntry(e);
         if (null != fileEntry) {
             if (1 == e.getClickCount() && e.getButton() == MouseEvent.BUTTON3) {
-               JaListerDatabaseController.getInstance().fileEntryRightClicked(fileEntry);
+                JaListerDatabaseController.getInstance().fileEntryRightClicked(fileEntry);
             }
-            else if(1 == e.getClickCount() && e.getButton() == MouseEvent.BUTTON1){
+            else if (1 == e.getClickCount() && e.getButton() == MouseEvent.BUTTON1) {
                 JaListerDatabaseController.getInstance().fileEntrySelected(fileEntry);
             }
         }
     }
 
-    private FileEntry getFileEntry(MouseEvent e) {
+    private FileEntry getFileEntry(final MouseEvent e) {
         final TreePath path = tree.getPathForLocation(e.getX(), e.getY());
         if (path != null) {
             final DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();

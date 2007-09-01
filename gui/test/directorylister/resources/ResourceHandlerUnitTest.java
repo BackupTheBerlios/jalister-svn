@@ -19,7 +19,7 @@ public class ResourceHandlerUnitTest {
     /**
      * Field resourceHandler
      */
-    private ResourceHandler resourceHandler;
+    private ResourceHandler resourceHandler = null;
 
     /**
      * Method setUp ...
@@ -64,7 +64,7 @@ public class ResourceHandlerUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testGetMessage() throws Exception {
         final String s = resourceHandler.getMessage("MainWindow");
         assertNotNull(s);

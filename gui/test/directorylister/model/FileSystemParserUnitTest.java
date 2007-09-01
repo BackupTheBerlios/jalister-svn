@@ -13,18 +13,13 @@ import java.io.IOException;
 public class FileSystemParserUnitTest {
 
     /**
-     * Field parser
-     */
-    private FileSystemParser parser;
-
-    /**
      * Method test ...
      *
      * @throws IOException when
      */
     @Test()
     public void test() throws IOException {
-        parser = new FileSystemParser(new File("."));
+        final FileSystemParser parser = new FileSystemParser(new File("."));
 
         final JaListerDatabase fileEntry = parser.parse();
 

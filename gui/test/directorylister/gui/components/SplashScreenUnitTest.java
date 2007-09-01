@@ -21,17 +21,11 @@ public class SplashScreenUnitTest {
     /**
      * Field splashWindow
      */
-    private Window splashWindow;
+    private Window splashWindow = null;
     /**
      * Field splashScreen
      */
-    private SplashScreen splashScreen;
-
-    /**
-     * Constructs a new SplashScreenUnitTest.
-     */
-    public SplashScreenUnitTest() {
-    }
+    private SplashScreen splashScreen = null;
 
     /**
      * Method setUp ...

@@ -10,5 +10,5 @@ public interface StartupStep {
     /**
      * Actions, that should be performed during this step.
      */
-    public void execute();
+    void execute();
 }

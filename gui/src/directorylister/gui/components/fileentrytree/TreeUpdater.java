@@ -33,7 +33,7 @@ final class TreeUpdater extends JaListerDatabaseListenerAdapter {
     }
 
     /**
-     * @see directorylister.controllers.JaListerDatabaseListenerAdapter#notifyJaListerDatabaseChanged(JaListerDatabase,JaListerDatabase)
+     * @see JaListerDatabaseListenerAdapter#notifyJaListerDatabaseChanged(JaListerDatabase,JaListerDatabase)
      */
     @Override
     public void notifyJaListerDatabaseChanged(final JaListerDatabase currentDatabase, final JaListerDatabase newDatabase) {
@@ -51,7 +51,7 @@ final class TreeUpdater extends JaListerDatabaseListenerAdapter {
      * @param root    of type DefaultMutableTreeNode
      * @param entries of type List<FileEntry>
      */
-    private void buildTree(final DefaultMutableTreeNode root, final List<FileEntry> entries) {
+    private static void buildTree(final DefaultMutableTreeNode root, final List<FileEntry> entries) {
 
         for (final FileEntry entry : entries) {
             final DefaultMutableTreeNode node = new DefaultMutableTreeNode(entry);

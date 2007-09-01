@@ -14,6 +14,9 @@ import java.awt.Dimension;
  *         Created on 05.08.2007
  */
 public class WorkspacePanel extends JPanel {
+    /**
+     * Field serialVersionUID
+     */
     private static final long serialVersionUID = 3230458465057238286L;
 
     /**
@@ -30,7 +33,7 @@ public class WorkspacePanel extends JPanel {
         panel.setPreferredSize(new Dimension(0, 300));
         final JSplitPane splitPane = new JSplitPane();
         splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-        
+
         splitPane.setTopComponent(panel);
 
         final SelectedFilesPanel bottomPanel = new SelectedFilesPanel();

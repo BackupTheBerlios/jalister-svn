@@ -14,6 +14,6 @@ public class CloseApplicationAction implements ActionListener {
      * {@inheritDoc}
      */
     public void actionPerformed(final ActionEvent actionEvent) {
-        System.exit(0);
+        Runtime.getRuntime().exit(0);
     }
 }

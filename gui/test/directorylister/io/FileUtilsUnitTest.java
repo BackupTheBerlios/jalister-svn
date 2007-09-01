@@ -19,13 +19,7 @@ public class FileUtilsUnitTest {
     /**
      * Field file
      */
-    private File file;
-
-    /**
-     * Constructs a new FileUtilsUnitTest.
-     */
-    public FileUtilsUnitTest() {
-    }
+    private File file = null;
 
     /**
      * Method setUp ...

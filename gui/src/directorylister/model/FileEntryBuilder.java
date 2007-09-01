@@ -14,6 +14,9 @@ import java.util.Collection;
  * @since 01.04.2007 12:43:41
  */
 public class FileEntryBuilder {
+    /**
+     * Field availableProviders
+     */
     private Collection<MetadataProvider> availableProviders;
 
 
@@ -34,7 +37,7 @@ public class FileEntryBuilder {
         final String md5 = null; //directorylister.utils.MD5Hasher.getMD5(file);
         final FileEntry fileEntry = new FileEntry(file.getAbsolutePath(), FileType.getType(file),
                 md5, file.getName());
-        for (MetadataProvider availableProvider : availableProviders) {
+        for (final MetadataProvider availableProvider : availableProviders) {
             final Collection<FileEntryMetaData> metadata = availableProvider.getMetadata(file);
             fileEntry.addMetaDatas(metadata);
         }

@@ -86,15 +86,15 @@ public class ResourceHandler {
             if (logger.isDebugEnabled()) {
                 logger.debug("Returning value [" + value + "] for key [" + key + "]");
             }
-
-        } catch(MissingResourceException e) {
+        }
+        catch(MissingResourceException e) {
             logger.error("Cannot find value for key [" + key + "]");
             return key;
         }
         return value;
     }
 
-    public String getFormattedMessage(final String key, Object... values) {
+    public String getFormattedMessage(final String key, final Object... values) {
         final String message = getMessage(key);
         return MessageFormat.format(message, values);
     }

@@ -14,6 +14,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class LoadThemeStep extends AbstractStartupStep {
 
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(LoadThemeStep.class.getName());
 
     public LoadThemeStep(final ProgressNotifier progressNotifier) {
@@ -28,13 +31,17 @@ public class LoadThemeStep extends AbstractStartupStep {
         UIManager.put(Options.USE_SYSTEM_FONTS_APP_KEY, Boolean.TRUE);
         try {
             UIManager.setLookAndFeel(Options.getCrossPlatformLookAndFeelClassName());
-        } catch(ClassNotFoundException e) {
+        }
+        catch(ClassNotFoundException e) {
             logger.warn(e.toString());
-        } catch(InstantiationException e) {
+        }
+        catch(InstantiationException e) {
             logger.warn(e.toString());
-        } catch(IllegalAccessException e) {
+        }
+        catch(IllegalAccessException e) {
             logger.warn(e.toString());
-        } catch(UnsupportedLookAndFeelException e) {
+        }
+        catch(UnsupportedLookAndFeelException e) {
             logger.warn(e.toString());
         }
     }

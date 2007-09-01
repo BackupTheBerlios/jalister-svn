@@ -4,7 +4,11 @@ import directorylister.model.FileEntry;
 import directorylister.model.FileType;
 import directorylister.model.JaListerDatabase;
 import org.apache.log4j.BasicConfigurator;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * Searcher Tester.
@@ -18,13 +22,7 @@ public class SearcherUnitTest {
     /**
      * Field searcher
      */
-    private Searcher searcher;
-
-    /**
-     * Constructs a new SearcherUnitTest.
-     */
-    public SearcherUnitTest() {
-    }
+    private Searcher searcher = null;
 
     /**
      * Method setUpClass ...
@@ -68,7 +66,7 @@ public class SearcherUnitTest {
      */
     @Test()
     public void testSearchWithChilds() throws Exception {
-        JaListerDatabase database = new JaListerDatabase();
+        final JaListerDatabase database = new JaListerDatabase();
         final FileEntry entry = new FileEntry();
         entry.setFileName("root");
         entry.setShortName("root");

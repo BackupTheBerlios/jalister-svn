@@ -15,5 +15,5 @@ public interface Transformer<Source, Target> {
      * @param source object to transform.
      * @return transformed object of class <code>Target</code>.
      */
-    public Target transform(Source source);
+    Target transform(Source source);
 }

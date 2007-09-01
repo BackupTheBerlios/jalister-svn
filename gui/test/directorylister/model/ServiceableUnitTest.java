@@ -17,18 +17,11 @@ public class ServiceableUnitTest {
     /**
      * Field serviceable
      */
-    private Serviceable serviceable;
+    private Serviceable serviceable = null;
     /**
      * Field service
      */
-    private Service service;
-
-    /**
-     * Constructs a new ServiceableUnitTest.
-     */
-    public ServiceableUnitTest() {
-
-    }
+    private Service service = null;
 
     /**
      * Method setUp ...

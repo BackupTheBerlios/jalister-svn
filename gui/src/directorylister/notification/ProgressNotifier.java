@@ -28,9 +28,9 @@ public class ProgressNotifier {
      *
      * @param message - notification message to broadcast.
      */
-    public void notifyListeners(final String message, Object... values) {
+    public void notifyListeners(final String message, final Object... values) {
 
-        String localizedMessage = ResourceHandler.getInstance().getFormattedMessage(message, values);
+        final String localizedMessage = ResourceHandler.getInstance().getFormattedMessage(message, values);
 
         final Notification notification = new Notification(localizedMessage);
         for (final ProgressListener listener : listeners) {

@@ -12,6 +12,8 @@ import javax.swing.ToolTipManager;
  * @since 27.08.2007 8:48:37
  */
 public class InitializeGUIStep extends AbstractStartupStep {
+    private static final int TOOLTIP_INITIAL_DELAY = 400;
+
     public InitializeGUIStep(final ProgressNotifier progressNotifier) {
         super(progressNotifier);
     }
@@ -40,8 +42,8 @@ public class InitializeGUIStep extends AbstractStartupStep {
 
         final ToolTipManager toolTipManager = ToolTipManager.sharedInstance();
         toolTipManager.setEnabled(true);
-        toolTipManager.setInitialDelay(400);
+        toolTipManager.setInitialDelay(TOOLTIP_INITIAL_DELAY);
         toolTipManager.setLightWeightPopupEnabled(true);
-        
+
     }
 }

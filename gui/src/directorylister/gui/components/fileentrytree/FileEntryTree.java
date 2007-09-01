@@ -8,7 +8,12 @@ import directorylister.search.SearchResult;
 import directorylister.search.Searcher;
 import org.apache.commons.lang.StringUtils;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -31,10 +36,6 @@ import java.awt.event.FocusListener;
 public final class FileEntryTree extends JPanel {
 
     /**
-     * Field tree
-     */
-    private final JTree tree;
-    /**
      * Field searchBox
      */
     private final JTextField searchBox;
@@ -56,7 +57,7 @@ public final class FileEntryTree extends JPanel {
      * Constructs a new FileEntryTree.
      */
     public FileEntryTree() {
-        tree = new TooltipTree();
+        final JTree tree = new TooltipTree();
         tree.setName("FileTree");
         tree.setToggleClickCount(1);
 
@@ -111,14 +112,6 @@ public final class FileEntryTree extends JPanel {
         searchBox.setForeground(searchBox.getDisabledTextColor());
     }
 
-    /**
-     * Method updateTree ...
-     *
-     * @param searchResult of type SearchResult
-     */
-    private void updateTree(final SearchResult searchResult) {
-        treeUpdater.updateTree(searchResult.getRoot());
-    }
 
     /**
      * Class SearchBoxFocusListener ...
@@ -163,6 +156,12 @@ public final class FileEntryTree extends JPanel {
         }
     }
 
+    /**
+     * Class SearchAction ...
+     *
+     * @author schakal
+     *         Created on 01.09.2007
+     */
     private class SearchAction implements ActionListener {
         /**
          * {@inheritDoc}
@@ -181,8 +180,24 @@ public final class FileEntryTree extends JPanel {
                     searchResult.getResultCount(), searchResult.getSearchTime());
             searchBox.setToolTipText(tooltip);
         }
+
+        /**
+         * Method updateTree ...
+         *
+         * @param searchResult of type SearchResult
+         */
+        private void updateTree(final SearchResult searchResult) {
+            treeUpdater.updateTree(searchResult.getRoot());
+        }
+
     }
 
+    /**
+     * Class ButtonStateUpdater ...
+     *
+     * @author schakal
+     *         Created on 01.09.2007
+     */
     private class ButtonStateUpdater implements DocumentListener {
 
         /**

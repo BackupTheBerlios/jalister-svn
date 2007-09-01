@@ -5,6 +5,9 @@ package directorylister.model.metadata;
  * @since 18.08.2007 21:06:30
  */
 public class DefaultMetaDataKey extends AbstractSearchableMetaDataKey {
+    /**
+     * Field serialVersionUID
+     */
     private static final long serialVersionUID = -5600589833389116491L;
 
     public DefaultMetaDataKey(final String name) {
@@ -13,8 +16,14 @@ public class DefaultMetaDataKey extends AbstractSearchableMetaDataKey {
         MetadataProviderFactory.getInstance().addMetadataKey(this);
     }
 
+    /**
+     * Field name
+     */
     private final String name;
 
+    /**
+     * @see directorylister.model.Nameable#getName()
+     */
     public String getName() {
         return name;
     }
@@ -29,18 +38,19 @@ public class DefaultMetaDataKey extends AbstractSearchableMetaDataKey {
         return "MetaDataKey." + name;
     }
 
-    public boolean equals(Object o) {
+    @Override
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DefaultMetaDataKey that = (DefaultMetaDataKey) o;
+        final DefaultMetaDataKey that = (DefaultMetaDataKey) o;
 
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        return !(name != null ? !name.equals(that.name) : that.name != null);
 
-        return true;
     }
 
+    @Override
     public int hashCode() {
-        return (name != null ? name.hashCode() : 0);
+        return name != null ? name.hashCode() : 0;
     }
 }

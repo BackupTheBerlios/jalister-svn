@@ -14,7 +14,10 @@ import java.util.List;
  * @since 19.08.2007 2:33:37
  */
 public class SortedMetaDataTransformer implements Transformer<Collection<FileEntryMetaData>, Collection<FileEntryMetaData>> {
-    private static final Comparator<? super FileEntryMetaData> COMPARATOR = new Comparator<FileEntryMetaData>(){
+    /**
+     * Field COMPARATOR
+     */
+    private static final Comparator<? super FileEntryMetaData> COMPARATOR = new Comparator<FileEntryMetaData>() {
 
         public int compare(final FileEntryMetaData o1, final FileEntryMetaData o2) {
             return o1.getKey().getName().compareTo(o2.getKey().getName());

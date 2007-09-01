@@ -24,12 +24,15 @@ public class ProgressBarFrame extends JFrame implements ProgressListener {
      * Field label
      */
     protected final JLabel label;
+    /**
+     * Field serialVersionUID
+     */
     private static final long serialVersionUID = 3285934927703340287L;
 
     /**
      * Constructs a new ProgressBarFrame.
      *
-     * @throws java.awt.HeadlessException in case of error.
+     * @throws HeadlessException in case of error.
      */
     public ProgressBarFrame() throws HeadlessException {
         setSize(600, 80);
@@ -64,14 +67,14 @@ public class ProgressBarFrame extends JFrame implements ProgressListener {
     /**
      * Method centerWindow ...
      */
-    protected void centerWindow() {
+    protected final void centerWindow() {
         setLocationRelativeTo(null);
     }
 
     /**
      * {@inheritDoc}
      *
-     * @see directorylister.notification.ProgressListener#notify(Notification)
+     * @see ProgressListener#notify(Notification)
      */
     public void notify(final Notification notification) {
         label.setText(notification.getMessage());

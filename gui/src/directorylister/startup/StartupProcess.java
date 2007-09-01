@@ -10,11 +10,20 @@ import java.util.List;
  */
 public class StartupProcess {
 
+    /**
+     * Field steps
+     */
     private List<StartupStep> steps = Collections.synchronizedList(new LinkedList<StartupStep>());
-    private StartupStep firstStep;
-    private StartupStep lastStep;
+    /**
+     * Field firstStep
+     */
+    private StartupStep firstStep = null;
+    /**
+     * Field lastStep
+     */
+    private StartupStep lastStep = null;
 
-    public void addStep(StartupStep startupStep) {
+    public void addStep(final StartupStep startupStep) {
         steps.add(startupStep);
     }
 
@@ -23,7 +32,7 @@ public class StartupProcess {
      *
      * @param startupStep Value to set for property 'firstStep'.
      */
-    public void setFirstStep(StartupStep startupStep) {
+    public void setFirstStep(final StartupStep startupStep) {
         firstStep = startupStep;
     }
 
@@ -32,7 +41,7 @@ public class StartupProcess {
             firstStep.execute();
         }
 
-        for (StartupStep step : steps) {
+        for (final StartupStep step : steps) {
             step.execute();
         }
 
@@ -46,7 +55,7 @@ public class StartupProcess {
      *
      * @param startupStep Value to set for property 'lastStep'.
      */
-    public void setLastStep(StartupStep startupStep) {
+    public void setLastStep(final StartupStep startupStep) {
         lastStep = startupStep;
     }
 }

@@ -9,8 +9,17 @@ import java.util.LinkedList;
  * @since 18.08.2007 20:36:23
  */
 public class MetadataProviderFactory {
+    /**
+     * Field INSTANCE
+     */
     private static final MetadataProviderFactory INSTANCE = new MetadataProviderFactory();
+    /**
+     * Field providers
+     */
     private Collection<MetadataProvider> providers = Collections.synchronizedList(new LinkedList<MetadataProvider>());
+    /**
+     * Field keys
+     */
     private Collection<MetaDataKey> keys = Collections.synchronizedCollection(new LinkedList<MetaDataKey>());
 
     private MetadataProviderFactory() {

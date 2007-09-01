@@ -15,11 +15,6 @@ import java.io.File;
  * @since <pre>08/17/2007</pre>
  */
 public class OperatingSystemUnitTest {
-    /**
-     * Constructs a new OperatingSystemUnitTest.
-     */
-    public OperatingSystemUnitTest() {
-    }
 
     /**
      * Method setUp ...

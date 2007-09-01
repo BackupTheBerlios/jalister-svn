@@ -23,17 +23,11 @@ public class MD5HasherUnitTest {
     /**
      * Field test
      */
-    private File test;
+    private File test = null;
     /**
      * Field directory
      */
-    private File directory;
-
-    /**
-     * Constructs a new MD5HasherUnitTest.
-     */
-    public MD5HasherUnitTest() {
-    }
+    private File directory = null;
 
     /**
      * Method setUp ...
@@ -98,10 +92,17 @@ public class MD5HasherUnitTest {
      * @param test of type File
      * @throws IOException when
      */
-    private void writeContent(final File test) throws IOException {
-        final FileOutputStream fileOutputStream = new FileOutputStream(test);
-        fileOutputStream.write("Test string".getBytes());
-        fileOutputStream.close();
+    private static void writeContent(final File test) throws IOException {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(test);
+            fileOutputStream.write("Test string".getBytes());
+        }
+        finally {
+            if (fileOutputStream != null) {
+                fileOutputStream.close();
+            }
+        }
     }
 
 }

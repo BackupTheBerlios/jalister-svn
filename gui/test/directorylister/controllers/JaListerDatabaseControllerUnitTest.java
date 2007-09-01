@@ -18,7 +18,7 @@ public class JaListerDatabaseControllerUnitTest {
     /**
      * Field controller
      */
-    private JaListerDatabaseController controller;
+    private JaListerDatabaseController controller = null;
     /**
      * Field NEW_ENTRY
      */
@@ -45,7 +45,7 @@ public class JaListerDatabaseControllerUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testGetInstance() throws Exception {
         Assert.assertNotNull(controller);
     }
@@ -55,7 +55,7 @@ public class JaListerDatabaseControllerUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testSetCurrentFileEntry() throws Exception {
 
     }
@@ -76,7 +76,7 @@ public class JaListerDatabaseControllerUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testGetCurrentEntry() throws Exception {
         controller.setCurrentJaListerDatabase(NEW_ENTRY);
 
@@ -98,11 +98,11 @@ public class JaListerDatabaseControllerUnitTest {
      * @author schakal
      *         Created on 05.08.2007
      */
-    private class TestJaListerDatabaseListener extends JaListerDatabaseListenerAdapter {
+    private static class TestJaListerDatabaseListener extends JaListerDatabaseListenerAdapter {
         /**
          * Field wasCalled
          */
-        boolean wasCalled;
+        boolean wasCalled = false;
 
         /**
          * {@inheritDoc}

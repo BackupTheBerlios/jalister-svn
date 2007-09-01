@@ -28,11 +28,11 @@ public class JaListerDatabaseController {
     /**
      * Field currentDatabase
      */
-    private JaListerDatabase currentDatabase;
+    private JaListerDatabase currentDatabase = null;
     /**
      * Field selectedFileEntry
      */
-    private FileEntry selectedFileEntry;
+    private FileEntry selectedFileEntry = null;
 
     /**
      * Getter for property 'instance'.

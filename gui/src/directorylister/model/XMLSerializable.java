@@ -16,5 +16,5 @@ public interface XMLSerializable {
      * @param document - DOM document for building XML.
      * @return - root element of the document.
      */
-    public Element serializeToXML(final Document document);
+    Element serializeToXML(final Document document);
 }

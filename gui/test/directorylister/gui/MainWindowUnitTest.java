@@ -18,13 +18,7 @@ public class MainWindowUnitTest {
     /**
      * Field window
      */
-    private Window window;
-
-    /**
-     * Constructs a new MainWindowUnitTest.
-     */
-    public MainWindowUnitTest() {
-    }
+    private Window window = null;
 
     /**
      * Method setUp ...
@@ -33,7 +27,7 @@ public class MainWindowUnitTest {
      */
     @Before()
     public void setUp() throws Exception {
-        MainWindow mainWindow = new MainWindow();
+        final MainWindow mainWindow = new MainWindow();
         window = new Window(mainWindow);
     }
 

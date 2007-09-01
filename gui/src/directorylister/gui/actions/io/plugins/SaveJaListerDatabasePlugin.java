@@ -11,7 +11,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JFileChooser;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
@@ -21,6 +25,9 @@ import java.util.zip.GZIPOutputStream;
  *         Created on 17.08.2007
  */
 public class SaveJaListerDatabasePlugin implements FileOpenSavePlugin {
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(OpenJaListerDatabasePlugin.class.getName());
 
     /**
@@ -35,18 +42,21 @@ public class SaveJaListerDatabasePlugin implements FileOpenSavePlugin {
                 outputStream = new GZIPOutputStream(new FileOutputStream(selectedFile));
                 SerializationUtils.serialize(listerDatabase, outputStream);
                 listener.notify(new Notification("Done."));
-            } catch(FileNotFoundException e) {
+            }
+            catch(FileNotFoundException e) {
                 SwingUtils.showError(e.getMessage());
                 logger.error(e.toString());
             }
             catch(IOException e) {
                 SwingUtils.showError(e.getMessage());
                 logger.error(e.toString());
-            } finally {
+            }
+            finally {
                 if (outputStream != null) {
                     try {
                         outputStream.close();
-                    } catch(IOException e) {
+                    }
+                    catch(IOException e) {
                         SwingUtils.showError(e.getMessage());
                         logger.error(e.toString());
                     }

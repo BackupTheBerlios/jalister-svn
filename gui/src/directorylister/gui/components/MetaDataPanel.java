@@ -9,7 +9,11 @@ import directorylister.model.metadata.MetaDataValue;
 import directorylister.model.transformers.SortedMetaDataTransformer;
 import directorylister.resources.Localizer;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.util.Collection;
 
@@ -21,7 +25,13 @@ import java.util.Collection;
  * @since 19.08.2007 2:22:21
  */
 public final class MetaDataPanel extends JPanel {
+    /**
+     * Field localizer
+     */
     private final Localizer localizer;
+    /**
+     * Field serialVersionUID
+     */
     private static final long serialVersionUID = -4979679532670512231L;
 
 
@@ -32,6 +42,9 @@ public final class MetaDataPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         JaListerDatabaseController.getInstance().addListener(new JaListerDatabaseListenerAdapter() {
+            /**
+             * @see directorylister.controllers.JaListerDatabaseListenerAdapter#notifyFileEntrySelected(FileEntry)
+             */
             @Override()
             public void notifyFileEntrySelected(final FileEntry fileEntry) {
                 removeAll();

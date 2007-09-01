@@ -4,7 +4,13 @@ import directorylister.resources.ResourceHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -88,7 +94,8 @@ public class SwingUtils {
                 result.addActionListener(listener);
             }
             result.setName(originalButton.getName());
-        } catch(Exception err) {
+        }
+        catch(Exception err) {
             logger.error(err);
         }
         return result;

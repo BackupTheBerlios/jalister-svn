@@ -6,6 +6,9 @@ package directorylister.model.metadata;
  * @since 19.08.2007 2:45:51
  */
 public class FileNameMetaDataKey extends DefaultMetaDataKey {
+    /**
+     * Field serialVersionUID
+     */
     private static final long serialVersionUID = 6155390653784048360L;
 
     public FileNameMetaDataKey() {

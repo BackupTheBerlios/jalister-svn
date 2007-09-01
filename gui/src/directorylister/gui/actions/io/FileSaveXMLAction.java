@@ -32,11 +32,6 @@ public final class FileSaveXMLAction implements ActionListener {
      */
     private static final Log logger = LogFactory.getLog(FileSaveXMLAction.class);
 
-    /**
-     * Field mainWindow
-     */
-    private final MainWindow mainWindow;
-
 
     /**
      * Constructor FileSaveXMLAction creates a new FileSaveXMLAction instance.
@@ -45,7 +40,7 @@ public final class FileSaveXMLAction implements ActionListener {
      */
     public FileSaveXMLAction(final MainWindow mainWindow) {
 
-        this.mainWindow = mainWindow;
+        final MainWindow mainWindow1 = mainWindow;
     }
 
     /**
@@ -65,17 +60,16 @@ public final class FileSaveXMLAction implements ActionListener {
         if (null != listerDatabase) {
             //OutputStream outputStream = null;
             //outputStream = new FileOutputStream(selectedFile);
-            final DocumentBuilderFactory factory;
-            factory = DocumentBuilderFactory.newInstance();
+            final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = null;
             try {
                 documentBuilder = factory.newDocumentBuilder();
-            } catch(ParserConfigurationException pce) {
+            }
+            catch(ParserConfigurationException pce) {
                 logger.error(pce.toString());
             }
-            final Document document;
             if (documentBuilder != null) {
-                document = documentBuilder.newDocument();
+                final Document document = documentBuilder.newDocument();
                 document.setXmlVersion("1.1");
 
                 final Element xmlNode = listerDatabase.serializeToXML(document);
@@ -86,7 +80,8 @@ public final class FileSaveXMLAction implements ActionListener {
                             false);
                     final XMLSerializer xmlSer = new XMLSerializer(fWriter, null);
                     xmlSer.serialize(document);
-                } catch(IOException ioe) {
+                }
+                catch(IOException ioe) {
                     logger.error(ioe.toString());
                 }
             }

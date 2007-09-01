@@ -13,7 +13,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.JFileChooser;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -23,9 +27,15 @@ import java.util.zip.GZIPInputStream;
  * @since 18.08.2007 13:56:40
  */
 public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
+    /**
+     * Field logger
+     */
     private static final Log logger = LogFactory.getLog(OpenJaListerDatabasePlugin.class.getName());
 
-    public void handleFile(File selectedFile, ProgressListener listener) {
+    /**
+     * @see FileOpenSavePlugin#handleFile(File,ProgressListener)
+     */
+    public void handleFile(final File selectedFile, final ProgressListener listener) {
         try {
             final InputStream inputStream = new GZIPInputStream(new FileInputStream(selectedFile));
             listener.notify(new Notification("Loading database..."));
@@ -35,20 +45,25 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
             JaListerDatabaseController.getInstance().setCurrentJaListerDatabase(listerDatabase);
             listener.notify(new Notification("Done."));
 
-        } catch(FileNotFoundException e) {
+        }
+        catch(FileNotFoundException e) {
             SwingUtils.showError(e.getMessage());
             logger.error(e.toString());
         }
         catch(SerializationException e) {
             SwingUtils.showError(e.getMessage());
             logger.error(e.toString());
-        } catch(IOException e) {
+        }
+        catch(IOException e) {
             SwingUtils.showError(e.getMessage());
             logger.error(e.toString());
         }
     }
 
 
+    /**
+     * @see FileOpenSavePlugin#getFileChooser()
+     */
     public JFileChooser getFileChooser() {
         final JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -56,10 +71,16 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
         return fileChooser;
     }
 
+    /**
+     * @see FileOpenSavePlugin#getFileExtension()
+     */
     public String getFileExtension() {
         return ".jalister";
     }
 
+    /**
+     * @see FileOpenSavePlugin#isOpenDialog()
+     */
     public boolean isOpenDialog() {
         return true;
     }

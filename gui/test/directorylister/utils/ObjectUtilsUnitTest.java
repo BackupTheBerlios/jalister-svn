@@ -3,6 +3,7 @@ package directorylister.utils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  * ObjectUtils Tester.
@@ -12,11 +13,6 @@ import org.junit.Before;
  * @since <pre>07/28/2007</pre>
  */
 public class ObjectUtilsUnitTest {
-    /**
-     * Constructs a new ObjectUtilsUnitTest.
-     */
-    public ObjectUtilsUnitTest() {
-    }
 
     /**
      * Method setUp ...
@@ -39,7 +35,7 @@ public class ObjectUtilsUnitTest {
      *
      * @throws Exception when
      */
-    @org.junit.Test()
+    @Test()
     public void testToString() throws Exception {
         Assert.assertNotNull(ObjectUtils.buildToString(this));
     }

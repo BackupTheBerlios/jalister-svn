@@ -31,7 +31,8 @@ public class LoadDirectoryPlugin implements FileOpenSavePlugin {
         JaListerDatabase jaListerDatabase = null;
         try {
             jaListerDatabase = parseFile(selectedFile, frame);
-        } catch(IOException e) {
+        }
+        catch(IOException e) {
             SwingUtils.showError(e.getMessage());
             logger.error(e);
         }
@@ -71,7 +72,7 @@ public class LoadDirectoryPlugin implements FileOpenSavePlugin {
      * @return FileEntry
      * @throws IOException when
      */
-    private JaListerDatabase parseFile(final File selectedFile, final ProgressListener frame) throws IOException {
+    private static JaListerDatabase parseFile(final File selectedFile, final ProgressListener frame) throws IOException {
         final FileSystemParser systemParser = new FileSystemParser(selectedFile);
         systemParser.addListener(frame);
         return systemParser.parse();

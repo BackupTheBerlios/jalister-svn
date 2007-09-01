@@ -14,7 +14,7 @@ public class JaListerDatabaseFileFilter extends FileFilter {
      * {@inheritDoc}
      */
     @Override
-    public boolean accept(File f) {
+    public boolean accept(final File f) {
         if (f.isDirectory()) {
             return true;
         }

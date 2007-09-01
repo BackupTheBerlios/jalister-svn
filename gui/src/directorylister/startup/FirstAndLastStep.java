@@ -10,7 +10,13 @@ import javax.swing.SwingUtilities;
  * @since 27.08.2007 8:49:54
  */
 public class FirstAndLastStep extends AbstractStartupStep {
-    private SplashScreen splashScreen;
+    /**
+     * Field splashScreen
+     */
+    private SplashScreen splashScreen = null;
+    /**
+     * Field wasRun
+     */
     private boolean wasRun;
 
     public FirstAndLastStep(final ProgressNotifier progressNotifier) {
