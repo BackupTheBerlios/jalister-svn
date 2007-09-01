@@ -3,6 +3,7 @@ package directorylister.startup;
 import directorylister.model.metadata.GenericInfoMetaDataProvider;
 import directorylister.model.metadata.MetadataProviderFactory;
 import directorylister.model.metadata.MimeTypeProvider;
+import directorylister.model.metadata.Mp3TagProvider;
 import directorylister.notification.ProgressNotifier;
 
 /**
@@ -22,5 +23,6 @@ public class InitializeMetadataStep extends AbstractStartupStep {
         final MetadataProviderFactory metadataProviderFactory = MetadataProviderFactory.getInstance();
         metadataProviderFactory.addMetadataProvider(new GenericInfoMetaDataProvider());
         metadataProviderFactory.addMetadataProvider(new MimeTypeProvider());
+        metadataProviderFactory.addMetadataProvider(new Mp3TagProvider());
     }
 }

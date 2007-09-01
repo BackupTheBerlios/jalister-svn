@@ -29,5 +29,4 @@ public interface SearchableMetaDataKey extends MetaDataKey {
      */
     Field createField(final String value);
 
-
 }

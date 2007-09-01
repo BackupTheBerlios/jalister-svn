@@ -345,6 +345,8 @@ public class FileEntry implements Serializable, XMLSerializable {
     }
 
     public void addMetaDatas(final Collection<FileEntryMetaData> metaDatas) {
-        metadatas.addAll(metaDatas);
+        if (null != metaDatas) {
+            metadatas.addAll(metaDatas);
+        }
     }
 }

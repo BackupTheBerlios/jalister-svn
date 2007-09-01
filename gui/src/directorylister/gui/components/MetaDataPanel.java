@@ -75,6 +75,7 @@ public final class MetaDataPanel extends JPanel {
                 }
 
                 localizer.localize(MetaDataPanel.this);
+                repaint();
             }
         });
     }
