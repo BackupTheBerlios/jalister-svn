@@ -1,6 +1,9 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.provider;
 
 import directorylister.utils.SwingUtils;
+import directorylister.model.metadata.FileEntryMetaData;
+import directorylister.model.metadata.key.MimeTypeMetaDataKey;
+import directorylister.model.metadata.value.MimeTypeMetaDataValue;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatch;

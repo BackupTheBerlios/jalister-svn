@@ -1,4 +1,4 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.value;
 
 /**
  * @author schakal Oleg Atamanenko

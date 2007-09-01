@@ -1,4 +1,12 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.provider;
+
+import directorylister.model.metadata.FileEntryMetaData;
+import directorylister.model.metadata.key.FileNameMetaDataKey;
+import directorylister.model.metadata.value.FileNameMetaDataValue;
+import directorylister.model.metadata.key.FileLastModifiedMetaDataKey;
+import directorylister.model.metadata.value.FileLastModifiedMetaDataValue;
+import directorylister.model.metadata.key.FileSizeMetaDataKey;
+import directorylister.model.metadata.value.FileSizeMetaDataValue;
 
 import java.io.File;
 import java.util.Collection;

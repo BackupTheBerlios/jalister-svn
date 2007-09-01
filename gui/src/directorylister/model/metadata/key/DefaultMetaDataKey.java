@@ -1,4 +1,6 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.key;
+
+import directorylister.model.metadata.MetadataProviderFactory;
 
 /**
  * @author schakal Oleg Atamanenko

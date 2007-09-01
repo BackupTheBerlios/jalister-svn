@@ -1,4 +1,4 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.key;
 
 /**
  * Key for file size metadata.

@@ -4,8 +4,8 @@ import directorylister.controllers.JaListerDatabaseController;
 import directorylister.controllers.JaListerDatabaseListenerAdapter;
 import directorylister.model.FileEntry;
 import directorylister.model.metadata.FileEntryMetaData;
-import directorylister.model.metadata.MetaDataKey;
-import directorylister.model.metadata.MetaDataValue;
+import directorylister.model.metadata.key.MetaDataKey;
+import directorylister.model.metadata.value.MetaDataValue;
 import directorylister.model.transformers.SortedMetaDataTransformer;
 import directorylister.resources.Localizer;
 

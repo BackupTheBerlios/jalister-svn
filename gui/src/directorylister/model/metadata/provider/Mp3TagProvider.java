@@ -1,4 +1,4 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.provider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,6 +9,20 @@ import org.blinkenlights.jid3.v1.ID3V1Tag;
 import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
+
+import directorylister.model.metadata.FileEntryMetaData;
+import directorylister.model.metadata.key.ArtistMetaDataKey;
+import directorylister.model.metadata.value.ArtistMetaDataValue;
+import directorylister.model.metadata.key.AlbumMetaDataKey;
+import directorylister.model.metadata.value.AlbumMetaDataValue;
+import directorylister.model.metadata.key.GenreMetaDataKey;
+import directorylister.model.metadata.value.GenreMetaDataValue;
+import directorylister.model.metadata.key.YearMetaDataKey;
+import directorylister.model.metadata.key.TrackCommentMetaDataKey;
+import directorylister.model.metadata.value.YearMetaDataValue;
+import directorylister.model.metadata.key.TrackTitleMetaDataKey;
+import directorylister.model.metadata.value.TrackTitleMetaDataValue;
+import directorylister.model.metadata.value.TrackCommentMetaDataValue;
 
 /**
  * @author schakal Oleg Atamanenko

@@ -1,4 +1,4 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.key;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.document.Field;

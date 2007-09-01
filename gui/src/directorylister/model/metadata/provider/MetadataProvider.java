@@ -1,4 +1,6 @@
-package directorylister.model.metadata;
+package directorylister.model.metadata.provider;
+
+import directorylister.model.metadata.FileEntryMetaData;
 
 import java.io.File;
 import java.util.Collection;

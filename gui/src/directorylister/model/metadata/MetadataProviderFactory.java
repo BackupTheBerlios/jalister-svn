@@ -1,5 +1,8 @@
 package directorylister.model.metadata;
 
+import directorylister.model.metadata.provider.MetadataProvider;
+import directorylister.model.metadata.key.MetaDataKey;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;

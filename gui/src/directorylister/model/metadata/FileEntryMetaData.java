@@ -1,6 +1,8 @@
 package directorylister.model.metadata;
 
 import directorylister.utils.ObjectUtils;
+import directorylister.model.metadata.key.MetaDataKey;
+import directorylister.model.metadata.value.MetaDataValue;
 
 import java.io.Serializable;
 

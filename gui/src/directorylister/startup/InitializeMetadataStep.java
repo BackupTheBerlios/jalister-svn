@@ -1,9 +1,9 @@
 package directorylister.startup;
 
-import directorylister.model.metadata.GenericInfoMetaDataProvider;
+import directorylister.model.metadata.provider.GenericInfoMetaDataProvider;
 import directorylister.model.metadata.MetadataProviderFactory;
-import directorylister.model.metadata.MimeTypeProvider;
-import directorylister.model.metadata.Mp3TagProvider;
+import directorylister.model.metadata.provider.MimeTypeProvider;
+import directorylister.model.metadata.provider.Mp3TagProvider;
 import directorylister.notification.ProgressNotifier;
 
 /**
