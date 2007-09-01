@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -88,7 +89,7 @@ public class FileEntryUnitTest {
      */
     @Test()
     public void testGetMetaDatas() {
-        final Set<FileEntryMetaData> metaDatas = fileEntry.getMetadatas();
+        final Collection<FileEntryMetaData> metaDatas = fileEntry.getMetadatas();
         assertNotNull(metaDatas);
         assertTrue(metaDatas.isEmpty());
     }
@@ -100,7 +101,7 @@ public class FileEntryUnitTest {
     public void testAddMetadata() {
         final FileEntryMetaData data = new FileEntryMetaData();
         fileEntry.addMetaData(data);
-        final Set<FileEntryMetaData> datas = fileEntry.getMetadatas();
+        final Collection<FileEntryMetaData> datas = fileEntry.getMetadatas();
         assertTrue(datas.contains(data));
     }
 
@@ -111,7 +112,7 @@ public class FileEntryUnitTest {
     public void testSetMetaData() {
         final Set<FileEntryMetaData> metaDatas = new HashSet<FileEntryMetaData>();
         fileEntry.setMetadatas(metaDatas);
-        final Set<FileEntryMetaData> datas = fileEntry.getMetadatas();
+        final Collection<FileEntryMetaData> datas = fileEntry.getMetadatas();
         assertSame(metaDatas, datas);
     }
 

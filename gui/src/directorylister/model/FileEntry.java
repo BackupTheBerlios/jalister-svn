@@ -10,10 +10,10 @@ import org.w3c.dom.Element;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author schakal Oleg Atamanenko
@@ -44,7 +44,7 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field metadatas
      */
-    private Set<FileEntryMetaData> metadatas = new HashSet<FileEntryMetaData>();
+    private Collection<FileEntryMetaData> metadatas = new HashSet<FileEntryMetaData>();
     /**
      * Field serialVersionUID
      */
@@ -126,8 +126,8 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @return Value for property 'metadatas'.
      */
-    public Set<FileEntryMetaData> getMetadatas() {
-        return metadatas;
+    public Collection<FileEntryMetaData> getMetadatas() {
+        return Collections.unmodifiableCollection(metadatas);
     }
 
     /**
@@ -135,7 +135,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      *
      * @param metadatas Value to set for property 'metadatas'.
      */
-    public void setMetadatas(final Set<FileEntryMetaData> metadatas) {
+    public void setMetadatas(final Collection<FileEntryMetaData> metadatas) {
         this.metadatas = metadatas;
     }
 
@@ -248,7 +248,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @return Value for property 'childs'.
      */
     public List<FileEntry> getChilds() {
-        return childs;
+        return Collections.unmodifiableList(childs);
     }
 
     /**
@@ -258,11 +258,11 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @return T
      */
     public <T> T getChilds(final Transformer<List<FileEntry>, T> transformer) {
-        return transformer.transform(childs);
+        return transformer.transform(getChilds());
     }
 
     public <T> T getMetadatas(final Transformer<Collection<FileEntryMetaData>, T> transformer) {
-        return transformer.transform(metadatas);
+        return transformer.transform(getMetadatas());
     }
 
 
@@ -346,7 +346,9 @@ public class FileEntry implements Serializable, XMLSerializable {
 
     public void addMetaDatas(final Collection<FileEntryMetaData> metaDatas) {
         if (null != metaDatas) {
-            metadatas.addAll(metaDatas);
+            for (FileEntryMetaData metaData : metaDatas) {
+                addMetaData(metaData);
+            }
         }
     }
 }

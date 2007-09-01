@@ -29,7 +29,6 @@ import org.apache.lucene.store.RAMDirectory;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * Lucene searcher.
@@ -236,7 +235,7 @@ public class Searcher implements Service<JaListerDatabase> {
                 addField(document, searchField, fileEntry);
             }
 
-            final Set<FileEntryMetaData> metaDatas = fileEntry.getMetadatas();
+            final Collection<FileEntryMetaData> metaDatas = fileEntry.getMetadatas();
             for (final FileEntryMetaData metaData : metaDatas) {
                 if (metaData.getKey() instanceof SearchableMetaDataKey) {
                     final SearchableMetaDataKey key = (SearchableMetaDataKey) metaData.getKey();
