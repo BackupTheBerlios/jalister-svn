@@ -174,9 +174,7 @@ public final class FileEntryTree extends JPanel {
             final SearchResult searchResult = searcher.search(condition);
             updateTree(searchResult);
 
-            // TODO: Use localization
-            final ResourceHandler resourceHandler = ResourceHandler.getInstance();
-            final String tooltip = resourceHandler.getFormattedMessage("SearchResult.Tooltip",
+            final String tooltip = ResourceHandler.getInstance().getFormattedMessage("SearchResult.Tooltip",
                     searchResult.getResultCount(), searchResult.getSearchTime());
             searchBox.setToolTipText(tooltip);
         }
@@ -218,7 +216,8 @@ public final class FileEntryTree extends JPanel {
          * Method updateButtonState ...
          */
         private void updateButtonState() {
-            searchButton.setEnabled(StringUtils.isNotEmpty(searchBox.getText()) && searchBox.isFocusOwner());
+            searchButton.setEnabled(StringUtils.isNotEmpty(searchBox.getText()) && searchBox.isFocusOwner()
+                    && JaListerDatabaseController.getInstance().getCurrentDatabase() != null);
         }
 
         /**

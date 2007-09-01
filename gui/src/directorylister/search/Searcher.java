@@ -180,17 +180,7 @@ public class Searcher implements Service<JaListerDatabase> {
     public void notifyAttached(final JaListerDatabase serviceable) {
         database = serviceable;
         final FileEntry rootEntry = serviceable.getRootEntry();
-        executeWithIndexWriter(new Executable<IndexWriter, IOException>() {
-            /**
-             * {@inheritDoc}
-             */
-            public void execute(final IndexWriter indexWriter) throws IOException {
-                if (null != rootEntry) {
-                    rootEntry.acceptVisitor(new IndexWriterFileEntryVisitor(indexWriter));
-                    indexWriter.optimize();
-                }
-            }
-        });
+        executeWithIndexWriter(new IndexWriterExecutable(rootEntry));
     }
 
 
@@ -301,6 +291,24 @@ public class Searcher implements Service<JaListerDatabase> {
                 catch(IOException e) {
                     logger.error(e);
                 }
+            }
+        }
+    }
+
+    private static class IndexWriterExecutable implements Executable<IndexWriter, IOException> {
+        private final FileEntry rootEntry;
+
+        public IndexWriterExecutable(final FileEntry rootEntry) {
+            this.rootEntry = rootEntry;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void execute(final IndexWriter indexWriter) throws IOException {
+            if (null != rootEntry) {
+                rootEntry.acceptVisitor(new IndexWriterFileEntryVisitor(indexWriter));
+                indexWriter.optimize();
             }
         }
     }

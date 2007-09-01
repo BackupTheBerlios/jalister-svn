@@ -4,6 +4,7 @@
 package directorylister.gui;
 
 import directorylister.gui.components.MainMenu;
+import directorylister.gui.components.StatusBar;
 import directorylister.gui.components.WorkspacePanel;
 import directorylister.gui.components.fileentrytree.FileEntryTree;
 import directorylister.utils.SwingUtils;
@@ -73,6 +74,9 @@ public final class MainWindow extends JFrame {
 
         final JMenuItem close = SwingUtils.findComponent("MainMenu.Close", menubar);
         toolBar.add(SwingUtils.createButton(close));
+
+        final StatusBar statusBar = new StatusBar();
+        add(statusBar, BorderLayout.SOUTH);
 
         // TODO: store in settings.
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
