@@ -23,11 +23,11 @@ public class MD5HasherUnitTest {
     /**
      * Field test
      */
-    private File test = null;
+    private File test;
     /**
      * Field directory
      */
-    private File directory = null;
+    private File directory;
 
     /**
      * Method setUp ...

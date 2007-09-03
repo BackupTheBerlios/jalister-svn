@@ -13,7 +13,7 @@ public class FirstAndLastStep extends AbstractStartupStep {
     /**
      * Field splashScreen
      */
-    private SplashScreen splashScreen = null;
+    private SplashScreen splashScreen;
     /**
      * Field wasRun
      */

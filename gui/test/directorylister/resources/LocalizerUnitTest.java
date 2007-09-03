@@ -25,7 +25,7 @@ public class LocalizerUnitTest {
     /**
      * Field localizer
      */
-    private Localizer localizer = null;
+    private Localizer localizer;
 
     /**
      * Method setUp ...

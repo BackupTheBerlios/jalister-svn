@@ -40,7 +40,7 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
     /**
      * Field root
      */
-    private FileEntry root = null;
+    private FileEntry root;
 
     /**
      * Getter for property 'root'.

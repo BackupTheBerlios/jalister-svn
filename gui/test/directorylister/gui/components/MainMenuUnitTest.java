@@ -23,11 +23,11 @@ public class MainMenuUnitTest {
     /**
      * Field menuBar
      */
-    private MenuBar menuBar = null;
+    private MenuBar menuBar;
     /**
      * Field resourceHandler
      */
-    private ResourceHandler resourceHandler = null;
+    private ResourceHandler resourceHandler;
 
     /**
      * Method setUp ...

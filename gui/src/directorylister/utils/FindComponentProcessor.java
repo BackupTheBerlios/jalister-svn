@@ -17,7 +17,7 @@ public final class FindComponentProcessor<T extends Component> implements Compon
     /**
      * Field foundComponent
      */
-    private T foundComponent = null;
+    private T foundComponent;
 
     /**
      * Constructor FindComponentProcessor creates a new FindComponentProcessor instance.

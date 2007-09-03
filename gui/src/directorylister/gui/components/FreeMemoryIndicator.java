@@ -23,7 +23,6 @@ public class FreeMemoryIndicator extends JPanel {
      * Field progressBar
      */
     private JProgressBar progressBar;
-    private JButton runGarbageCollector;
     private static final int DEFAULT_UPDATE_PERIOD = 2000;
 
     private static final FileSizeFormatter FORMATTER = new FileSizeFormatter();
@@ -46,7 +45,7 @@ public class FreeMemoryIndicator extends JPanel {
         add(progressBar);
 
         // TODO: Use icon.
-        runGarbageCollector = new JButton();
+        final JButton runGarbageCollector = new JButton();
         runGarbageCollector.setName("FreeMemoryIndicator.RunGC");
         runGarbageCollector.addActionListener(new RunGarbageCollectorAction());
         add(runGarbageCollector);
@@ -74,6 +73,7 @@ public class FreeMemoryIndicator extends JPanel {
     }
 
     private class UpdateProgressBarTask extends TimerTask {
+        @Override
         public void run() {
             final Runtime runtime = Runtime.getRuntime();
             final long totalMemory = runtime.totalMemory();

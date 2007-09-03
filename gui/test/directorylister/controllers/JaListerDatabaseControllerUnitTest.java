@@ -18,7 +18,7 @@ public class JaListerDatabaseControllerUnitTest {
     /**
      * Field controller
      */
-    private JaListerDatabaseController controller = null;
+    private JaListerDatabaseController controller;
     /**
      * Field NEW_ENTRY
      */
@@ -102,7 +102,7 @@ public class JaListerDatabaseControllerUnitTest {
         /**
          * Field wasCalled
          */
-        boolean wasCalled = false;
+        boolean wasCalled;
 
         /**
          * {@inheritDoc}

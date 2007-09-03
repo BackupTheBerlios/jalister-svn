@@ -18,7 +18,7 @@ public class MainWindowUnitTest {
     /**
      * Field window
      */
-    private Window window = null;
+    private Window window;
 
     /**
      * Method setUp ...

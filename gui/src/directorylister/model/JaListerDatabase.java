@@ -21,11 +21,11 @@ public class JaListerDatabase extends ServiceableImpl<JaListerDatabase> implemen
     /**
      * Field rootEntry
      */
-    private FileEntry rootEntry = null;
+    private FileEntry rootEntry;
     /**
      * Field rootPath
      */
-    private String rootPath = null;
+    private String rootPath;
     /**
      * Field serialVersionUID
      */

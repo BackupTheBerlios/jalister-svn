@@ -19,6 +19,7 @@ public class FileSizeMetaDataValue extends DefaultMetaDataValue<Long> {
         super(fileSize);
     }
 
+    @Override
     public String getFormattedValue() {
         return formatter.format(getValue());
     }

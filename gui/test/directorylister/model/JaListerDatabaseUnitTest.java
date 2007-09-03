@@ -17,7 +17,7 @@ public class JaListerDatabaseUnitTest {
     /**
      * Field listerDatabase
      */
-    private JaListerDatabase listerDatabase = null;
+    private JaListerDatabase listerDatabase;
 
     /**
      * Method setUp ...

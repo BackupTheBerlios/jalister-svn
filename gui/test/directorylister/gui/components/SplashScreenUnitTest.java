@@ -21,11 +21,11 @@ public class SplashScreenUnitTest {
     /**
      * Field splashWindow
      */
-    private Window splashWindow = null;
+    private Window splashWindow;
     /**
      * Field splashScreen
      */
-    private SplashScreen splashScreen = null;
+    private SplashScreen splashScreen;
 
     /**
      * Method setUp ...

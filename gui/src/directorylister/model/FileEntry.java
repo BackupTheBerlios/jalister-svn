@@ -27,19 +27,19 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field fileName
      */
-    private String fileName = null;
+    private String fileName;
     /**
      * Field shortName
      */
-    private String shortName = null;
+    private String shortName;
     /**
      * Field fileType
      */
-    private FileType fileType = null;
+    private FileType fileType;
     /**
      * Field parent
      */
-    private FileEntry parent = null;
+    private FileEntry parent;
 
     /**
      * Field metadatas
@@ -94,7 +94,7 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field md5
      */
-    private String md5 = null;
+    private String md5;
 
     /**
      * Getter for property 'shortName'.
@@ -299,7 +299,7 @@ public class FileEntry implements Serializable, XMLSerializable {
         if (fileType.equals(FileType.FILE)) {
             final List<FileEntry> childs = getChilds();
             for (final FileEntry child : childs) {
-                Element el = child.serializeToXML(document);
+                final Element el = child.serializeToXML(document);
                 if (null != el) xmlNode.appendChild(el);
             }
         }
@@ -347,7 +347,7 @@ public class FileEntry implements Serializable, XMLSerializable {
 
     public void addMetaDatas(final Collection<FileEntryMetaData> metaDatas) {
         if (null != metaDatas) {
-            for (FileEntryMetaData metaData : metaDatas) {
+            for (final FileEntryMetaData metaData : metaDatas) {
                 addMetaData(metaData);
             }
         }

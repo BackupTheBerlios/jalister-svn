@@ -18,7 +18,7 @@ public class SortedFileEntryListTransformerUnitTest {
     /**
      * Field transformer
      */
-    private SortedFileEntryListTransformer transformer = null;
+    private SortedFileEntryListTransformer transformer;
 
     /**
      * Method setUp ...

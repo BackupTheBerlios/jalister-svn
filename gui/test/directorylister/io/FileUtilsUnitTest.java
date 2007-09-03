@@ -19,7 +19,7 @@ public class FileUtilsUnitTest {
     /**
      * Field file
      */
-    private File file = null;
+    private File file;
 
     /**
      * Method setUp ...

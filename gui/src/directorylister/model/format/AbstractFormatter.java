@@ -20,7 +20,7 @@ public abstract class AbstractFormatter<Source, Target> implements Formatter<Sou
     public AbstractFormatter() {
     }
 
-    public final Target format(Source source) {
+    public final Target format(final Source source) {
         return transform(source);
     }
 

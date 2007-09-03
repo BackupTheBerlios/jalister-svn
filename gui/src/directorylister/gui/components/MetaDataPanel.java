@@ -43,7 +43,7 @@ public final class MetaDataPanel extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         JaListerDatabaseController.getInstance().addListener(new JaListerDatabaseListenerAdapter() {
             /**
-             * @see directorylister.controllers.JaListerDatabaseListenerAdapter#notifyFileEntrySelected(FileEntry)
+             * @see JaListerDatabaseListenerAdapter#notifyFileEntrySelected(FileEntry)
              */
             @Override()
             public void notifyFileEntrySelected(final FileEntry fileEntry) {

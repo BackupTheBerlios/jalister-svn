@@ -22,7 +22,7 @@ public class SearcherUnitTest {
     /**
      * Field searcher
      */
-    private Searcher searcher = null;
+    private Searcher searcher;
 
     /**
      * Method setUpClass ...

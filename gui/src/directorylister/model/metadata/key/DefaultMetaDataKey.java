@@ -1,5 +1,6 @@
 package directorylister.model.metadata.key;
 
+import directorylister.model.Nameable;
 import directorylister.model.metadata.MetadataProviderFactory;
 
 /**
@@ -24,7 +25,7 @@ public class DefaultMetaDataKey extends AbstractSearchableMetaDataKey {
     private final String name;
 
     /**
-     * @see directorylister.model.Nameable#getName()
+     * @see Nameable#getName()
      */
     public String getName() {
         return name;

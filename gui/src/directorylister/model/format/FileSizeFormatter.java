@@ -22,7 +22,7 @@ public class FileSizeFormatter extends AbstractFormatter<Long, String> {
     public FileSizeFormatter() {
     }
 
-    public String transform(Long source) {
+    public String transform(final Long source) {
         final FileSizeSuffix sizeSuffix = FileSizeSuffix.getSuffix(source);
         final double size = sizeSuffix.getSize(source);
         return ResourceHandler.getInstance().getFormattedMessage(sizeSuffix.getLocalizationKey(), size);

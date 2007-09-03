@@ -6,8 +6,8 @@ import directorylister.model.JaListerDatabase;
 import directorylister.model.Nameable;
 import directorylister.model.Service;
 import directorylister.model.metadata.FileEntryMetaData;
-import directorylister.model.metadata.key.MetaDataKey;
 import directorylister.model.metadata.MetadataProviderFactory;
+import directorylister.model.metadata.key.MetaDataKey;
 import directorylister.model.metadata.key.SearchableMetaDataKey;
 import directorylister.utils.SwingUtils;
 import org.apache.commons.lang.StringUtils;
@@ -54,7 +54,7 @@ public class Searcher implements Service<JaListerDatabase> {
     /**
      * Field database
      */
-    private JaListerDatabase database = null;
+    private JaListerDatabase database;
     /**
      * Field MAX_CLAUSE_COUNT
      */

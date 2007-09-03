@@ -8,11 +8,13 @@ import javax.swing.JOptionPane;
  */
 public class NarrowOptionPane extends JOptionPane {
     int maxCharactersPerLineCount;
+    private static final long serialVersionUID = 7841574024523668326L;
 
-    public NarrowOptionPane(int maxCharactersPerLineCount) {
+    public NarrowOptionPane(final int maxCharactersPerLineCount) {
         this.maxCharactersPerLineCount = maxCharactersPerLineCount;
     }
 
+    @Override
     public int getMaxCharactersPerLineCount() {
         return maxCharactersPerLineCount;
     }

@@ -14,7 +14,7 @@ public class RunGarbageCollectorAction implements ActionListener {
     /**
      * {@inheritDoc}
      */
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         final Runtime runtime = Runtime.getRuntime();
         runtime.runFinalization();
         runtime.gc();

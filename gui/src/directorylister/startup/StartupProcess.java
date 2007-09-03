@@ -17,11 +17,11 @@ public class StartupProcess {
     /**
      * Field firstStep
      */
-    private StartupStep firstStep = null;
+    private StartupStep firstStep;
     /**
      * Field lastStep
      */
-    private StartupStep lastStep = null;
+    private StartupStep lastStep;
 
     public void addStep(final StartupStep startupStep) {
         steps.add(startupStep);

@@ -19,7 +19,7 @@ public class ResourceHandlerUnitTest {
     /**
      * Field resourceHandler
      */
-    private ResourceHandler resourceHandler = null;
+    private ResourceHandler resourceHandler;
 
     /**
      * Method setUp ...

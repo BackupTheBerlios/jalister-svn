@@ -1,8 +1,8 @@
 package directorylister.model.metadata;
 
-import directorylister.utils.ObjectUtils;
 import directorylister.model.metadata.key.MetaDataKey;
 import directorylister.model.metadata.value.MetaDataValue;
+import directorylister.utils.ObjectUtils;
 
 import java.io.Serializable;
 
@@ -15,11 +15,11 @@ public class FileEntryMetaData implements Serializable {
     /**
      * Field key
      */
-    private MetaDataKey key = null;
+    private MetaDataKey key;
     /**
      * Field value
      */
-    private MetaDataValue value = null;
+    private MetaDataValue value;
     /**
      * Field serialVersionUID
      */
