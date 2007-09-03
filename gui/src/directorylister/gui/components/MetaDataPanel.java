@@ -58,7 +58,7 @@ public final class MetaDataPanel extends JPanel {
                     keyLabel.setName(key.getLocalizationKey());
 
                     final JLabel valueLabel = new JLabel();
-                    final String textValue = String.valueOf(value.getValue());
+                    final String textValue = value.toString();
                     valueLabel.setText(textValue);
                     valueLabel.setToolTipText(textValue);
 

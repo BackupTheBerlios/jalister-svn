@@ -18,9 +18,13 @@ public class DefaultMetaDataValue<T> implements MetaDataValue<T> {
         this.value = value;
     }
 
+    public String getFormattedValue() {
+        return String.valueOf(getValue());
+    }
+
     @Override
     public String toString() {
-        return String.valueOf(getValue());
+        return getFormattedValue();
     }
 
     public T getValue() {

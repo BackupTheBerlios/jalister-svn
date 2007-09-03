@@ -1,6 +1,7 @@
 package directorylister.gui.components;
 
 import directorylister.gui.actions.RunGarbageCollectorAction;
+import directorylister.model.format.FileSizeFormatter;
 import directorylister.resources.ResourceHandler;
 
 import javax.swing.JButton;
@@ -23,8 +24,10 @@ public class FreeMemoryIndicator extends JPanel {
      */
     private JProgressBar progressBar;
     private JButton runGarbageCollector;
-    private static final int BYTES_IN_MEGABYTE = 1048576;
     private static final int DEFAULT_UPDATE_PERIOD = 2000;
+
+    private static final FileSizeFormatter FORMATTER = new FileSizeFormatter();
+    private static final long serialVersionUID = -7468581539037689059L;
 
     /**
      * Constructs a new FreeMemoryIndicator.
@@ -76,8 +79,9 @@ public class FreeMemoryIndicator extends JPanel {
             final long totalMemory = runtime.totalMemory();
             final long freeMemory = runtime.freeMemory();
             final long usedMemory = totalMemory - freeMemory;
-            final double usedMB = (double) usedMemory / BYTES_IN_MEGABYTE;
-            final double totalMB = (double) totalMemory / BYTES_IN_MEGABYTE;
+
+            final String usedMB = FORMATTER.format(usedMemory);
+            final String totalMB = FORMATTER.format(totalMemory);
             final int usedMemoryPercents = 500 - (int) ((totalMemory - usedMemory) / (float) totalMemory * 500);
             final String message = ResourceHandler.getInstance().getFormattedMessage("FreeMemoryIndicator.MemoryUsed", usedMB, totalMB);
 
