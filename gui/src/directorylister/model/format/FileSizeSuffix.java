@@ -11,7 +11,7 @@ enum FileSizeSuffix implements Localizable {
     KB(2L << 9, "FileSizeFormatter.kb"),
     MB(2L << 19, "FileSizeFormatter.mb"),
     GB(2L << 29, "FileSizeFormatter.gb"),
-    TB(2L << 39, "FileSizeFormatter.gb");
+    TB(2L << 39, "FileSizeFormatter.tb");
 
     private final long resolution;
     private final String localizationKey;

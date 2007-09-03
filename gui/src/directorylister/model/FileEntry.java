@@ -44,6 +44,7 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field metadatas
      */
+    // TODO: Refactor it for simple synchronized Map
     private Collection<FileEntryMetaData> metadatas = new HashSet<FileEntryMetaData>();
     /**
      * Field serialVersionUID
