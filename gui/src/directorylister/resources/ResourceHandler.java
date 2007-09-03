@@ -96,6 +96,12 @@ public class ResourceHandler {
 
     public String getFormattedMessage(final String key, final Object... values) {
         final String message = getMessage(key);
-        return MessageFormat.format(message, values);
+        try {
+            return MessageFormat.format(message, values);
+        }
+        catch(IllegalArgumentException e) {
+            logger.error(e);
+        }
+        return message;
     }
 }
