@@ -3,7 +3,7 @@ package directorylister;
 import directorylister.notification.ProgressNotifier;
 import directorylister.startup.FirstAndLastStep;
 import directorylister.startup.InitializeGUIStep;
-import directorylister.startup.InitializeLoggerStep;
+import directorylister.startup.BaseInitialization;
 import directorylister.startup.InitializeMetadataStep;
 import directorylister.startup.LoadResourcesStep;
 import directorylister.startup.LoadThemeStep;
@@ -35,7 +35,7 @@ public class Main {
         startupProcess.setFirstStep(firstAndLastStep);
         startupProcess.setLastStep(firstAndLastStep);
 
-        startupProcess.addStep(new InitializeLoggerStep(progressNotifier));
+        startupProcess.addStep(new BaseInitialization(progressNotifier));
         startupProcess.addStep(new LoadResourcesStep(progressNotifier));
         startupProcess.addStep(new LoadThemeStep(progressNotifier));
         startupProcess.addStep(new InitializeMetadataStep(progressNotifier));

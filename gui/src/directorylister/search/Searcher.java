@@ -25,8 +25,10 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
-import org.apache.lucene.store.RAMDirectory;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -46,7 +48,7 @@ public class Searcher implements Service<JaListerDatabase> {
     /**
      * Field directory
      */
-    private transient RAMDirectory directory;
+    private transient Directory directory;
     /**
      * Field serialVersionUID
      */
@@ -65,7 +67,13 @@ public class Searcher implements Service<JaListerDatabase> {
      */
     public Searcher() {
         try {
-            directory = new RAMDirectory(".");
+            // TODO:
+            final File tempDir = new File(System.getProperty("java.io.tmpdir"), String.valueOf(Math.random()));
+            tempDir.deleteOnExit();
+            tempDir.mkdirs();
+            directory = FSDirectory.getDirectory(tempDir);
+//            directory = new RAMDirectory(".");
+
         }
         catch(IOException e) {
             logger.error(e);
@@ -275,6 +283,7 @@ public class Searcher implements Service<JaListerDatabase> {
         IndexWriter indexWriter = null;
         try {
             indexWriter = new IndexWriter(directory, new StandardAnalyzer());
+            //indexWriter.setMergeFactor(DEFAULT_MERGE_FACTOR);
             executable.execute(indexWriter);
 
         }

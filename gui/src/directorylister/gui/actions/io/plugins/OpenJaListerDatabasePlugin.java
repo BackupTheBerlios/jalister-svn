@@ -38,12 +38,16 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
     public void handleFile(final File selectedFile, final ProgressListener listener) {
         try {
             final InputStream inputStream = new GZIPInputStream(new FileInputStream(selectedFile));
+            final long startTime = System.currentTimeMillis();
             listener.notify(new Notification("Loading database..."));
             final JaListerDatabase listerDatabase = (JaListerDatabase) SerializationUtils.deserialize(inputStream);
             listener.notify(new Notification("Building indexes..."));
             listerDatabase.attachService(new Searcher());
             JaListerDatabaseController.getInstance().setCurrentJaListerDatabase(listerDatabase);
             listener.notify(new Notification("Done."));
+            final long loadTime = System.currentTimeMillis() - startTime;
+
+            logger.info("Loaded in " + loadTime /(double ) 1000 + " seconds");
 
         }
         catch(FileNotFoundException e) {
