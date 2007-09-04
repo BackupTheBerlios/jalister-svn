@@ -1,6 +1,8 @@
 package directorylister.gui.components;
 
+import directorylister.notification.Notification;
 import directorylister.notification.ProgressNotifier;
+import directorylister.resources.ResourceHandler;
 
 import java.awt.HeadlessException;
 
@@ -35,7 +37,9 @@ public class SplashScreen extends ProgressBarFrame {
         final ProgressNotifier notifier = new ProgressNotifier();
         notifier.addListener(screen);
 
-        notifier.notifyListeners("Startup.Start");
+        final ResourceHandler resourceHandler = ResourceHandler.getInstance();
+
+        notifier.notifyListeners(new Notification(resourceHandler.getMessage("Startup.Start")));
 
         try {
             Thread.sleep(2000);
@@ -44,6 +48,6 @@ public class SplashScreen extends ProgressBarFrame {
             e.printStackTrace();
         }
 
-        notifier.notifyListeners("Startup.Done");
+        notifier.notifyListeners(new Notification(resourceHandler.getMessage("Startup.Done")));
     }
 }

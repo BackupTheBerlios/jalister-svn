@@ -66,7 +66,7 @@ public class StartupProgressNotifierUnitTest {
         final TestStartupListener listener = new TestStartupListener();
         notifier.addListener(listener);
 
-        notifier.notifyListeners("message");
+        notifier.notifyListeners(new Notification("message"));
 
         Assert.assertTrue(listener.notifyReceived);
     }

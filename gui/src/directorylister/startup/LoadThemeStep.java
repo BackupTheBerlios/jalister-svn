@@ -1,7 +1,9 @@
 package directorylister.startup;
 
 import com.jgoodies.looks.Options;
+import directorylister.notification.Notification;
 import directorylister.notification.ProgressNotifier;
+import directorylister.resources.ResourceHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -27,7 +29,7 @@ public class LoadThemeStep extends AbstractStartupStep {
      * {@inheritDoc}
      */
     public void execute() {
-        progressNotifier.notifyListeners("Startup.LoadingTheme");
+        progressNotifier.notifyListeners(new Notification(ResourceHandler.getInstance().getMessage("Startup.LoadingTheme")));
         UIManager.put(Options.USE_SYSTEM_FONTS_APP_KEY, Boolean.TRUE);
         try {
             UIManager.setLookAndFeel(Options.getCrossPlatformLookAndFeelClassName());

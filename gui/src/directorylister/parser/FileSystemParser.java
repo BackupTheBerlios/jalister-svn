@@ -4,7 +4,9 @@ import directorylister.io.FileUtils;
 import directorylister.model.FileEntry;
 import directorylister.model.FileEntryBuilder;
 import directorylister.model.JaListerDatabase;
+import directorylister.notification.Notification;
 import directorylister.notification.ProgressNotifier;
+import directorylister.resources.ResourceHandler;
 import directorylister.search.Searcher;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -48,6 +50,7 @@ public class FileSystemParser extends ProgressNotifier {
             return !FileUtils.isLink(pathname);
         }
     };
+    private Notification notification;
 
     /**
      * Constructor FileSystemParser creates a new FileSystemParser instance.
@@ -58,6 +61,7 @@ public class FileSystemParser extends ProgressNotifier {
         assert startFile.exists();
         this.startFile = startFile;
         fileEntryBuilder = new FileEntryBuilder();
+        notification = new Notification();
     }
 
     /**
@@ -68,15 +72,21 @@ public class FileSystemParser extends ProgressNotifier {
      */
     public JaListerDatabase parse() throws IOException {
 
-        notifyListeners("Parser.ParsingFile", startFile);
+        final ResourceHandler resourceHandler = ResourceHandler.getInstance();
+        final String localizedMessage = resourceHandler.getFormattedMessage("Parser.ParsingFile", startFile);
+        notification.setMessage(localizedMessage);
+        notifyListeners(notification);
         final FileEntry rootEntry = fileEntryBuilder.buildFrom(startFile);
         parse(startFile, rootEntry);
 
         final JaListerDatabase jaListerDatabase = new JaListerDatabase();
         jaListerDatabase.setRootEntry(rootEntry);
-        notifyListeners("Parser.BuildingIndices");
+        notification.setMessage(resourceHandler.getMessage("Parser.BuildingIndices"));
+        notifyListeners(notification);
         jaListerDatabase.attachService(new Searcher());
-        notifyListeners("Parser.Done");
+
+        notification.setMessage(resourceHandler.getMessage("Parser.Done"));
+        notifyListeners(notification);
         return jaListerDatabase;
     }
 
@@ -95,7 +105,8 @@ public class FileSystemParser extends ProgressNotifier {
                 logger.debug("Parsing: " + file.getAbsolutePath());
                 final FileEntry fileEntry = fileEntryBuilder.buildFrom(file);
                 result.addChild(fileEntry);
-                notifyListeners("Parser.ParsingEntry", file);
+                notification.setMessage(ResourceHandler.getInstance().getFormattedMessage("Parser.ParsingEntry", file));
+                notifyListeners(notification);
                 if (file.isDirectory() && file.exists()) {
                     parse(file, fileEntry);
                 }

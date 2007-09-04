@@ -5,6 +5,8 @@ import directorylister.model.metadata.MetadataProviderFactory;
 import directorylister.model.metadata.provider.MimeTypeProvider;
 import directorylister.model.metadata.provider.Mp3TagProvider;
 import directorylister.notification.ProgressNotifier;
+import directorylister.notification.Notification;
+import directorylister.resources.ResourceHandler;
 
 /**
  * @author schakal Oleg Atamanenko
@@ -19,7 +21,8 @@ public class InitializeMetadataStep extends AbstractStartupStep {
      * {@inheritDoc}
      */
     public void execute() {
-        progressNotifier.notifyListeners("Startup.InitMetaData");
+        final String message = ResourceHandler.getInstance().getMessage("Startup.InitMetaData");
+        progressNotifier.notifyListeners(new Notification(message));
         final MetadataProviderFactory metadataProviderFactory = MetadataProviderFactory.getInstance();
         metadataProviderFactory.addMetadataProvider(new GenericInfoMetaDataProvider());
         metadataProviderFactory.addMetadataProvider(new MimeTypeProvider());

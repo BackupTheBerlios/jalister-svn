@@ -1,8 +1,10 @@
 package directorylister.startup;
 
 import directorylister.gui.MainWindow;
+import directorylister.notification.Notification;
 import directorylister.notification.ProgressNotifier;
 import directorylister.resources.Localizer;
+import directorylister.resources.ResourceHandler;
 
 import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
@@ -23,7 +25,8 @@ public class InitializeGUIStep extends AbstractStartupStep {
      * {@inheritDoc}
      */
     public void execute() {
-        progressNotifier.notifyListeners("Startup.InitGUI");
+        final ResourceHandler resourceHandler = ResourceHandler.getInstance();
+        progressNotifier.notifyListeners(new Notification(resourceHandler.getMessage("Startup.InitGUI")));
         final MainWindow mainWindow = new MainWindow();
 
         SwingUtilities.invokeLater(new Runnable() {

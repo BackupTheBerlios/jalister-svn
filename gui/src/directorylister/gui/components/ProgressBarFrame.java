@@ -77,6 +77,12 @@ public class ProgressBarFrame extends JFrame implements ProgressListener {
      * @see ProgressListener#notify(Notification)
      */
     public void notify(final Notification notification) {
+        if (notification.getMaxValue() > 0) {
+            progressBar.setIndeterminate(false);
+            progressBar.setMinimum(notification.getMinValue());
+            progressBar.setMaximum(notification.getMaxValue());
+            progressBar.setValue(notification.getCurrentValue());
+        }
         label.setText(notification.getMessage());
     }
 }

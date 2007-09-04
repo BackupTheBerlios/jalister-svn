@@ -2,6 +2,7 @@ package directorylister.model;
 
 
 import directorylister.model.metadata.FileEntryMetaData;
+import directorylister.model.metadata.key.MetaDataKey;
 import directorylister.model.transformers.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -118,7 +119,18 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @param metaData of type FileEntryMetaData
      */
     public void addMetaData(final FileEntryMetaData metaData) {
-        metadatas.add(metaData);
+        if (null == getMetadata(metaData.getKey())) {
+            metadatas.add(metaData);
+        }
+    }
+
+    private FileEntryMetaData getMetadata(final MetaDataKey key) {
+        for (final FileEntryMetaData metadata : metadatas) {
+            if (metadata.getKey().equals(key)) {
+                return metadata;
+            }
+        }
+        return null;
     }
 
 

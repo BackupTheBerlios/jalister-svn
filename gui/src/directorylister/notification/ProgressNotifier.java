@@ -1,7 +1,5 @@
 package directorylister.notification;
 
-import directorylister.resources.ResourceHandler;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,13 +24,9 @@ public class ProgressNotifier {
     /**
      * Notifies all listeners about new notification status.
      *
-     * @param message - notification message to broadcast.
+     * @param notification - notification message to broadcast.
      */
-    public void notifyListeners(final String message, final Object... values) {
-
-        final String localizedMessage = ResourceHandler.getInstance().getFormattedMessage(message, values);
-
-        final Notification notification = new Notification(localizedMessage);
+    public void notifyListeners(final Notification notification) {
         for (final ProgressListener listener : listeners) {
             listener.notify(notification);
         }

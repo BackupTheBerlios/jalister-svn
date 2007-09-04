@@ -11,5 +11,8 @@ import java.util.Collection;
  */
 public interface MetadataProvider {
 
+    /**
+     * {@inheritDoc}
+     */
     Collection<FileEntryMetaData> getMetadata(final File file);
 }

@@ -1,5 +1,6 @@
 package directorylister.startup;
 
+import directorylister.notification.Notification;
 import directorylister.notification.ProgressNotifier;
 import directorylister.resources.ResourceHandler;
 
@@ -16,7 +17,7 @@ public class LoadResourcesStep extends AbstractStartupStep {
      * {@inheritDoc}
      */
     public void execute() {
-        ResourceHandler.getInstance();
-        progressNotifier.notifyListeners("Startup.LoadingResources");
+        final ResourceHandler resourceHandler = ResourceHandler.getInstance();
+        progressNotifier.notifyListeners(new Notification(resourceHandler.getMessage("Startup.LoadingResources")));
     }
 }
