@@ -1,15 +1,17 @@
 package directorylister.search;
 
+import directorylister.controllers.JaListerDatabaseController;
 import directorylister.model.FileEntry;
 import directorylister.model.FileEntryVisitorAdapter;
+import directorylister.model.JaListerDatabase;
 import directorylister.utils.SwingUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.search.Hits;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -76,16 +78,24 @@ public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter
     }
 
     /**
-     * Method addParentDirectories ...
+     * Adds all parent directories to search result.
      *
-     * @param s of type String
+     * @param pathToProcess of type String
      */
-    private void addParentDirectories(final String s) {
-        final File file = new File(s);
-        String parent = file.getParent();
-        while (parent != null) {
-            searchResult.add(parent);
-            parent = new File(parent).getParent();
+    private void addParentDirectories(final String pathToProcess) {
+        final String rootFileName = root == null ? "" : root.getFileName();
+        final String path = pathToProcess.substring(rootFileName.length());
+
+        final JaListerDatabase jaListerDatabase = JaListerDatabaseController.getInstance().getCurrentDatabase();
+        final String fileSeparator = jaListerDatabase.getCreator().getFileSeparator();
+        final String[] directories = path.split(fileSeparator);
+
+        final StringBuilder parent = new StringBuilder(rootFileName);
+        for (final String directory : directories) {
+            if (StringUtils.isNotEmpty(directory)) {
+                parent.append(fileSeparator).append(directory);
+                searchResult.add(parent.toString());
+            }
         }
     }
 
