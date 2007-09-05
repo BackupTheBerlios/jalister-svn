@@ -19,8 +19,8 @@ import java.util.Set;
 import java.util.Stack;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 01.08.2007 0:13:19
  */
 public final class IndexSearcherFileEntryVisitor extends FileEntryVisitorAdapter {

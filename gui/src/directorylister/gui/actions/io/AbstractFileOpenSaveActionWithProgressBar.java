@@ -16,8 +16,8 @@ import java.util.concurrent.Executors;
 /**
  * Generic action for performing loading/save actions with user callback.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 11.08.2007 3:44:44
  */
 public abstract class AbstractFileOpenSaveActionWithProgressBar implements ActionListener {

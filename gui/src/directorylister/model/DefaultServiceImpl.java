@@ -3,8 +3,8 @@ package directorylister.model;
 /**
  * Default implementation of the <code>Service</code> interface.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 23:11:42
  */
 public class DefaultServiceImpl<T extends Serviceable<? super T>> implements Service<T> {

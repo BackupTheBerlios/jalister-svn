@@ -18,8 +18,8 @@ import java.awt.Container;
 import java.awt.event.ActionListener;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 29.07.2007 23:56:34
  */
 public class SwingUtils {

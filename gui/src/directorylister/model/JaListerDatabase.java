@@ -8,8 +8,8 @@ import java.io.Serializable;
 /**
  * Database of directory with files.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 0:21:45
  */
 public class JaListerDatabase extends ServiceableImpl<JaListerDatabase> implements Serializable, XMLSerializable {

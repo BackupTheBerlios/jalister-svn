@@ -6,8 +6,8 @@ import directorylister.model.JaListerDatabase;
 /**
  * Defines interface for listening events about FileEntry.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:02:14
  */
 public interface JaListerDatabaseListener {

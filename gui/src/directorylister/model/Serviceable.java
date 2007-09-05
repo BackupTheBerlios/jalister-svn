@@ -3,8 +3,8 @@ package directorylister.model;
 /**
  * Interface for objects, that can have services.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 2:07:45
  */
 public interface Serviceable<T extends Serviceable<? extends T>> {

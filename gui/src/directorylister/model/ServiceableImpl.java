@@ -7,8 +7,8 @@ import java.util.LinkedList;
 /**
  * Default implementation of the <code>Serviceable</code> interface.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 23:09:11
  */
 public class ServiceableImpl<T extends Serviceable<? extends T>> implements Serviceable<T> {

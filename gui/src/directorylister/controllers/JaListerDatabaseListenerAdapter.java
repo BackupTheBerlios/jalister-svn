@@ -6,8 +6,8 @@ import directorylister.model.JaListerDatabase;
 /**
  * Default implementation of the <code>JaListerDatabaseListener</code>.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:06:07
  */
 public class JaListerDatabaseListenerAdapter implements JaListerDatabaseListener {

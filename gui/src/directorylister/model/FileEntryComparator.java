@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 16.07.2007 23:58:49
  */
 public class FileEntryComparator implements Comparator<FileEntry>, Serializable {

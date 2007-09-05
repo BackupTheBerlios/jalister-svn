@@ -7,8 +7,8 @@ import directorylister.utils.ObjectUtils;
 import java.io.Serializable;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:34:41
  */
 public class FileEntryMetaData implements Serializable {

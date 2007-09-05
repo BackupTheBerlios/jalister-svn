@@ -6,8 +6,8 @@ import org.apache.lucene.document.Field;
 /**
  * Represents search field for searcher.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 05.08.2007 1:13:15
  */
 public enum SearchField {

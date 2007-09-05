@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Controller for FileEntry entity.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:01:20
  */
 public class JaListerDatabaseController {

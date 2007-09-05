@@ -18,8 +18,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 29.07.2007 23:12:18
  */
 public final class AboutBox extends JDialog {

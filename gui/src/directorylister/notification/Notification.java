@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * Represents notification.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 11.08.2007 4:09:37
  */
 public class Notification implements Serializable {

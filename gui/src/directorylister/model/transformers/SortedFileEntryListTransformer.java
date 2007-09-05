@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 0:04:00
  */
 public class SortedFileEntryListTransformer implements Transformer<List<FileEntry>, List<FileEntry>> {

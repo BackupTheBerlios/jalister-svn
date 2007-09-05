@@ -1,8 +1,8 @@
 package directorylister.model.metadata.value;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 19.08.2007 2:45:15
  */
 public class FileNameMetaDataValue extends DefaultMetaDataValue<String> {

@@ -35,8 +35,8 @@ import java.util.Collection;
 /**
  * Lucene searcher.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 31.07.2007 23:43:45
  */
 public class Searcher implements Service<JaListerDatabase> {

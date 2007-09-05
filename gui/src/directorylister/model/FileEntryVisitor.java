@@ -4,8 +4,8 @@ package directorylister.model;
  * Interface for file entry visitor. if class want to know
  * it should implement this interface.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 31.07.2007 23:55:37
  */
 public interface FileEntryVisitor {

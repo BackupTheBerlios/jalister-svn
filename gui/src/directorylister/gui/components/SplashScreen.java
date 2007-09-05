@@ -7,8 +7,8 @@ import directorylister.resources.ResourceHandler;
 import java.awt.HeadlessException;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 1:19:00
  */
 public class SplashScreen extends ProgressBarFrame {

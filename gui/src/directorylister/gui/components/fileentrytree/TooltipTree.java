@@ -9,8 +9,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 19.08.2007 3:24:31
  */
 public class TooltipTree extends JTree {

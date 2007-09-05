@@ -3,8 +3,8 @@ package directorylister.utils;
 import java.awt.Component;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 30.07.2007 0:01:00
  */
 public class DefaultComponentProcessor implements ComponentProcessor {

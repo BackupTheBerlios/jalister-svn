@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 19.08.2007 2:33:37
  */
 public class SortedMetaDataTransformer implements Transformer<Collection<FileEntryMetaData>, Collection<FileEntryMetaData>> {

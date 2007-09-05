@@ -20,8 +20,8 @@ import java.util.Collection;
 /**
  * Panel with metadata information.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 19.08.2007 2:22:21
  */
 public final class MetaDataPanel extends JPanel {

@@ -3,8 +3,8 @@ package directorylister.model;
 /**
  * Enum for operating systems.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.08.2007 0:25:48
  */
 public enum OperatingSystem {

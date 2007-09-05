@@ -3,8 +3,8 @@ package directorylister.model.transformers;
 /**
  * Interface for defining transformation of one entities to another.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 17.07.2007 0:02:21
  */
 public interface Transformer<Source, Target> {

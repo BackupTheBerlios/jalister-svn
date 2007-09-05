@@ -8,8 +8,8 @@ import java.io.File;
 /**
  * Interface for file isOpenDialog/save actions.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 11.08.2007 3:45:36
  */
 public interface FileOpenSavePlugin {

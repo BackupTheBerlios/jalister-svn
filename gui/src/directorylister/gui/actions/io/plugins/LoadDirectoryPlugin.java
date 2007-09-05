@@ -14,8 +14,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 11.08.2007 3:13:18
  */
 public class LoadDirectoryPlugin implements FileOpenSavePlugin {

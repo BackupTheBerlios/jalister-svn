@@ -7,8 +7,8 @@ import java.io.File;
 /**
  * Represents different file types.
  *
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 11.08.2007 4:39:02
  */
 public enum FileType {

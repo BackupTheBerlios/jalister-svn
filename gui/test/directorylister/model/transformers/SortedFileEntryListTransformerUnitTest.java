@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 25.07.2007 0:21:16
  */
 public class SortedFileEntryListTransformerUnitTest {

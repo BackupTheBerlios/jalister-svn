@@ -3,8 +3,8 @@ package directorylister.search;
 import directorylister.model.FileEntry;
 
 /**
+ * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
- * @author: Oleg Atamanenko dark.schakal@gmail.com
  * @since 18.08.2007 1:17:04
  */
 public class SearchResult {
