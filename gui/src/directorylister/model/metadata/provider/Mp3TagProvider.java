@@ -35,6 +35,9 @@ public class Mp3TagProvider implements MetadataProvider {
      */
     private static final Log logger = LogFactory.getLog(Mp3TagProvider.class.getName());
 
+    /**
+     * Constructor Mp3TagProvider creates a new Mp3TagProvider instance.
+     */
     public Mp3TagProvider() {
     }
 
@@ -44,33 +47,65 @@ public class Mp3TagProvider implements MetadataProvider {
     public Collection<FileEntryMetaData> getMetadata(final File file) {
         final Collection<FileEntryMetaData> metaDatas = new LinkedList<FileEntryMetaData>();
         final MP3File mp3File = new MP3File(file);
-        try {
+        final ID3V1Tag id3V1Tag = getId3V1Tag(mp3File);
+        if (null != id3V1Tag) {
+            addArtistMetadata(metaDatas, id3V1Tag.getArtist());
+            addAlbumMetadata(metaDatas, id3V1Tag.getAlbum());
+            addGenreMetadata(metaDatas, id3V1Tag.getGenre().toString());
+            addYearMetadata(metaDatas, id3V1Tag.getYear());
+            addTitleMetadata(metaDatas, id3V1Tag.getTitle());
+            addCommentMetadata(metaDatas, id3V1Tag.getComment());
+        }
 
-            final ID3V1Tag id3V1Tag = mp3File.getID3V1Tag();
-            if (null != id3V1Tag) {
-                addArtistMetadata(metaDatas, id3V1Tag.getArtist());
-                addAlbumMetadata(metaDatas, id3V1Tag.getAlbum());
-                addGenreMetadata(metaDatas, id3V1Tag.getGenre().toString());
-                addYearMetadata(metaDatas, id3V1Tag.getYear());
-                addTitleMetadata(metaDatas, id3V1Tag.getTitle());
-                addCommentMetadata(metaDatas, id3V1Tag.getComment());
-            }
+        final ID3V2Tag id3V2Tag = getId3V2Tag(mp3File);
+        if (null != id3V2Tag) {
+            addArtistMetadata(metaDatas, id3V2Tag.getArtist());
+            addAlbumMetadata(metaDatas, id3V2Tag.getAlbum());
+            addGenreMetadata(metaDatas, id3V2Tag.getGenre());
 
-            final ID3V2Tag id3V2Tag = mp3File.getID3V2Tag();
-            if (null != id3V2Tag) {
-                addArtistMetadata(metaDatas, id3V2Tag.getArtist());
-                addAlbumMetadata(metaDatas, id3V2Tag.getAlbum());
-                addGenreMetadata(metaDatas, id3V2Tag.getGenre());
+            try {
                 addYearMetadata(metaDatas, String.valueOf(id3V2Tag.getYear()));
-                addTitleMetadata(metaDatas, id3V2Tag.getTitle());
-                addCommentMetadata(metaDatas, id3V2Tag.getComment());
+            }
+            catch(ID3Exception e) {
+                logger.warn(e.toString());
             }
 
+            addTitleMetadata(metaDatas, id3V2Tag.getTitle());
+            addCommentMetadata(metaDatas, id3V2Tag.getComment());
+        }
+        return metaDatas;
+    }
+
+    /**
+     * Method getId3V2Tag ...
+     *
+     * @param mp3File of type MP3File
+     * @return ID3V2Tag
+     */
+    private static ID3V2Tag getId3V2Tag(final MP3File mp3File) {
+        try {
+            return mp3File.getID3V2Tag();
         }
         catch(ID3Exception e) {
             logger.warn(e.toString());
+            return null;
         }
-        return metaDatas;
+    }
+
+    /**
+     * Method getId3V1Tag ...
+     *
+     * @param mp3File of type MP3File
+     * @return ID3V1Tag
+     */
+    private static ID3V1Tag getId3V1Tag(final MP3File mp3File) {
+        try {
+            return mp3File.getID3V1Tag();
+        }
+        catch(ID3Exception e) {
+            logger.warn(e.toString());
+            return null;
+        }
     }
 
     /**

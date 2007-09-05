@@ -14,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * @author schakal Oleg Atamanenko
@@ -51,6 +52,7 @@ public class FileSystemParser extends ProgressNotifier {
         }
     };
     private Notification notification;
+    private static final FileComparator FILE_ENTRY_COMPARATOR = new FileComparator();
 
     /**
      * Constructor FileSystemParser creates a new FileSystemParser instance.
@@ -100,6 +102,7 @@ public class FileSystemParser extends ProgressNotifier {
      */
     private FileEntry parse(final File startFile, final FileEntry result) throws IOException {
         final File[] files = startFile.listFiles(FILTER);
+        Arrays.sort(files, FILE_ENTRY_COMPARATOR);
         if (null != files) {
             for (final File file : files) {
                 logger.debug("Parsing: " + file.getAbsolutePath());
