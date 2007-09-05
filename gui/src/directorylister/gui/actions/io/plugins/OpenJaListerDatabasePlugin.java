@@ -36,8 +36,10 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
      * @see FileOpenSavePlugin#handleFile(File,ProgressListener)
      */
     public void handleFile(final File selectedFile, final ProgressListener listener) {
+        InputStream inputStream = null;
         try {
-            final InputStream inputStream = new GZIPInputStream(new FileInputStream(selectedFile));
+            // TODO: Localization.
+            inputStream = new GZIPInputStream(new FileInputStream(selectedFile));
             final long startTime = System.currentTimeMillis();
             listener.notify(new Notification("Loading database..."));
             final JaListerDatabase listerDatabase = (JaListerDatabase) SerializationUtils.deserialize(inputStream);
@@ -47,7 +49,7 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
             listener.notify(new Notification("Done."));
             final long loadTime = System.currentTimeMillis() - startTime;
 
-            logger.info("Loaded in " + loadTime /(double ) 1000 + " seconds");
+            logger.info("Loaded in " + loadTime / (double) 1000 + " seconds");
 
         }
         catch(FileNotFoundException e) {
@@ -61,6 +63,16 @@ public class OpenJaListerDatabasePlugin implements FileOpenSavePlugin {
         catch(IOException e) {
             SwingUtils.showError(e.getMessage());
             logger.error(e.toString());
+        }
+        finally {
+            if (null != inputStream) {
+                try {
+                    inputStream.close();
+                }
+                catch(IOException e) {
+                    logger.error(e.toString());
+                }
+            }
         }
     }
 
