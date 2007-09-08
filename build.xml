@@ -41,7 +41,6 @@
             <fileset dir="${lib.dir}">
                 <include name="*.jar"/>
             </fileset>
-            <pathelement location="${tools.dir}/ant/ant-junit.jar"/>
         </path>
 
         <path id="cobertura.classpath">
@@ -327,5 +326,22 @@
 
     </target>
 
+    <target name="lint" depends="compile">
+        <property name="lint4j.dist.dir" value="${tools.dir}/lint4j"/>
+
+        <taskdef name="lint4j" classname="com.jutils.lint4j.ant.Lint4jAntTask">
+            <classpath>
+                <pathelement location="${lint4j.dist.dir}/jars/lint4j.jar"/>
+            </classpath>
+        </taskdef>
+
+        <lint4j packages="directorylister.*" level="${lint4j.level}" exact="${lint4j.exact}">
+            <sourcepath>
+                <dirset dir="${src.dir}"/>
+            </sourcepath>
+            <classpath refid="classpath"/>
+        </lint4j>
+
+    </target>
 
 </project>
