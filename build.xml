@@ -344,4 +344,21 @@
 
     </target>
 
+    <target name="findbugs" depends="compile">
+        <property name="findbugs.home" value="${tools.dir}/findbugs-1.2.1"/>
+        <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+            <classpath>
+                <pathelement location="${findbugs.home}/lib/findbugs-ant.jar"/>
+            </classpath>
+        </taskdef>
+
+        <findbugs home="${findbugs.home}"
+                  output="xml"
+                  outputFile="jalister-findbugs.xml">
+            <sourcepath path="${src.dir}"/>
+            <class location="${build.dir}"/>
+            <auxclasspath refid="classpath"/>
+        </findbugs>
+    </target>
+
 </project>
