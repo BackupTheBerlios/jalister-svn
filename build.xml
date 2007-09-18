@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Directory Lister" basedir="." default="help">
 
-    <property name="application.name" value="jalister"/>
-
-    <property name="javac.debug" value="true"/>
-    <property name="javac.deprecation" value="true"/>
-    <property name="javac.optimize" value="false"/>
-
     <property file="${basedir}/build.properties"/>
 
     <target name="init">
+        <property name="application.name" value="jalister"/>
+
+        <property name="javac.debug" value="true"/>
+        <property name="javac.deprecation" value="true"/>
+        <property name="javac.optimize" value="false"/>
+
 
         <property name="lib.dir" value="${basedir}/lib"/>
         <property name="main.dir" value="${basedir}/gui"/>
@@ -361,4 +361,25 @@
         </findbugs>
     </target>
 
+    <target name="checkstyle" depends="init"
+            description="Generates a report of code convention violations.">
+        <taskdef resource="checkstyletask.properties"
+                 classpath="${tools.dir}/checkstyle-4.3/checkstyle-all-4.3.jar"/>
+
+        <checkstyle config="${basedir}/sun_checks.xml"
+                    failureProperty="checkstyle.failure"
+                    failOnViolation="false">
+            <formatter type="xml" tofile="checkstyle_report.xml"/>
+            <fileset dir="${src.dir}" includes="**/*.java"/>
+        </checkstyle>
+
+        <mkdir dir="${reports.dir}/checkstyle"/>
+        <xslt
+                basedir="${reports.dir}/checkstyle"
+                in="checkstyle_report.xml"
+
+                out="checkstyle_report.html"
+                style="${basedir}/checkstyle-frames.xsl"/>
+
+    </target>
 </project>
