@@ -1,15 +1,16 @@
 package directorylister.gui.components;
 
-import directorylister.gui.actions.RunGarbageCollectorAction;
-import directorylister.model.format.FileSizeFormatter;
-import directorylister.resources.ResourceHandler;
+import java.awt.EventQueue;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import directorylister.gui.actions.RunGarbageCollectorAction;
+import directorylister.model.format.FileSizeFormatter;
+import directorylister.resources.ResourceHandler;
 
 /**
  * Component, which shows free memory indicator and allows to run garbage collector.
@@ -85,7 +86,7 @@ public class FreeMemoryIndicator extends JPanel {
             final int usedMemoryPercents = 500 - (int) ((totalMemory - usedMemory) / (float) totalMemory * 500);
             final String message = ResourceHandler.getInstance().getFormattedMessage("FreeMemoryIndicator.MemoryUsed", usedMB, totalMB);
 
-            SwingUtilities.invokeLater(new UpdateProgressBarAction(usedMemoryPercents, message));
+            EventQueue.invokeLater(new UpdateProgressBarAction(usedMemoryPercents, message));
         }
     }
 }

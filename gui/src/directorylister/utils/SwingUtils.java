@@ -1,9 +1,9 @@
 package directorylister.utils;
 
-import directorylister.gui.NarrowOptionPane;
-import directorylister.resources.ResourceHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.EventQueue;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -12,10 +12,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.event.ActionListener;
+
+import directorylister.gui.NarrowOptionPane;
+import directorylister.resources.ResourceHandler;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Oleg Atamanenko dark.schakal@gmail.com
@@ -77,9 +78,9 @@ public class SwingUtils {
      * @return T
      */
     public static <T extends Component> T findComponent(final String componentName, final Component container) {
-        final FindComponentProcessor componentProcessor = new FindComponentProcessor<T>(componentName);
+        final FindComponentProcessor<T> componentProcessor = new FindComponentProcessor<T>(componentName);
         processWithSubComponents(container, componentProcessor);
-        return (T) componentProcessor.getFoundComponent();
+        return componentProcessor.getFoundComponent();
     }
 
     /**
@@ -105,7 +106,7 @@ public class SwingUtils {
     }
 
     public static void showError(final String message) {
-        SwingUtilities.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
                 final ResourceHandler resourceHandler = ResourceHandler.getInstance();
                 final String localizedMessage = resourceHandler.getFormattedMessage("Application.ErrorOccured", message);

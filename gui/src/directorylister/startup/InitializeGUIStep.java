@@ -1,13 +1,14 @@
 package directorylister.startup;
 
+import java.awt.EventQueue;
+
+import javax.swing.ToolTipManager;
+
 import directorylister.gui.MainWindow;
 import directorylister.notification.Notification;
 import directorylister.notification.ProgressNotifier;
 import directorylister.resources.Localizer;
 import directorylister.resources.ResourceHandler;
-
-import javax.swing.SwingUtilities;
-import javax.swing.ToolTipManager;
 
 /**
  * @author schakal Oleg Atamanenko
@@ -29,7 +30,7 @@ public class InitializeGUIStep extends AbstractStartupStep {
         progressNotifier.notifyListeners(new Notification(resourceHandler.getMessage("Startup.InitGUI")));
         final MainWindow mainWindow = new MainWindow();
 
-        SwingUtilities.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             /**
              * {@inheritDoc}
              */

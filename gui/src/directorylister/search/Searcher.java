@@ -1,5 +1,12 @@
 package directorylister.search;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import directorylister.model.FileEntry;
 import directorylister.model.FileEntryVisitorAdapter;
 import directorylister.model.JaListerDatabase;
@@ -27,10 +34,6 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
 
 /**
  * Lucene searcher.
@@ -61,6 +64,8 @@ public class Searcher implements Service<JaListerDatabase> {
      * Field MAX_CLAUSE_COUNT
      */
     private static final int MAX_CLAUSE_COUNT = 65536;
+
+    private DelayedExecutor executor = new DelayedExecutor();
 
     /**
      * Constructs a new Searcher.
@@ -109,12 +114,18 @@ public class Searcher implements Service<JaListerDatabase> {
         }
         finally {
             if (indexSearcher != null) {
-                try {
-                    indexSearcher.close();
-                }
-                catch(IOException e) {
-                    logger.error(e);
-                }
+                final IndexSearcher searcher = indexSearcher;
+                executor.execute(new Runnable() {
+                    public void run() {
+                        try {
+                            logger.info("\n\n\nClosing index");
+                            searcher.close();
+                        }
+                        catch(IOException e) {
+                            logger.error(e);
+                        }
+                    }
+                }, 1000);
             }
         }
         return searchResult;
@@ -293,12 +304,19 @@ public class Searcher implements Service<JaListerDatabase> {
         }
         finally {
             if (indexWriter != null) {
-                try {
-                    indexWriter.close();
-                }
-                catch(IOException e) {
-                    logger.error(e);
-                }
+                final IndexWriter writer = indexWriter;
+                executor.execute(new Runnable() {
+                    public void run() {
+                        try {
+                            logger.info("\n\nClosing writer");
+                            writer.close();
+                        }
+                        catch(IOException e) {
+                            logger.error(e);
+                        }
+                    }
+
+                }, 1000);
             }
         }
     }
@@ -317,6 +335,30 @@ public class Searcher implements Service<JaListerDatabase> {
             if (null != rootEntry) {
                 rootEntry.acceptVisitor(new IndexWriterFileEntryVisitor(indexWriter));
                 indexWriter.optimize();
+            }
+        }
+    }
+
+    private class DelayedExecutor {
+
+        private long timeToStart = System.currentTimeMillis();
+        private Runnable task;
+        private Timer timer = new Timer("IndexCloser", true);
+
+        public void execute(final Runnable runnable, int delay) {
+            task = runnable;
+            timeToStart += delay;
+            reshedule();
+        }
+
+        private void reshedule() {
+            if (null != task) {
+                logger.info("rescheduling task...");
+                timer.schedule(new TimerTask() {
+                    public void run() {
+                        task.run();
+                    }
+                }, new Date(timeToStart));
             }
         }
     }

@@ -1,11 +1,11 @@
 package directorylister.startup;
 
+import java.awt.EventQueue;
+
 import directorylister.gui.components.SplashScreen;
 import directorylister.notification.Notification;
 import directorylister.notification.ProgressNotifier;
 import directorylister.resources.ResourceHandler;
-
-import javax.swing.SwingUtilities;
 
 /**
  * @author schakal Oleg Atamanenko
@@ -41,7 +41,7 @@ public class FirstAndLastStep extends AbstractStartupStep {
 
     private void hideSplashScreen() {
         progressNotifier.notifyListeners(new Notification(ResourceHandler.getInstance().getMessage("Startup.Done")));
-        SwingUtilities.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             /**
              * {@inheritDoc}
              */
@@ -53,7 +53,7 @@ public class FirstAndLastStep extends AbstractStartupStep {
 
     private void showSplashScreen() {
         splashScreen = new SplashScreen();
-        SwingUtilities.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             /**
              * {@inheritDoc}
              */
