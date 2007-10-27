@@ -1,5 +1,10 @@
 package directorylister.model.metadata.provider;
 
+import java.io.File;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+
 import directorylister.model.metadata.FileEntryMetaData;
 import directorylister.model.metadata.key.AlbumMetaDataKey;
 import directorylister.model.metadata.key.ArtistMetaDataKey;
@@ -21,10 +26,6 @@ import org.blinkenlights.jid3.MP3File;
 import org.blinkenlights.jid3.v1.ID3V1Tag;
 import org.blinkenlights.jid3.v2.ID3V2Tag;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.LinkedList;
-
 /**
  * @author schakal Oleg Atamanenko
  * @since 01.09.2007 11:36:26
@@ -45,6 +46,9 @@ public class Mp3TagProvider implements MetadataProvider {
      * @see MetadataProvider#getMetadata(File)
      */
     public Collection<FileEntryMetaData> getMetadata(final File file) {
+        if(file.isDirectory()){
+            return Collections.emptySet();
+        }
         final Collection<FileEntryMetaData> metaDatas = new LinkedList<FileEntryMetaData>();
         final MP3File mp3File = new MP3File(file);
         final ID3V1Tag id3V1Tag = getId3V1Tag(mp3File);

@@ -1,18 +1,20 @@
 package directorylister.gui.components;
 
-import directorylister.gui.MainWindow;
-import directorylister.gui.actions.CloseApplicationAction;
-import directorylister.gui.actions.SettingsSetLanguageAction;
-import directorylister.gui.actions.ShowAboutBoxAction;
-import directorylister.gui.actions.io.ChooseDirectoryAction;
-import directorylister.gui.actions.io.FileSaveTreeAction;
-import directorylister.gui.actions.io.FileSaveXMLAction;
-import directorylister.gui.actions.io.OpenSavedTreeAction;
+import java.util.Locale;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import java.util.Locale;
+
+import directorylister.gui.MainWindow;
+import directorylister.gui.actions.CloseApplicationAction;
+import directorylister.gui.actions.SettingsSetLanguageAction;
+import directorylister.gui.actions.ShowAboutBoxAction;
+import directorylister.gui.actions.ShowSettingsDialog;
+import directorylister.gui.actions.io.ChooseDirectoryAction;
+import directorylister.gui.actions.io.FileSaveTreeAction;
+import directorylister.gui.actions.io.FileSaveXMLAction;
+import directorylister.gui.actions.io.OpenSavedTreeAction;
 
 /**
  * Created by IntelliJ IDEA.
@@ -85,6 +87,12 @@ public class MainMenu extends JMenuBar {
         languageRussian.setName("MainMenu.Settings.Language.Russian");
         languageRussian.addActionListener(new SettingsSetLanguageAction(mainWindow, new Locale("RU", "ru")));
         settingsLanguage.add(languageRussian);
+
+
+        final JMenuItem menuOptions = new JMenuItem();
+        menuOptions.setName("MainMenu.Settings.ConfigureJaLister");
+        menuOptions.addActionListener(new ShowSettingsDialog());
+        menuSettings.add(menuOptions);
 
         final JMenu helpMenu = new JMenu();
         helpMenu.setName("MainMenu.Help");
