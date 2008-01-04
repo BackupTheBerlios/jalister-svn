@@ -174,7 +174,7 @@
     </target>
 
     <target name="status-svn" depends="init-svnant">
-        <svn username="${svnant.repository.user}"
+        <svn username="${svnant.repository.user}" javahl="false"
              password="${svnant.repository.passwd}">
             <status path="${basedir}" revisionProperty="revision"/>
         </svn>
