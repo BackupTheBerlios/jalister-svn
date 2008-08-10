@@ -8,6 +8,9 @@ import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.OutputStream;
 
 /**
@@ -47,7 +50,22 @@ public class XMLSerializer {
 
         entry.serializeToXML(document);
 
+        // Prepare the DOM document for writing
+        Source source = new DOMSource(document);
 
-        // dump document to outputStream.
+        Result result = new StreamResult(outputStream);
+
+        // Write the DOM document to the file
+        Transformer xformer = null;
+        try {
+            xformer = TransformerFactory.newInstance().newTransformer();
+            xformer.transform(source, result);
+        } catch (TransformerConfigurationException e) {
+            // TODO: Handle exception
+            logger.error(e);
+        } catch (TransformerException e) {
+            logger.error(e);
+        }
+
     }
 }

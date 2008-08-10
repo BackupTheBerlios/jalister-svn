@@ -38,4 +38,10 @@ public enum FileType {
         }
         return FILE;
     }
+
+
+    @Override
+    public String toString() {
+        return name();
+    }
 }

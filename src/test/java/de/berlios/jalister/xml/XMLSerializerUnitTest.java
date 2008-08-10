@@ -46,12 +46,14 @@ public class XMLSerializerUnitTest {
 
         entry.setFileType(FileType.DIRECTORY);
         entry.setFileName("fileName");
+        entry.setShortName("shortName");
 
         serializer.serialize(outputStream, entry);
 
         final String result = new String(outputStream.toByteArray());
 
-        final String expected = "<?xml version=\"1.0\"?>";
+        final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
+                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\"/>";
         Assert.assertEquals(expected, result);
     }
 

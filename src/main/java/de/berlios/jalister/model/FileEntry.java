@@ -3,6 +3,7 @@ package de.berlios.jalister.model;
 
 import de.berlios.jalister.model.metadata.FileEntryMetaData;
 import de.berlios.jalister.model.metadata.key.MetaDataKey;
+import de.berlios.jalister.model.metadata.value.MetaDataValue;
 import de.berlios.jalister.model.transformers.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,6 +48,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      * Field serialVersionUID
      */
     private static final long serialVersionUID = -1988882703594070834L;
+    private static final String FILE_ENTRY = "fileEntry";
 
     /**
      * Setter for property 'fileName'.
@@ -296,22 +298,33 @@ public class FileEntry implements Serializable, XMLSerializable {
      */
     public Element serializeToXML(final Document document) {
         //    logger.debug((fileType?"fileType ":"file")+shortName);
-        final Element xmlNode = document.createElement(fileType.name().toLowerCase());
+        final Element xmlNode = document.createElement(FILE_ENTRY);
+        document.appendChild(xmlNode);
 
-        xmlNode.setAttribute("Name", shortName);
+        addAttribute(xmlNode, "fileType", String.valueOf(fileType));
+        addAttribute(xmlNode, "fileName", fileName);
+        addAttribute(xmlNode, "shortName", shortName);
 
         for (final FileEntryMetaData data : metadatas) {
-            xmlNode.setAttribute(data.getKey().toString(), data.getValue().toString());
-        }
-        //  logger.debug(xmlNode.toString());
-        if (fileType.equals(FileType.FILE)) {
-            final List<FileEntry> childs = getChilds();
-            for (final FileEntry child : childs) {
-                final Element el = child.serializeToXML(document);
-                if (null != el) xmlNode.appendChild(el);
+            MetaDataValue value = data.getValue();
+            if (value != null) {
+                addAttribute(xmlNode, data.getKey().toString(), value.toString());
             }
         }
+
+        final List<FileEntry> childs = getChilds();
+        for (final FileEntry child : childs) {
+            final Element el = child.serializeToXML(document);
+            if (null != el) xmlNode.appendChild(el);
+        }
+
         return xmlNode;
+    }
+
+    private void addAttribute(Element xmlNode, String attrName, String attrValue) {
+        if (null != attrValue) {
+            xmlNode.setAttribute(attrName, attrValue);
+        }
     }
 
     /**
