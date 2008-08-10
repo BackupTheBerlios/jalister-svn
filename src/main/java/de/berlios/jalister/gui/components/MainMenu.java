@@ -52,7 +52,7 @@ public class MainMenu extends JMenuBar {
 
         final JMenuItem saveXML = new JMenuItem();
         saveXML.setName("MainMenu.SaveXML");
-        saveXML.addActionListener(new FileSaveXMLAction(mainWindow));
+        saveXML.addActionListener(new FileSaveXMLAction());
 
         final JMenuItem fileCloseApp = new JMenuItem();
         fileCloseApp.setName("MainMenu.Close");

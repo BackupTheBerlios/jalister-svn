@@ -10,17 +10,11 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Created by IntelliJ IDEA.
  * User: bg
  * Date: 17.07.2007
  * Time: 23:16:05
  */
 public class XMLSerializerUnitTest {
-
-    /**
-     * Field serializer
-     */
-    private XMLSerializer serializer;
 
     /**
      * Field outputStream
@@ -32,9 +26,7 @@ public class XMLSerializerUnitTest {
      */
     @Before()
     public void setUp() {
-
         outputStream = new ByteArrayOutputStream();
-        serializer = new XMLSerializer();
     }
 
     /**
@@ -48,12 +40,12 @@ public class XMLSerializerUnitTest {
         entry.setFileName("fileName");
         entry.setShortName("shortName");
 
-        serializer.serialize(outputStream, entry);
+        XMLSerializer.serialize(outputStream, entry);
 
         final String result = new String(outputStream.toByteArray());
 
         final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
-                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\"/>";
+                                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\"/>";
         Assert.assertEquals(expected, result);
     }
 
@@ -73,14 +65,14 @@ public class XMLSerializerUnitTest {
         child.setShortName("shortChilsName");
         root.addChild(child);
 
-        serializer.serialize(outputStream, root);
+        XMLSerializer.serialize(outputStream, root);
 
         final String result = new String(outputStream.toByteArray());
 
         final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
-                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\">" +
-                "<fileEntry fileName=\"childName\" fileType=\"FILE\" shortName=\"shortChilsName\"/>" +
-                "</fileEntry>";
+                                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\">" +
+                                "<fileEntry fileName=\"childName\" fileType=\"FILE\" shortName=\"shortChilsName\"/>" +
+                                "</fileEntry>";
 
         Assert.assertEquals(expected, result);
 
