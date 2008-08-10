@@ -46,6 +46,10 @@ public class MainMenu extends JMenuBar {
         fileOpenTree.setName("MainMenu.OpenSavedTree");
         fileOpenTree.addActionListener(new OpenSavedTreeAction(mainWindow));
 
+        final JMenuItem openXML = new JMenuItem();
+        openXML.setName("MainMenu.OpenXML");
+        // TODO: implement action
+
         final JMenuItem fileSave = new JMenuItem();
         fileSave.setName("MainMenu.SaveTree");
         fileSave.addActionListener(new FileSaveTreeAction(mainWindow));
@@ -61,8 +65,9 @@ public class MainMenu extends JMenuBar {
         menuFile.add(fileChooseDirectory);
         menuFile.addSeparator();
         menuFile.add(fileOpenTree);
-        menuFile.add(fileSave);
+        menuFile.add(openXML);
         menuFile.addSeparator();
+        menuFile.add(fileSave);
         menuFile.add(saveXML);
         menuFile.addSeparator();
         menuFile.add(fileCloseApp);

@@ -56,10 +56,14 @@ public final class MainWindow extends JFrame {
         final JMenuItem openSavedTree = SwingUtils.findComponent("MainMenu.OpenSavedTree", menubar);
         toolBar.add(SwingUtils.createButton(openSavedTree));
 
+        final JMenuItem openXML = SwingUtils.findComponent("MainMenu.OpenXML", menubar);
+        toolBar.add(SwingUtils.createButton(openXML));
+
+        toolBar.addSeparator();
+
         final JMenuItem saveTree = SwingUtils.findComponent("MainMenu.SaveTree", menubar);
         toolBar.add(SwingUtils.createButton(saveTree));
 
-        toolBar.addSeparator();
         final JMenuItem saveXML = SwingUtils.findComponent("MainMenu.SaveXML", menubar);
         toolBar.add(SwingUtils.createButton(saveXML));
 
