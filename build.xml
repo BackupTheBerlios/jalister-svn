@@ -109,7 +109,7 @@
     </target>
 
     <target name="run" depends="compile, prepare-run">
-        <java classname="directorylister.Main" fork="true" failonerror="true">
+        <java classname="de.berlios.jalister.Main" fork="true" failonerror="true">
             <classpath path="${build.dir}"/>
             <classpath refid="classpath"/>
         </java>
@@ -119,7 +119,7 @@
         <jar destfile="${dist.file}">
             <manifest>
                 <attribute name="Built-By" value="${user.name}"/>
-                <attribute name="Main-Class" value="directorylister.Main"/>
+                <attribute name="Main-Class" value="de.berlios.jalister.Main"/>
                 <attribute name="Class-Path"
                            value="activation.jar commons-codec-1.3.jar commons-lang-2.2.jar commons-logging-1.1.jar jmimemagic-0.1.0.jar log4j.jar lucene-core-2.1.0.jar looks-2.1.4.jar JID3.jar"/>
             </manifest>

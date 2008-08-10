@@ -1,222 +1,215 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-Licensed to the Apache Software Foundation (ASF) under one
-or more contributor license agreements.  See the NOTICE file
-distributed with this work for additional information
-regarding copyright ownership.  The ASF licenses this file
-to you under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance
-with the License.  You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied.  See the License for the
-specific language governing permissions and limitations
-under the License.
--->
-<module version="4" relativePaths="false" type="JAVA_MODULE"> 
-  <component name="NewModuleRootManager"> 
-    <exclude-output/>  
-    <orderEntry type="inheritedJdk"/>  
-    <!-- output url="file://$$MODULE_DIR$$/${maven.build.dest}"/ -->  
-    <!-- output-test url="file://$$MODULE_DIR$$/${maven.test.dest}"/ -->  
-    <content url="file://$MODULE_DIR$"> 
-      <!-- sourceFolder url="file://$$MODULE_DIR$$/${pom.build.sourceDirectory}" isTestSource="false"/ -->  
-      <!-- sourceFolder url="file://$$MODULE_DIR$$/${pom.build.testSourceDirectory}" isTestSource="true"/ -->  
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false"/>
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true"/>
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false"/>
-      <excludeFolder url="file://$MODULE_DIR$/target"/>
-    </content>  
-    <orderEntry type="sourceFolder" forTests="false"/>  
-    <!-- Next include each dependency:
-      <orderEntry type="module" module-name="${dep.artifactId}"/>
-      <orderEntry type="module-library">
-        <library name="${dep.artifactId}">
-          <CLASSES>
-            <root url="jar://${lib.path}!/"/>
-          </CLASSES>
-          <JAVADOC/>
-          <SOURCES/>
-        </library>
-      </orderEntry>
-     -->  
-    <output url="file://$MODULE_DIR$/target/classes"/>
-    <output-test url="file://$MODULE_DIR$/target/test-classes"/>
+<module relativePaths="false" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/jmimemagic/jmimemagic/0.1.2/jmimemagic-0.1.2.jar!/"/>
+          <root url="jar:///home/schakal/.m2/jmimemagic/jmimemagic/0.1.2/jmimemagic-0.1.2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/oro/oro/2.0.8/oro-2.0.8.jar!/"/>
+          <root url="jar:///home/schakal/.m2/oro/oro/2.0.8/oro-2.0.8.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/"/>
+          <root url="jar:///home/schakal/.m2/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/log4j/log4j/1.2.8/log4j-1.2.8.jar!/"/>
+          <root url="jar:///home/schakal/.m2/log4j/log4j/1.2.8/log4j-1.2.8.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/xerces/xercesImpl/2.4.0/xercesImpl-2.4.0.jar!/"/>
+          <root url="jar:///home/schakal/.m2/xerces/xercesImpl/2.4.0/xercesImpl-2.4.0.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar!/"/>
+          <root url="jar:///home/schakal/.m2/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/xml-apis/xmlParserAPIs/2.0.2/xmlParserAPIs-2.0.2.jar!/"/>
+          <root url="jar:///home/schakal/.m2/xml-apis/xmlParserAPIs/2.0.2/xmlParserAPIs-2.0.2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/commons-lang/commons-lang/2.4/commons-lang-2.4.jar!/"/>
+          <root url="jar:///home/schakal/.m2/commons-lang/commons-lang/2.4/commons-lang-2.4.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///media/data/src/java/jalister/lib/JID3.jar!/"/>
+          <root url="jar://$MODULE_DIR$/lib/JID3.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/org/apache/lucene/lucene-core/2.3.2/lucene-core-2.3.2.jar!/"/>
+          <root url="jar:///home/schakal/.m2/org/apache/lucene/lucene-core/2.3.2/lucene-core-2.3.2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/commons-codec/commons-codec/20041127.091804/commons-codec-20041127.091804.jar!/"/>
+          <root url="jar:///home/schakal/.m2/commons-codec/commons-codec/20041127.091804/commons-codec-20041127.091804.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/org/jmock/jmock-junit4/2.5.0-RC1/jmock-junit4-2.5.0-RC1.jar!/"/>
+          <root url="jar:///home/schakal/.m2/org/jmock/jmock-junit4/2.5.0-RC1/jmock-junit4-2.5.0-RC1.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/org/jmock/jmock/2.5.0-RC1/jmock-2.5.0-RC1.jar!/"/>
+          <root url="jar:///home/schakal/.m2/org/jmock/jmock/2.5.0-RC1/jmock-2.5.0-RC1.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar!/"/>
+          <root url="jar:///home/schakal/.m2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/org/hamcrest/hamcrest-library/1.1/hamcrest-library-1.1.jar!/"/>
+          <root url="jar:///home/schakal/.m2/org/hamcrest/hamcrest-library/1.1/hamcrest-library-1.1.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/junit/junit-dep/4.4/junit-dep-4.4.jar!/"/>
+          <root url="jar:///home/schakal/.m2/junit/junit-dep/4.4/junit-dep-4.4.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/com/jgoodies/looks/2.1.2/looks-2.1.2.jar!/"/>
+          <root url="jar:///home/schakal/.m2/com/jgoodies/looks/2.1.2/looks-2.1.2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/uispec4j/uispec4j/1.5/uispec4j-1.5.jar!/"/>
+          <root url="jar:///home/schakal/.m2/uispec4j/uispec4j/1.5/uispec4j-1.5.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/junit/junit/4.4/junit-4.4.jar!/"/>
+          <root url="jar:///home/schakal/.m2/junit/junit/4.4/junit-4.4.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/asm/asm/1.5.2/asm-1.5.2.jar!/"/>
+          <root url="jar:///home/schakal/.m2/asm/asm/1.5.2/asm-1.5.2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/asm/asm-util/1.5.2/asm-util-1.5.2.jar!/"/>
+          <root url="jar:///home/schakal/.m2/asm/asm-util/1.5.2/asm-util-1.5.2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///home/schakal/.m2/asm/asm-attrs/1.5.1/asm-attrs-1.5.1.jar!/"/>
+          <root url="jar:///home/schakal/.m2/asm/asm-attrs/1.5.1/asm-attrs-1.5.1.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
-  </component>  
-  <component name="ModuleRootManager"/>  
-  <!-- If it's a war project:
-  <component name="WebModuleProperties">
-    <containerElement type="module" name="${dep.artifactId}">
-      <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/classes" />
-    </containerElement>
-    <containerElement type="library" level="module" name="${dep.artifactId}">
-      <attribute name="method" value="1" />
-      <attribute name="URI" value="/WEB-INF/lib/${dep.systemPath.name}" />
-    </containerElement>
-    <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/${pom.build.warSourceDirectory}/WEB-INF/web.xml" version="" />
-    <webroots>
-      <root url="file://$MODULE_DIR$/${pom.build.warSourceDirectory}" relative="/" />
-    </webroots>
   </component>
-  --> 
 </module>
+
