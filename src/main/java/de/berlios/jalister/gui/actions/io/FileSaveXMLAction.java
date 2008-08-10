@@ -4,10 +4,12 @@ import de.berlios.jalister.XMLSerializer;
 import de.berlios.jalister.controllers.JaListerDatabaseController;
 import de.berlios.jalister.model.FileEntry;
 import de.berlios.jalister.model.JaListerDatabase;
+import de.berlios.jalister.resources.ResourceHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -41,6 +43,9 @@ public final class FileSaveXMLAction implements ActionListener {
      */
     public void actionPerformed(final ActionEvent actionEvent) {
         final JFileChooser fileChooser = new JFileChooser();
+        fileChooser.addChoosableFileFilter(
+                new FileNameExtensionFilter(ResourceHandler.getInstance().getMessage("FileType.XML"), "xml")
+        );
         fileChooser.showSaveDialog(null);
 
         final File selectedFile = fileChooser.getSelectedFile();
