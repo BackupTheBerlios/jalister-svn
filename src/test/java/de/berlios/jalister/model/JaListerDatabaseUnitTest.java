@@ -46,9 +46,9 @@ public class JaListerDatabaseUnitTest {
      */
     @Test()
     public void testGetCreator() throws Exception {
-        final OperatingSystem operatingSystem = listerDatabase.getCreator();
-        Assert.assertNotNull(operatingSystem);
-        Assert.assertEquals(OperatingSystem.getOperatingSystem(), operatingSystem);
+        final FilePathSeparator filePathSeparator = listerDatabase.getCreator();
+        Assert.assertNotNull(filePathSeparator);
+        Assert.assertEquals(FilePathSeparator.getFilePathSeparator(), filePathSeparator);
 
     }
 

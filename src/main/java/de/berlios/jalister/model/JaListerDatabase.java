@@ -17,7 +17,7 @@ public class JaListerDatabase extends ServiceableImpl<JaListerDatabase> implemen
     /**
      * Field creator
      */
-    private final OperatingSystem creator;
+    private final FilePathSeparator creator;
     /**
      * Field rootEntry
      */
@@ -35,7 +35,7 @@ public class JaListerDatabase extends ServiceableImpl<JaListerDatabase> implemen
      * Constructs a new JaListerDatabase.
      */
     public JaListerDatabase() {
-        creator = OperatingSystem.getOperatingSystem();
+        creator = FilePathSeparator.getFilePathSeparator();
     }
 
     /**
@@ -43,7 +43,7 @@ public class JaListerDatabase extends ServiceableImpl<JaListerDatabase> implemen
      *
      * @return Value for property 'creator'.
      */
-    public OperatingSystem getCreator() {
+    public FilePathSeparator getCreator() {
         return creator;
     }
 

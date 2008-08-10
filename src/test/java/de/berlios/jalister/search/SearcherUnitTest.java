@@ -1,5 +1,6 @@
 package de.berlios.jalister.search;
 
+import de.berlios.jalister.controllers.JaListerDatabaseController;
 import de.berlios.jalister.model.FileEntry;
 import de.berlios.jalister.model.FileType;
 import de.berlios.jalister.model.JaListerDatabase;
@@ -44,6 +45,7 @@ public class SearcherUnitTest {
     @Test()
     public void testSearchSimple() throws Exception {
         final JaListerDatabase database = new JaListerDatabase();
+        JaListerDatabaseController.getInstance().setCurrentJaListerDatabase(database);
         final FileEntry root = new FileEntry();
         root.setFileName("root");
         root.setShortName("root");

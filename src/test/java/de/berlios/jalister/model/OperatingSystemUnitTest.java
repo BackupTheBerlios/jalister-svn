@@ -43,10 +43,10 @@ public class OperatingSystemUnitTest {
      */
     @Test()
     public void testGetOperatingSystem() throws Exception {
-        final OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();
-        Assert.assertNotNull(operatingSystem);
+        final FilePathSeparator filePathSeparator = FilePathSeparator.getFilePathSeparator();
+        Assert.assertNotNull(filePathSeparator);
 
-        Assert.assertTrue(operatingSystem != OperatingSystem.UNKNOWN);
+        Assert.assertTrue(filePathSeparator != FilePathSeparator.UNKNOWN);
     }
 
     /**
@@ -56,6 +56,6 @@ public class OperatingSystemUnitTest {
      */
     @Test()
     public void testGetFileSeparator() throws Exception {
-        Assert.assertEquals(File.separator, OperatingSystem.getOperatingSystem().getFileSeparator());
+        Assert.assertEquals(File.separator, FilePathSeparator.getFilePathSeparator().getFileSeparator());
     }
 }
