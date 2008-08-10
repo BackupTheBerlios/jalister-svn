@@ -56,10 +56,12 @@ public class XMLSerializer {
         Result result = new StreamResult(outputStream);
 
         // Write the DOM document to the file
-        Transformer xformer = null;
+        Transformer transformer;
         try {
-            xformer = TransformerFactory.newInstance().newTransformer();
-            xformer.transform(source, result);
+            transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setParameter(OutputKeys.INDENT, true);
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+            transformer.transform(source, result);
         } catch (TransformerConfigurationException e) {
             // TODO: Handle exception
             logger.error(e);

@@ -57,4 +57,33 @@ public class XMLSerializerUnitTest {
         Assert.assertEquals(expected, result);
     }
 
+    /**
+     * Test that simple entry with child can be serialized
+     */
+    @Test
+    public void complicatedEntryTest() {
+        final FileEntry root = new FileEntry();
+        root.setFileType(FileType.DIRECTORY);
+        root.setFileName("fileName");
+        root.setShortName("shortName");
+
+        FileEntry child = new FileEntry();
+        child.setFileType(FileType.FILE);
+        child.setFileName("childName");
+        child.setShortName("shortChilsName");
+        root.addChild(child);
+
+        serializer.serialize(outputStream, root);
+
+        final String result = new String(outputStream.toByteArray());
+
+        final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
+                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\">" +
+                "<fileEntry fileName=\"childName\" fileType=\"FILE\" shortName=\"shortChilsName\"/>" +
+                "</fileEntry>";
+
+        Assert.assertEquals(expected, result);
+
+    }
+
 }

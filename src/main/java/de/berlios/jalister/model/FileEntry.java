@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import java.io.Serializable;
 import java.util.*;
@@ -298,26 +299,37 @@ public class FileEntry implements Serializable, XMLSerializable {
      */
     public Element serializeToXML(final Document document) {
         //    logger.debug((fileType?"fileType ":"file")+shortName);
+        final Element xmlNode = createNode(document, this);
+        return serializeToXml(document, document.getParentNode(), xmlNode, this);
+    }
+
+    private Element serializeToXml(Document document, Node parentNode, Element xmlNode, FileEntry fileEntry) {
+        if (null != parentNode) {
+            parentNode.appendChild(xmlNode);
+        } else {
+            document.appendChild(xmlNode);
+        }
+        final List<FileEntry> childs = fileEntry.getChilds();
+        for (final FileEntry child : childs) {
+            Element childElem = createNode(document, child);
+            serializeToXml(document, xmlNode, childElem, child);
+        }
+        return xmlNode;
+    }
+
+    private Element createNode(Document document, FileEntry fileEntry) {
         final Element xmlNode = document.createElement(FILE_ENTRY);
-        document.appendChild(xmlNode);
 
-        addAttribute(xmlNode, "fileType", String.valueOf(fileType));
-        addAttribute(xmlNode, "fileName", fileName);
-        addAttribute(xmlNode, "shortName", shortName);
+        addAttribute(xmlNode, "fileType", String.valueOf(fileEntry.fileType));
+        addAttribute(xmlNode, "fileName", fileEntry.fileName);
+        addAttribute(xmlNode, "shortName", fileEntry.shortName);
 
-        for (final FileEntryMetaData data : metadatas) {
+        for (final FileEntryMetaData data : fileEntry.metadatas) {
             MetaDataValue value = data.getValue();
             if (value != null) {
                 addAttribute(xmlNode, data.getKey().toString(), value.toString());
             }
         }
-
-        final List<FileEntry> childs = getChilds();
-        for (final FileEntry child : childs) {
-            final Element el = child.serializeToXML(document);
-            if (null != el) xmlNode.appendChild(el);
-        }
-
         return xmlNode;
     }
 
