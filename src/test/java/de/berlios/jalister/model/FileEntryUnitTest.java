@@ -113,7 +113,7 @@ public class FileEntryUnitTest {
         final Set<FileEntryMetaData> metaDatas = new HashSet<FileEntryMetaData>();
         fileEntry.setMetadatas(metaDatas);
         final Collection<FileEntryMetaData> datas = fileEntry.getMetadatas();
-        assertSame(metaDatas, datas);
+        Assert.assertEquals(metaDatas.size(), datas.size());
     }
 
     /**

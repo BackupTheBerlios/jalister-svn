@@ -47,6 +47,7 @@ public class XMLSerializer {
 
         entry.serializeToXML(document);
 
+
         // dump document to outputStream.
     }
 }

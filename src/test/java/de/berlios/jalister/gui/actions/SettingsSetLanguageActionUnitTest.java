@@ -30,7 +30,7 @@ public class SettingsSetLanguageActionUnitTest {
      * Method tearDown ...
      */
     @After()
-    public static void tearDown() {
+    public void tearDown() {
         ResourceHandler.getInstance().setLocale(Locale.ENGLISH);
     }
 
