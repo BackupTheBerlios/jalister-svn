@@ -49,7 +49,7 @@ public class ResourceHandler {
      * Method reloadResources ...
      */
     private void reloadResources() {
-        resourceBundle = ResourceBundle.getBundle("directorylister.resources.messages", locale);
+        resourceBundle = ResourceBundle.getBundle("de.berlios.jalister.resources.messages", locale);
     }
 
     /**

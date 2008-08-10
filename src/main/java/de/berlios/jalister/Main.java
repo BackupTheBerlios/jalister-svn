@@ -35,7 +35,12 @@ public class Main {
         startupProcess.addStep(new InitializeMetadataStep(progressNotifier));
         startupProcess.addStep(new InitializeGUIStep(progressNotifier));
 
-        startupProcess.execute();
+        try {
+            startupProcess.execute();
+        } catch (Exception e) {
+            logger.error(e);
+            System.exit(-1);
+        }
         logger.info("Application successfully started.");
     }
 

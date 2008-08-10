@@ -36,7 +36,7 @@ public class Mp3TagProvider implements MetadataProvider {
      * @see MetadataProvider#getMetadata(File)
      */
     public Collection<FileEntryMetaData> getMetadata(final File file) {
-        if (file.isDirectory()) {
+        if (file.isDirectory() || file.length() == 0) {
             return Collections.emptySet();
         }
         final Collection<FileEntryMetaData> metaDatas = new LinkedList<FileEntryMetaData>();
@@ -81,7 +81,7 @@ public class Mp3TagProvider implements MetadataProvider {
             return mp3File.getID3V2Tag();
         }
         catch (ID3Exception e) {
-            logger.warn(e.toString());
+            logger.warn("Cannot read ID3V2 tag from " + mp3File, e);
             return null;
         }
     }
