@@ -39,9 +39,21 @@ public enum FileType {
         return FILE;
     }
 
-
-    @Override
-    public String toString() {
-        return name();
+    /**
+     * Gets Enum value from string
+     *
+     * @param str String with value
+     * @return FileType
+     */
+    public static FileType fromString(String str) {
+        if (str.equals("FILE")) {
+            return FILE;
+        } else if (str.equals("DIRECTORY")) {
+            return DIRECTORY;
+        } else if (str.equals("SYMLINK")) {
+            return SYMLINK;
+        }
+        //TODO: FIXME 
+        return FILE;
     }
 }
