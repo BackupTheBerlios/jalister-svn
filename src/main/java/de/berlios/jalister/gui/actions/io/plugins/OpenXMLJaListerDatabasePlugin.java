@@ -63,6 +63,9 @@ public class OpenXMLJaListerDatabasePlugin implements FileOpenSavePlugin {
         catch (IOException e) {
             SwingUtils.showError(e.getMessage());
             logger.error(e.toString());
+        } catch (Exception e) {
+            SwingUtils.showError(e.getMessage());
+            logger.error(e.toString());
         }
     }
 
