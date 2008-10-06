@@ -3,14 +3,10 @@ package de.berlios.jalister;
 import de.berlios.jalister.model.XMLSerializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Document;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.load.Persister;
+import org.simpleframework.xml.stream.Format;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.OutputStream;
 
 /**
@@ -23,6 +19,8 @@ public class XMLSerializer {
      * Field logger
      */
     private static final Log logger = LogFactory.getLog(Main.class);
+    private static final String xmlHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>";
+    private static final int xmlIdent = 4;
 
     /**
      * Method serialize ...
@@ -31,43 +29,13 @@ public class XMLSerializer {
      * @param entry        of type XMLSerializable
      */
     public static void serialize(final OutputStream outputStream, final XMLSerializable entry) {
-
-        // extract creation of document in the method.
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = null;
+        Format fmt = new Format(xmlIdent, xmlHeader);
+        Serializer serializer = new Persister(fmt);
         try {
-            documentBuilder = factory.newDocumentBuilder();
-        }
-        catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        if (documentBuilder == null) {
-            logger.error("documentBuilder is null");
-            return;
-        }
-        final Document document = documentBuilder.newDocument();
-        document.setXmlVersion("1.0");
-
-        entry.serializeToXML(document);
-
-        // Prepare the DOM document for writing
-        Source source = new DOMSource(document);
-
-        Result result = new StreamResult(outputStream);
-
-        // Write the DOM document to the file
-        Transformer transformer;
-        try {
-            transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setParameter(OutputKeys.INDENT, true);
-            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-            transformer.transform(source, result);
-        } catch (TransformerConfigurationException e) {
-            // TODO: Handle exception
-            logger.error(e);
-        } catch (TransformerException e) {
+            serializer.write(entry, outputStream);
+        } catch (Exception e) {
+            // TODO: handle  
             logger.error(e);
         }
-
     }
 }

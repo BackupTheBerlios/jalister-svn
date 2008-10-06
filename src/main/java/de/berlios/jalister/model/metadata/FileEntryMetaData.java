@@ -3,22 +3,28 @@ package de.berlios.jalister.model.metadata;
 import de.berlios.jalister.model.metadata.key.MetaDataKey;
 import de.berlios.jalister.model.metadata.value.MetaDataValue;
 import de.berlios.jalister.utils.ObjectUtils;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
+
 
 /**
  * @author Oleg Atamanenko dark.schakal@gmail.com
  * @version 1.0
  * @since 17.07.2007 1:34:41
  */
+@Root
 public class FileEntryMetaData implements Serializable {
     /**
      * Field key
      */
+    @Attribute
     private MetaDataKey key;
     /**
      * Field value
      */
+    @Attribute
     private MetaDataValue value;
     /**
      * Field serialVersionUID

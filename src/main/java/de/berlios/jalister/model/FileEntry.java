@@ -7,6 +7,9 @@ import de.berlios.jalister.model.metadata.value.MetaDataValue;
 import de.berlios.jalister.model.transformers.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,6 +21,7 @@ import java.util.*;
  * @author schakal Oleg Atamanenko
  * @since 01.04.2007 12:13:55
  */
+@Root(name = "fileEntry")
 public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field logger
@@ -26,15 +30,18 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field fileName
      */
+    @Attribute
     private String fileName;
-    /**
-     * Field shortName
-     */
-    private String shortName;
     /**
      * Field fileType
      */
+    @Attribute
     private FileType fileType;
+    /**
+     * Field shortName
+     */
+    @Attribute
+    private String shortName;
     /**
      * Field parent
      */
@@ -44,6 +51,7 @@ public class FileEntry implements Serializable, XMLSerializable {
      * Field metadatas
      */
     // TODO: Refactor it for simple synchronized Map
+    // @ElementMap(attribute=true, required=false, inline=true)
     private Collection<FileEntryMetaData> metadatas = new HashSet<FileEntryMetaData>();
     /**
      * Field serialVersionUID
@@ -90,10 +98,12 @@ public class FileEntry implements Serializable, XMLSerializable {
     /**
      * Field childs
      */
+    @ElementList(required = false, inline = true)
     private final List<FileEntry> childs = new LinkedList<FileEntry>();
     /**
      * Field md5
      */
+    @Attribute(required = false)
     private String md5;
 
     /**
@@ -298,7 +308,6 @@ public class FileEntry implements Serializable, XMLSerializable {
      * @see XMLSerializable#serializeToXML(Document)
      */
     public Element serializeToXML(final Document document) {
-        //    logger.debug((fileType?"fileType ":"file")+shortName);
         final Element xmlNode = createNode(document, this);
         return serializeToXml(document, document.getParentNode(), xmlNode, this);
     }

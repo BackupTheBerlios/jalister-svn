@@ -45,7 +45,8 @@ public class XMLSerializerUnitTest {
         final String result = new String(outputStream.toByteArray());
 
         final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
-                                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\"/>";
+                System.getProperty("line.separator") +
+                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\"></fileEntry>";
         Assert.assertEquals(expected, result);
     }
 
@@ -62,7 +63,7 @@ public class XMLSerializerUnitTest {
         FileEntry child = new FileEntry();
         child.setFileType(FileType.FILE);
         child.setFileName("childName");
-        child.setShortName("shortChilsName");
+        child.setShortName("shortChildsName");
         root.addChild(child);
 
         XMLSerializer.serialize(outputStream, root);
@@ -70,9 +71,12 @@ public class XMLSerializerUnitTest {
         final String result = new String(outputStream.toByteArray());
 
         final String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
-                                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\">" +
-                                "<fileEntry fileName=\"childName\" fileType=\"FILE\" shortName=\"shortChilsName\"/>" +
-                                "</fileEntry>";
+                System.getProperty("line.separator") +
+                "<fileEntry fileName=\"fileName\" fileType=\"DIRECTORY\" shortName=\"shortName\">" +
+                System.getProperty("line.separator") +
+                "    <fileEntry fileName=\"childName\" fileType=\"FILE\" shortName=\"shortChildsName\"></fileEntry>" +
+                System.getProperty("line.separator") +
+                "</fileEntry>";
 
         Assert.assertEquals(expected, result);
 

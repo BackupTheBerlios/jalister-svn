@@ -71,6 +71,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.simpleframework</groupId>
+            <artifactId>simple-xml</artifactId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
 
     <build>
