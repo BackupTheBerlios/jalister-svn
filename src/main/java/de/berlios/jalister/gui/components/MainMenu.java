@@ -5,10 +5,7 @@ import de.berlios.jalister.gui.actions.CloseApplicationAction;
 import de.berlios.jalister.gui.actions.SettingsSetLanguageAction;
 import de.berlios.jalister.gui.actions.ShowAboutBoxAction;
 import de.berlios.jalister.gui.actions.ShowSettingsDialog;
-import de.berlios.jalister.gui.actions.io.ChooseDirectoryAction;
-import de.berlios.jalister.gui.actions.io.FileSaveTreeAction;
-import de.berlios.jalister.gui.actions.io.FileSaveXMLAction;
-import de.berlios.jalister.gui.actions.io.OpenSavedTreeAction;
+import de.berlios.jalister.gui.actions.io.*;
 
 import javax.swing.*;
 import java.util.Locale;
@@ -48,7 +45,7 @@ public class MainMenu extends JMenuBar {
 
         final JMenuItem openXML = new JMenuItem();
         openXML.setName("MainMenu.OpenXML");
-        // TODO: implement action
+        openXML.addActionListener(new FileOpenXMLAction(mainWindow));
 
         final JMenuItem fileSave = new JMenuItem();
         fileSave.setName("MainMenu.SaveTree");
